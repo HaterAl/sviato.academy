@@ -1,0 +1,15 @@
+pages:
+  only:
+    - gitlab-ci
+  tags:
+    - docker
+  script:
+    - mkdir public
+    - cp -r static/html public
+    # - cp -r static/fnt public
+    - cp -r static/img public
+    - cp -r static/css public
+    - cp -r static/js public
+  artifacts:
+    paths:
+      - public

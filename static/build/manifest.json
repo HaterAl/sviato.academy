@@ -1,0 +1,20 @@
+{
+  "resources/images/app/ideil.svg": {
+    "file": "assets/ideil.f8577898.svg",
+    "src": "resources/images/app/ideil.svg"
+  },
+  "resources/images/menu.svg": {
+    "file": "assets/menu.86cd830b.svg",
+    "src": "resources/images/menu.svg"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app.e5198d1b.js",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/css/tailwind.css": {
+    "file": "assets/tailwind.679b2078.css",
+    "src": "resources/css/tailwind.css",
+    "isEntry": true
+  }
+}

@@ -1,1 +1,4 @@
-import './bootstrap';
+//# App
+
+import './parts/vite';
+// import './parts/bootstrap';
