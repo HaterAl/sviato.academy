@@ -14,3 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', fn() => view('_l.pages._dump'));
+
+require_once(__DIR__ . '/layouts.php');

@@ -1,6 +1,6 @@
 ---
 lang: en
-name: Starter
+name: Sviato Academy
 meta:
   description: 'Starter—Laravel web app blank'
 ---

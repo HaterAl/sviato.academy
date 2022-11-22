@@ -1,0 +1,56 @@
+/* Base: Type */
+
+@layer base {
+    @font-face {
+        font-family: 'Bebas Neue Pro';
+        src: url('/resources/fonts/BebasNeuePro-ExpandedRegular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Bebas Neue Pro';
+        src: url('/resources/fonts/BebasNeuePro-ExpandedItalic.woff2') format('woff2');
+        font-weight: 400;
+        font-style: italic;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Bebas Neue Pro';
+        src: url('/resources/fonts/BebasNeuePro-ExpandedBold.woff2') format('woff2');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Bebas Neue Pro';
+        src: url('/resources/fonts/BebasNeuePro-ExpandedBoldItalic.woff2') format('woff2');
+        font-weight: 700;
+        font-style: italic;
+        font-display: swap;
+    }
+
+    /**
+     * 162 — h1
+     * 90 - h2
+     * 64 - h3
+     * 53 - h4
+     * 35 — large
+     * 20 — base
+     * 16 — small
+     */
+    h1 {
+        @apply font-bold text-9xl mb-4;
+    }
+
+    h2 {
+        @apply font-bold text-7xl mb-4;
+    }
+
+    p, ul, ol, dl {
+        @apply text-base mb-6;
+    }
+}

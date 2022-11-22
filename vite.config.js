@@ -12,7 +12,7 @@ export default defineConfig({
                 'resources/css/tailwind.css',
                 'resources/js/app.js',
             ],
-            refresh: true,
+            refresh: ['resources/_data/**'],
             publicDirectory: 'static',
         }),
     ],

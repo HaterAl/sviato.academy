@@ -5,12 +5,8 @@
 @endphp
 
 @section('main')
-    <main class="g-sheet u-px--3">
+    <main class="sheet">
         <h1>Pages</h1>
-
-        <h1 class="text-3xl font-bold underline">
-            Hello world!
-        </h1>
 
         @if (!empty($pages))
             <ol>

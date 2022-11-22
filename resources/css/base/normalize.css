@@ -1,0 +1,12 @@
+/* Base: Normalize */
+
+@layer base {
+    body {
+        @apply antialiased font-app text-gray-400 uppercase bg-gray-900;
+    }
+
+    a,
+    button {
+        @apply transition-colors;
+    }
+}

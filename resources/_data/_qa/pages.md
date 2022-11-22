@@ -1,5 +1,5 @@
 ---
-# article:
-#   name: Article
-#   slug: post
+home:
+  name: Home
+  # slug: homepage
 ---
