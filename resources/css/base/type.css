@@ -3,7 +3,7 @@
 @layer base {
     @font-face {
         font-family: 'Bebas Neue Pro';
-        src: url('/resources/fonts/BebasNeuePro-ExpandedRegular.woff2') format('woff2');
+        src: url('/resources/fonts/BebasNeuePro-Regular.woff2') format('woff2');
         font-weight: 400;
         font-style: normal;
         font-display: swap;
@@ -11,7 +11,7 @@
 
     @font-face {
         font-family: 'Bebas Neue Pro';
-        src: url('/resources/fonts/BebasNeuePro-ExpandedItalic.woff2') format('woff2');
+        src: url('/resources/fonts/BebasNeuePro-Italic.woff2') format('woff2');
         font-weight: 400;
         font-style: italic;
         font-display: swap;
@@ -19,7 +19,7 @@
 
     @font-face {
         font-family: 'Bebas Neue Pro';
-        src: url('/resources/fonts/BebasNeuePro-ExpandedBold.woff2') format('woff2');
+        src: url('/resources/fonts/BebasNeuePro-Bold.woff2') format('woff2');
         font-weight: 700;
         font-style: normal;
         font-display: swap;
@@ -27,30 +27,46 @@
 
     @font-face {
         font-family: 'Bebas Neue Pro';
-        src: url('/resources/fonts/BebasNeuePro-ExpandedBoldItalic.woff2') format('woff2');
+        src: url('/resources/fonts/BebasNeuePro-BoldItalic.woff2') format('woff2');
         font-weight: 700;
         font-style: italic;
         font-display: swap;
+    }
+
+    body {
+        @apply font-app text-gray-400 text-base uppercase;
     }
 
     /**
-     * 162 — h1
-     * 90 - h2
-     * 64 - h3
-     * 53 - h4
-     * 35 — large
-     * 20 — base
-     * 16 — small
+     * small  'base'    16  / 1       16/16  = 1rem
+     * base   'xl'      20  / 1       20/16  = 1.25rem
+     * h5     '4xl'     36  / 0.9     36/16  = 2.25rem
+     * h4     '5xl'     52  / 0.8     52/16  = 3.25rem
+     * h3     '6xl'     64  / 0.8     64/16  = 4rem
+     * h2     '7xl'     90  / 0.8     90/16  = 5.625rem
+     * h1     '9xl'     162 / 0.8     162/16 = 10.125rem
      */
-    h1 {
+    h1, .b-h1 {
         @apply font-bold text-9xl mb-4;
     }
 
-    h2 {
+    h2, .b-h2 {
         @apply font-bold text-7xl mb-4;
     }
 
+    h3, .b-h3 {
+        @apply font-bold text-6xl mb-4;
+    }
+
+    h4, .b-h4 {
+        @apply font-bold text-5xl mb-4;
+    }
+
+    h5, .b-h5 {
+        @apply font-bold text-4xl mb-4;
+    }
+
     p, ul, ol, dl {
-        @apply text-base mb-6;
+        @apply mb-6;
     }
 }

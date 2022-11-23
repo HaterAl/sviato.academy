@@ -5,13 +5,13 @@
 @endphp
 
 @section('main')
-    <main class="sheet">
-        <h1>Pages</h1>
+    <main class="c-sheet pt-16">
+        <h1 class="b-h3 mb-8">Pages</h1>
 
         @if (!empty($pages))
-            <ol>
+            <ol class="list-decimal pl-16 b-h5">
                 @foreach ($pages as $id => $data)
-                    <li>
+                    <li class="mb-2">
                         <a
                             href="{{
                                 empty($data['slug']) ?

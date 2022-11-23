@@ -5,27 +5,49 @@
 @endphp
 
 @section('main')
-    <main class="sheet">
-        <h1 class="sr-only">{{ $config->name }}</h1>
+    <main class="c-sheet">
+        <div class="relative">
+            <h1 class="sr-only">{{ $config->name }}</h1>
 
-        {{-- <div class="bg-gradient-radial from-gray-400 via-transparent to-transparent py-28 -my-28"> --}}
-        <div class="flex aspect-[6/2] relative">
-            <img
-                src="{{ Vite::asset('resources/images/hero.png') }}"
-                width="888"
-                height="860"
-                class="mx-auto absolute left-0 right-0 top-0"
-                alt="Sviato Otchenash from {{ $config->name }}"
-            >
+            <div class="px-[13%] flex justify-center">
+                <div class="c-spotlight">
+                    <img
+                        src="{{ Vite::asset('resources/images/hero.png') }}"
+                        width="840"
+                        height="840"
+                        class="aspect-square relative"
+                        alt="Sviato Otchenash from {{ $config->name }}"
+                    >
+                </div>
+            </div>
+
+            <section class="absolute left-0 right-0 bottom-[20%] md:flex md:items-center">
+                <div class="md:w-1/3 xl:w-6/12">
+                    <h2>Redefining <br><span class="u-text--primary italic pl-[32%] pr-2">Beauty</span></h2>
+                </div>
+
+                <div class="flex md:w-2/3 xl:w-6/12">
+                    <div class="text-sm pl-9 md:w-1/2">
+                        <p>In the four years since we started, Sviato Academy has redefined the standards of the <span class="u-text--primary">permanent makeup industry</span>. Led by one of the world’s leading permanent makeup artists, Sviatoslav Otchenash, we have become the <span class="u-text--primary">go-to institution</span> for gifted individuals seeking to perfect their craft.</p>
+                    </div>
+
+                    <div class="text-sm pl-9 md:w-1/2">
+                        <p>Our techniques and training methods are the results of over a decade of the tireless <span class="u-text--primary">pursuit of perfection</span>. We have proven time and time again that our innovative approach and constant evolution stand head and shoulders above other academies.</p>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <section class="relative">
-            <h2>Redefining <br><span class="italic pl-52 pr-1  text-transparent bg-clip-text bg-gradient-to-r from-gold-light to-gold-dark">Beauty</span></h2>
+        {{-- <section class="py-20 relative">
+            <h2 class="b-h1">Our <span class="u-text--primary italic">products</span></h2>
 
-            <p>In the four years since we started, Sviato Academy has redefined the standards of the permanent makeup industry. Led by one of the world’s leading permanent makeup artists, Sviatoslav Otchenash, we have become the go-to institution for gifted individuals seeking to perfect their craft.</p>
+            <h3>S-Liner Basic</h3>
 
-            <p>Our techniques and training methods are the results of over a decade of the tireless pursuit of perfection. We have proven time and time again that our innovative approach and constant evolution stand head and shoulders above other academies.</p>
-        </section>
+            <dl>
+                <dt class="sr-only">Price</dt>
+                <dd class="u-text--primary b-h3">€1,000.00</dd>
+            </dl>
+        </section> --}}
     </main>
 @endsection
 

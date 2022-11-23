@@ -1,0 +1,9 @@
+/*
+ * Utilities: Miscellaneous
+ */
+
+@layer utilities {
+    .u-text--primary {
+        @apply text-transparent bg-clip-text bg-gradient-to-r from-gold-light to-gold-dark;
+    }
+}

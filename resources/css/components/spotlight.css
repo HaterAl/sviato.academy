@@ -1,0 +1,31 @@
+/* Component: Spotlight */
+
+@layer components {
+    .c-spotlight {
+        @apply
+            relative
+            before:content-['']
+
+            before:absolute
+            /*before:z-10*/
+
+            /*before:bg-gradient-radial
+                before:from-spotlight-blue
+                before:via-transparent
+                before:to-transparent
+            before:-top-12
+            before:-bottom-12
+            before:-left-12
+            before:-right-12*/
+
+            before:top-[37%]
+            before:left-[68%]
+            before:w-[20%]
+            before:h-[20%]
+            before:-translate-x-1/2
+            before:-translate-y-1/2
+            before:bg-spotlight-blue
+            before:blur-[277px]
+        ;
+    }
+}

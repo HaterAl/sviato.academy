@@ -1,4 +1,7 @@
-/* Tailwind */
+/*
+ * Tailwind
+ */
+
 
 
 /**
@@ -48,3 +51,6 @@
 @import 'base/type';
 
 @import 'components/layout';
+@import 'components/spotlight';
+
+@import 'utilities/misc';

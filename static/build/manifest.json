@@ -1,31 +1,31 @@
 {
+  "resources/images/ideil.svg": {
+    "file": "assets/ideil.f8577898.svg",
+    "src": "resources/images/ideil.svg"
+  },
   "resources/images/logo.svg": {
     "file": "assets/logo.7ec46eb9.svg",
     "src": "resources/images/logo.svg"
-  },
-  "resources/fonts/BebasNeuePro-ExpandedRegular.woff2": {
-    "file": "assets/BebasNeuePro-ExpandedRegular.887d9737.woff2",
-    "src": "resources/fonts/BebasNeuePro-ExpandedRegular.woff2"
   },
   "resources/fonts/BebasNeuePro-ExpandedBold.woff2": {
     "file": "assets/BebasNeuePro-ExpandedBold.f6990109.woff2",
     "src": "resources/fonts/BebasNeuePro-ExpandedBold.woff2"
   },
-  "resources/fonts/BebasNeuePro-ExpandedItalic.woff2": {
-    "file": "assets/BebasNeuePro-ExpandedItalic.f717926d.woff2",
-    "src": "resources/fonts/BebasNeuePro-ExpandedItalic.woff2"
-  },
-  "resources/images/hero.png": {
-    "file": "assets/hero.c09952b0.png",
-    "src": "resources/images/hero.png"
-  },
   "resources/fonts/BebasNeuePro-ExpandedBoldItalic.woff2": {
     "file": "assets/BebasNeuePro-ExpandedBoldItalic.10b2a819.woff2",
     "src": "resources/fonts/BebasNeuePro-ExpandedBoldItalic.woff2"
   },
-  "resources/images/ideil.svg": {
-    "file": "assets/ideil.f8577898.svg",
-    "src": "resources/images/ideil.svg"
+  "resources/fonts/BebasNeuePro-ExpandedItalic.woff2": {
+    "file": "assets/BebasNeuePro-ExpandedItalic.f717926d.woff2",
+    "src": "resources/fonts/BebasNeuePro-ExpandedItalic.woff2"
+  },
+  "resources/fonts/BebasNeuePro-ExpandedRegular.woff2": {
+    "file": "assets/BebasNeuePro-ExpandedRegular.887d9737.woff2",
+    "src": "resources/fonts/BebasNeuePro-ExpandedRegular.woff2"
+  },
+  "resources/images/hero.png": {
+    "file": "assets/hero.c09952b0.png",
+    "src": "resources/images/hero.png"
   },
   "resources/js/app.js": {
     "file": "assets/app.e5198d1b.js",
@@ -33,7 +33,7 @@
     "isEntry": true
   },
   "resources/css/tailwind.css": {
-    "file": "assets/tailwind.1a99d80f.css",
+    "file": "assets/tailwind.3231ca7a.css",
     "src": "resources/css/tailwind.css",
     "isEntry": true
   }
