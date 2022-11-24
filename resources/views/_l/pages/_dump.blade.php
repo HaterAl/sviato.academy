@@ -9,7 +9,7 @@
         <h1 class="b-h3 mb-8">Pages</h1>
 
         @if (!empty($pages))
-            <ol class="list-decimal pl-16 b-h5">
+            <ol class="list-decimal pl-16 text-lg">
                 @foreach ($pages as $id => $data)
                     <li class="mb-2">
                         <a

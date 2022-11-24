@@ -1,8 +1,12 @@
 /* Base: Normalize */
 
 @layer base {
+    html {
+        @apply h-full;
+    }
+
     body {
-        @apply antialiased bg-gray-900;
+        @apply min-h-full antialiased bg-gray-900;
     }
 
     a,

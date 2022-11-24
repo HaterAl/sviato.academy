@@ -1,7 +1,9 @@
-/* Component: Layout */
+/*
+ * Component: Layout
+ */
 
 @layer components {
     .c-sheet {
-        @apply mx-auto max-w-8xl px-2 sm:px-6 lg:px-8;
+        @apply mx-auto max-w-8xl px-6 xl:px-16;
     }
 }

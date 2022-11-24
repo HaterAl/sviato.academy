@@ -13,40 +13,36 @@ module.exports = {
       'gray': {
           100: '#d9d9d9',
           400: '#87878d',
+          500: '#707077',
           900: '#0c0c0d',
       },
       'gold': {
-        'light': '#ffdd64',
+        'light': '#ffda55', // ffdd64
         'dark': '#ca9d00',
       },
       'spotlight': {
-        'blue': '#7a86c6',
-        // 'blue': '#00ffff',
+        'blue': '#807a86c6',
       },
       'transparent': 'transparent',
       'white': '#fff',
     },
-    'fontFamily': {
+    fontFamily: {
       'app': [
-        'Bebas Neue Pro',
-        'ui-sans-serif',
-        'system-ui',
-        '-apple-system',
-        'BlinkMacSystemFont',
-        'sans-serif',
-        'Apple Color Emoji',
-        'Segoe UI Emoji',
-        'Segoe UI Symbol',
-        'Noto Color Emoji',
+        'Bebas Neue Pro', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji',
       ],
     },
     fontSize: {
       'sm': ['1rem', {
-        'lineHeight': '1.125rem',
+        'lineHeight': 1,
         'letterSpacing': '0.05em',
       }],
-      'base': ['1.25rem', 1],
-      '4xl': ['2.25rem', '2rem'],
+      'base': ['1.25rem', {
+        'lineHeight': 1,
+        'letterSpacing': '0.05em',
+      }],
+      'lg': ['1.5rem', 1],
+      '3xl': ['2.25rem', '2rem'],
+      '4xl': ['3rem', '2.7rem'],
       '5xl': ['3.25rem', '2.75rem'],
       '6xl': ['4rem', '3.25rem'],
       '7xl': ['5.625rem', '4.5rem'],
@@ -54,13 +50,13 @@ module.exports = {
     },
 
     extend: {
-      'backgroundImage': {
+      backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
       },
-      'maxWidth': {
+      maxWidth: {
         '8xl': '90rem',
       },
-      'screens': {
+      screens: {
           // 'sm': '640px',
           // 'md': '768px',
           // 'lg': '1024px',

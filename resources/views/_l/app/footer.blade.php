@@ -1,4 +1,4 @@
-<footer class="c-sheet py-20">
+<footer class="c-sheet py-28">
     <div class="-mx-4 flex justify-between">
         <dl class="b-h4 px-4">
             <dt class="sr-only">Phone number:</dt>
@@ -8,7 +8,7 @@
             <dd class="u-text--primary pt-px"><a href="mailto:hello@sviato.academy">hello@sviato.academy</a></dd>
         </dl>
 
-        <dl class="b-h5 text-gray-100 px-4">
+        <dl class="b-h6 text-gray-100 px-4">
             <dt class="sr-only">Address:</dt>
             <dd>Lasnamäe tn 4c-151, <br>11412, Harju maakond, <br>Tallinn, Estonia</dd>
         </dl>

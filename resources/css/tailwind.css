@@ -47,10 +47,11 @@
  * Customs
  */
 
+@import 'base/font';
 @import 'base/normalize';
 @import 'base/type';
 
 @import 'components/layout';
-@import 'components/spotlight';
+@import 'components/decorations';
 
 @import 'utilities/misc';
