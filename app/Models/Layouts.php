@@ -16,5 +16,20 @@ if (app()->environment() == 'local') {
         {
             return YamlFrontMatter::parseFile(resource_path('_data/screens.md'));
         }
+
+        public static function navs()
+        {
+            return YamlFrontMatter::parseFile(resource_path('_data/navs.md'))->matter();
+        }
+
+        public static function socials()
+        {
+            return YamlFrontMatter::parseFile(resource_path('_data/socials.md'))->matter();
+        }
+
+        public static function coaches()
+        {
+            return YamlFrontMatter::parseFile(resource_path('_data/_qa/coaches.md'))->matter();
+        }
     }
 }

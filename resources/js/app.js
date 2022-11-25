@@ -1,4 +1,5 @@
 //# App
 
-import './parts/vite';
-// import './parts/bootstrap';
+import '@part/vite'
+// import '@part/bootstrap';
+import '@plugin/carousel'

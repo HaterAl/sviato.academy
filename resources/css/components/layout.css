@@ -4,6 +4,14 @@
 
 @layer components {
     .c-sheet {
-        @apply mx-auto max-w-8xl px-6 xl:px-16;
+        @apply
+        mx-auto px-6
+        max-w-xl
+        md:max-w-3xl
+        lg:max-w-5xl
+        xl:px-16
+        xl:max-w-6xl
+        2xl:max-w-7xl
+        3xl:max-w-8xl;
     }
 }

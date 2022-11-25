@@ -8,7 +8,7 @@
     <main class="c-sheet">
         <h1 class="sr-only">{{ $config->name }}</h1>
 
-        <div class="px-[13%] flex justify-center">
+        <div class="flex justify-center md:px-[13%]">
             <div class="c-spotlight">
                 <img
                 src="{{ Vite::image('hero-00.png') }}"
@@ -21,12 +21,12 @@
         </div>
 
         <section class="relative">
-            <div class="mb-28 absolute left-0 right-0 bottom-full md:flex md:items-center">
+            <div class="mb-28 md:absolute md:left-0 md:right-0 md:bottom-full md:flex md:items-center">
                 <div class="md:w-1/3 xl:w-6/12 flex">
                     <h2>Redefining <br><span class="u-text--primary italic pl-[68.5%] pr-2">Beauty</span></h2>
                 </div>
 
-                <div class="flex md:w-2/3 xl:w-6/12">
+                <div class="md:flex md:w-2/3 xl:w-6/12">
                     <div class="text-sm pl-9 md:w-1/2">
                         <p>In the four years since we started, Sviato Academy has redefined the standards of <span class="u-text--primary">the permanent makeup industry</span>. Led by one of the world’s leading permanent makeup artists, Sviatoslav Otchenash, we have become <span class="u-text--primary">the go-to institution</span> for gifted individuals seeking to perfect their craft.</p>
                     </div>
@@ -73,27 +73,27 @@
             </div>
 
             <div class="relative z-10">
-                <h2 class="b-h1 mb-0">Sviato Academy <div class="pl-[32.3%]">by <span class="u-text--primary italic pr-2">the numbers</span></div></h2>
+                <h2 class="b-h1 mb-0">Sviato Academy <div class="pl-[10%] lg:pl-[32.3%]">by <span class="u-text--primary italic pr-2">the numbers</span></div></h2>
 
-                <div class="flex justify-between text-white text-lg">
-                    <dl class="flex flex-col-reverse">
-                        <dt class="self-end">Trainers</dt>
+                <div class="text-white md:text-lg md:flex md:justify-between">
+                    <dl class="flex flex-col-reverse items-end">
+                        <dt>Trainers</dt>
                         <dd class="b-h1 mb-1">+190</dd>
                     </dl>
 
-                    <dl class="flex flex-col-reverse">
-                        <dt class="self-end">Students</dt>
+                    <dl class="flex flex-col-reverse items-end">
+                        <dt>Students</dt>
                         <dd class="b-h1 mb-1">16 000</dd>
                     </dl>
 
-                    <dl class="flex flex-col-reverse">
-                        <dt class="self-end">Countries</dt>
+                    <dl class="flex flex-col-reverse items-end">
+                        <dt>Countries</dt>
                         <dd class="b-h1 mb-1">44</dd>
                     </dl>
                 </div>
             </div>
 
-            <div class="px-[19%]">
+            <div class="lg:px-[19%]">
                 <img
                 src="{{ Vite::image('Earth.jpg') }}"
                 class="mix-blend-screen mx-auto -mt-[34.5%]"
@@ -104,7 +104,7 @@
             </div>
 
             <div class="flex">
-                <div class="pt-28 ml-[5%] w-[56%] relative">
+                <div class="pt-28 ml-[7%] w-[59%] relative">
                     <p class="b-h5">In my over <span class="u-text--primary">10 years</span> working in the permanent makeup industry, I’ve held over <span class="u-text--primary">400 masterclasses worldwide</span> and trained some of the world’s top artists. But, my interest in beauty goes back much longer.</p>
                 </div>
 
@@ -114,14 +114,14 @@
                     srcset="{{ Vite::image('hero-03@2x.png') }}"
                     width="384"
                     height="800"
-                    class="c-mask-opacity-to-bottom-75 -ml-[9.5%] -mb-[74%]"
+                    class="c-mask-opacity-to-bottom-75 -ml-[9.7%] -mb-[74%]"
                     alt="Sviato Otchenash from {{ $config->name }}"
                     >
                 </div>
             </div>
 
-            <div class="flex items-center">
-                <div class="w-1/2 pr-[9%]">
+            <div class="md:flex md:items-center">
+                <div class="pr-[7%] md:w-1/2">
                     <img
                     src="{{ Vite::image('hero-04.jpg') }}"
                     width="560"
@@ -131,13 +131,13 @@
                     >
                 </div>
 
-                <div class="w-[23%] ml-4">
+                <div class="ml-20 md:w-[26.5%]">
                     <p>Before becoming a PMU trainer, I spent years working professionally as a <span class="u-text--primary">tattoo artist</span> <span class="u-text--primary">and art educator</span>. That foundation allowed me quickly develop the skills needed for elite-level PMU. But, it was my years spent in art education that gave me the patience, people skills, and creativity needed to develop my own unique approach to training and PMU.</p>
                     <p>The techniques I’ve developed have since become industry staples and the continuous improvement of these techniques continues to drive my dedication to perfection.</p>
                 </div>
             </div>
 
-            <div class="ml-[41%]">
+            <div class="ml-[43%]">
                 <img
                 src="{{ Vite::image('hero-05.jpg') }}"
                 srcset="{{ Vite::image('hero-05@2x.jpg') }}"
@@ -149,45 +149,42 @@
             </div>
         </section>
 
-        <section class="py-28">
+        <section class="py-28 splide js-carousel">
             <h2 class="b-h1 text-center mb-14">Our <span class="u-text--primary italic pr-2">trainers</span></h2>
 
-            <div class="-mx-8 flex">
-                <div class="px-8 w-1/5">
-                    <img
-                    src="{{ Vite::image('coach-00.jpg') }}"
-                    {{-- srcset="{{ Vite::image('hero-05@2x.jpg') }}" --}}
-                    width=""
-                    height=""
-                    class="rounded mb-7"
-                    alt="Sviato Otchenash from {{ $config->name }}"
-                    >
+            @php
+                $coaches = App\Models\Layouts::coaches();
+            @endphp
 
-                    <h3 class="b-h6 text-white mb-2">
-                        <a href="#" class="hover:text-gold-dark">Maja <div class="pl-[15%]">Granic</div></a>
-                    </h3>
-                    <p>Permanent makeup</p>
+            <div class="splide__track -mx-3 xl:-mx-8">
+                <div class="splide__list">
+                    @foreach ($coaches as $coache)
+                        <article class="splide__slide px-3 xl:px-8 w-1/5">
+                            <img
+                            src="{{ Vite::image('coach-00.jpg') }}"
+                            {{-- srcset="{{ Vite::image('hero-05@2x.jpg') }}" --}}
+                            width=""
+                            height=""
+                            class="rounded mb-7"
+                            alt="{{ $coache['fname'] }} {{ $coache['lname'] }}"
+                            >
+
+                            <h3 class="b-h6 text-white mb-2">
+                                <a href="#" class="hover:text-gold-dark">{{ $coache['fname'] }} <div class="pl-[15%]">{{ $coache['lname'] }}</div></a>
+                            </h3>
+                            <p>{{ $coache['specialty'] }}</p>
+                        </article>
+                    @endforeach
                 </div>
+            </div>
 
-                <div class="px-8 w-1/5">
-                    <img
-                    src="{{ Vite::image('coach-00.jpg') }}"
-                    {{-- srcset="{{ Vite::image('hero-05@2x.jpg') }}" --}}
-                    width=""
-                    height=""
-                    class="rounded mb-7"
-                    alt="Sviato Otchenash from {{ $config->name }}"
-                    >
-
-                    <h3 class="b-h6 text-white mb-2">
-                        <a href="#" class="hover:text-gold-dark">Chris <div class="pl-[15%]">Barrows</div></a>
-                    </h3>
-                    <p>Makeup</p>
-                </div>
+            <div class="splide__arrows flex justify-between items-start">
+                <button class="splide__arrow splide__arrow--prev block hover:text-gold-dark">@svg('arrow-ltr', '-scale-x-1')</button>
+                <button class="splide__arrow splide__arrow--next block hover:text-gold-dark">@svg('arrow-ltr')</button>
             </div>
         </section>
 
-        <section class="py-28">
+        <section class="py-28 px">
             <h2 class="text-center max-w-4xl mx-auto mb-14">Here are the steps how to join and advance within the <span class="u-text--primary italic pr-2">Sviato Academy</span> team</h2>
 
             <div class="max-w-xl mx-auto">

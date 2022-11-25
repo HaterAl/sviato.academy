@@ -21,27 +21,27 @@
      * h1     '9xl'     162 / 0.8     162/16 = 10.125rem
      */
     h1, .b-h1 {
-        @apply font-bold text-9xl text-gray-500 mb-4;
+        @apply font-bold text-7xl text-gray-500 mb-4 lg:text-9xl;
     }
 
     h2, .b-h2 {
-        @apply font-bold text-7xl text-gray-500 mb-4;
+        @apply font-bold text-6xl text-gray-500 mb-4 lg:text-7xl;
     }
 
     h3, .b-h3 {
-        @apply font-bold text-6xl text-gray-500 mb-4;
+        @apply font-bold text-4xl text-gray-500 mb-4 lg:text-6xl;
     }
 
     h4, .b-h4 {
-        @apply font-bold text-5xl text-gray-500 mb-4;
+        @apply font-bold text-3xl text-gray-500 mb-4 lg:text-5xl;
     }
 
     h5, .b-h5 {
-        @apply font-bold text-4xl text-gray-500 mb-4;
+        @apply font-bold text-2xl text-gray-500 mb-4 lg:text-4xl;
     }
 
     h6, .b-h6 {
-        @apply font-bold text-3xl text-gray-500 mb-4;
+        @apply font-bold text-xl text-gray-500 mb-4 lg:text-3xl;
     }
 
     p, ul, ol, dl {

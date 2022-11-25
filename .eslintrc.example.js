@@ -1,25 +1,27 @@
-{
+module.exports = {
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true,
+    },
     "extends": [
         "eslint:recommended",
         "plugin:vue/vue3-recommended",
     ],
-    "env": {
-        "browser": true,
-        "node": true,
-    },
+    "overrides": [
+    ],
     "parserOptions": {
-        "ecmaVersion": 12,
+        "ecmaVersion": "latest",
         "sourceType": "module",
     },
     "rules": {
         "comma-dangle": ["error", "always-multiline"],
         "curly": [2, "multi-line"],
-        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
-        "semi": ["error", "never"],
-
         "indent": ["error", 4, {
             "SwitchCase": 1,
         }],
+        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+        "semi": ["error", "never"],
 
         "vue/no-v-html": 0,
         "vue/html-indent": ["error", 4, {}],

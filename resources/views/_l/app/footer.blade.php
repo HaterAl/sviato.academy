@@ -1,5 +1,5 @@
 <footer class="c-sheet py-28">
-    <div class="-mx-4 flex justify-between">
+    <div class="-mx-4 lg:flex justify-between">
         <dl class="b-h4 px-4">
             <dt class="sr-only">Phone number:</dt>
             <dd class="text-gray-100 mb-2"><a href="tel:+37259151766">+372 5915 1766</a></dd>

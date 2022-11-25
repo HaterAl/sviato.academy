@@ -1,0 +1,24 @@
+/*
+ * Carousel
+ */
+
+@layer components {
+    .splide .splide__pagination__page {
+        @apply
+        p-1
+        before:content-['']
+        before:block
+        before:w-3
+        before:h-3
+        before:rounded-full
+        before:border
+        before:border-gray-400
+        before:transition-colors
+        hover:before:border-gold-dark;
+    }
+    .splide .splide__pagination__page.is-active {
+        @apply
+        before:border-gold-dark
+        before:bg-gold-dark;
+    }
+}

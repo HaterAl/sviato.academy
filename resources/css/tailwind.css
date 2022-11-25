@@ -53,5 +53,6 @@
 
 @import 'components/layout';
 @import 'components/decorations';
+@import 'components/carousel';
 
 @import 'utilities/misc';
