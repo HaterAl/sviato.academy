@@ -17,6 +17,7 @@ module.exports = {
     screens,
     colors: {
       'current': 'currentColor',
+      'inherit': 'inherit',
       'gray': {
         100: '#d9d9d9',
         400: '#87878d',

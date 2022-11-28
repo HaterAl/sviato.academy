@@ -5,7 +5,11 @@ import Splide from '@splidejs/splide'
 
 import ScreenMatch from '@helper/screen-match'
 
-const screens = new ScreenMatch().thresholds // sm md lg xl 2xl 3xl
+const screens = Object.fromEntries( // sm md lg xl 2xl 3xl
+    Object.entries(new ScreenMatch().thresholds).map(
+        ([k, v]) => [k, parseInt(v)],
+    ),
+)
 
 new Splide('.js-carousel', {
     type: 'loop',

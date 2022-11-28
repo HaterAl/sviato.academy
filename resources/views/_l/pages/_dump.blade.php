@@ -1,7 +1,7 @@
 @extends('_l.templates.base')
 
 @php
-    $pages = \Spatie\YamlFrontMatter\YamlFrontMatter::parseFile(resource_path('_data/_qa/pages.md'))->matter();
+    $pages = Spatie\YamlFrontMatter\YamlFrontMatter::parseFile(resource_path('_data/_qa/pages.md'))->matter();
 @endphp
 
 @section('main')
@@ -12,13 +12,20 @@
             <ol class="list-decimal pl-16 text-lg">
                 @foreach ($pages as $id => $data)
                     <li class="mb-2">
-                        <a
+                        {{-- <a
                             href="{{
                                 empty($data['slug']) ?
                                 route('_l.'.$id) :
                                 route('_l.'.$data['slug'])
                             }}"
-                            target="_blank"
+                        >{{ $data['name'] }}</a> --}}
+
+                        <a
+                            href="{{
+                                empty($data['slug']) ?
+                                '_l/'.$id :
+                                route('_l.'.$data['slug'])
+                            }}"
                         >{{ $data['name'] }}</a>
                     </li>
                 @endforeach

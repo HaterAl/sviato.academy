@@ -2,46 +2,63 @@
 
 /* eslint indent: [error, 2] */
 
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import laravel from 'laravel-vite-plugin'
 // import autoprefixer from 'autoprefixer'
 import path from 'path'
 
-export default defineConfig({
-  // css: {postcss: { plugins: [autoprefixer] }} // Is NOT compatible w/ Tailwind
-  plugins: [
-    laravel({
-      input: [
-        'resources/css/tailwind.css',
-        'resources/js/app.js',
-      ],
-      refresh: [
-        'resources/_data/**',
-        'resources/images/**',
-      ],
-      publicDirectory: 'static',
-    }),
-  ],
-  resolve: {
-    alias: {
-      '@root': '/',
-      '@js': '/resources/js/parts',
-      '@part': '/resources/js/parts',
-      '@plugin': '/resources/js/plugins',
-      '@helper': '/resources/js/helpers',
-      '@screens': path.resolve(__dirname, 'screens.config.js'),
-    },
-  },
-  optimizeDeps: {
-    include: [
-      '@screens', // required for `npm run dev`
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '')
+
+  return {
+    // css: {postcss: { plugins: [autoprefixer] }} // Is NOT compatible w/ Tailwind
+    plugins: [
+      laravel({
+        input: [
+          'resources/css/tailwind.css',
+          'resources/js/app.js',
+        ],
+        refresh: [
+          'resources/_data/**',
+          'resources/images/**',
+        ],
+        publicDirectory: 'static',
+      }),
     ],
-  },
-  build: {
-    commonjsOptions: {
+    resolve: {
+      alias: {
+        '@root': '/',
+        '@js': '/resources/js',
+        '@part': '/resources/js/parts',
+        '@plugin': '/resources/js/plugins',
+        '@helper': '/resources/js/helpers',
+        '@screens': path.resolve(__dirname, 'screens.config.js'),
+      },
+    },
+    optimizeDeps: {
       include: [
-        'screens.config.js', // required for `npm run build`
+        '@screens', // required for `npm run dev`
       ],
     },
-  },
+    build: {
+      commonjsOptions: {
+        include: [
+          'screens.config.js', // required for `npm run build`
+        ],
+      },
+    },
+    // server: {
+    //   open: `${env.APP_URL}/_l`,
+    // },
+    server: {
+      host: true,
+      open: '/_l',
+      hmr: {
+        host: '10.30.30.223',
+      },
+      proxy: {
+        '/_l': `${env.APP_URL}`,
+      },
+    },
+  }
 })

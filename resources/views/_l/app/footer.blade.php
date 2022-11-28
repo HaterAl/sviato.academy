@@ -1,4 +1,4 @@
-<footer class="c-sheet py-28">
+<footer class="c-sheet pt-16 pb-20 md:pt-28 md:pb-32">
     <div class="-mx-4 lg:flex justify-between">
         <dl class="b-h4 px-4">
             <dt class="sr-only">Phone number:</dt>

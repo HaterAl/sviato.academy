@@ -8,18 +8,14 @@ import screenThresholds from /* preval */ '@screens'
 
 export default class ScreenMatch {
     constructor(range = []) {
-        this.thresholds = Object.fromEntries(
-            Object.entries(screenThresholds).map(
-                ([k, v]) => [k, parseInt(v)],
-            ),
-        )
+        this.thresholds = screenThresholds
         this.above = range[0]
         this.below = range[1]
     }
 
     check(size) {
         return window.matchMedia(
-            `(min-width: ${ this.thresholds[size] }px)`,
+            `(min-width: ${ this.thresholds[size] })`,
         ).matches
     }
 
