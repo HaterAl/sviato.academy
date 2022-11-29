@@ -1,7 +1,7 @@
 @extends('_l.templates.base')
 
 @php
-    $pages = Spatie\YamlFrontMatter\YamlFrontMatter::parseFile(resource_path('_data/_qa/pages.md'))->matter();
+    $pages = App\Models\Layouts::pages();
 @endphp
 
 @section('main')

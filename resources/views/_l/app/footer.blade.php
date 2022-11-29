@@ -1,11 +1,11 @@
-<footer class="c-sheet pt-16 pb-20 md:pt-28 md:pb-32">
+<footer class="c-sheet pt-20 pb-28 md:pt-28 md:pb-36">
     <div class="-mx-4 lg:flex justify-between">
         <dl class="b-h4 px-4">
             <dt class="sr-only">Phone number:</dt>
             <dd class="text-gray-100 mb-2"><a href="tel:+37259151766">+372 5915 1766</a></dd>
 
             <dt class="sr-only">Email address:</dt>
-            <dd class="u-text--primary pt-px"><a href="mailto:hello@sviato.academy">hello@sviato.academy</a></dd>
+            <dd class="u-text--primary"><a href="mailto:hello@sviato.academy">hello@sviato.academy</a></dd>
         </dl>
 
         <dl class="b-h6 text-gray-100 px-4">

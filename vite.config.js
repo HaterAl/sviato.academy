@@ -9,6 +9,7 @@ import path from 'path'
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
+  const screensConfig = () => path.resolve(__dirname, 'screens.config.js')
 
   return {
     // css: {postcss: { plugins: [autoprefixer] }} // Is NOT compatible w/ Tailwind
@@ -21,6 +22,7 @@ export default defineConfig(({ mode }) => {
         refresh: [
           'resources/_data/**',
           'resources/images/**',
+          'app/**',
         ],
         publicDirectory: 'static',
       }),
@@ -32,10 +34,11 @@ export default defineConfig(({ mode }) => {
         '@part': '/resources/js/parts',
         '@plugin': '/resources/js/plugins',
         '@helper': '/resources/js/helpers',
-        '@screens': path.resolve(__dirname, 'screens.config.js'),
+        '@screens': screensConfig(),
       },
     },
     optimizeDeps: {
+      force: true,
       include: [
         '@screens', // required for `npm run dev`
       ],
@@ -43,7 +46,7 @@ export default defineConfig(({ mode }) => {
     build: {
       commonjsOptions: {
         include: [
-          'screens.config.js', // required for `npm run build`
+          path.resolve(__dirname, 'screens.config.js'), // required for `npm run build`
         ],
       },
     },

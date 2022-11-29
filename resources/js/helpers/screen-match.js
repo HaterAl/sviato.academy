@@ -4,11 +4,19 @@
 //  import { ScreenMatch } from '@helper/screen-match';
 //  isBoxVisible = new ScreenMatch([false, 'lg']).define();
 
-import screenThresholds from /* preval */ '@screens'
+import screenThresholds from '@screens'
 
 export default class ScreenMatch {
     constructor(range = []) {
-        this.thresholds = screenThresholds
+        this.thresholds = {}
+        Object.entries(screenThresholds).map(([screenAlias, screenData]) => {
+            Object.entries(screenData).map(([screenKey, screenSize]) => {
+                if (Object.keys(screenData).length === 1 && screenKey === 'min') {
+                    this.thresholds[screenAlias] = parseInt(screenSize)
+                }
+            })
+        })
+
         this.above = range[0]
         this.below = range[1]
     }

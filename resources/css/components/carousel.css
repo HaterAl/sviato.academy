@@ -3,9 +3,26 @@
  */
 
 @layer components {
+    .splide {
+        & .splide__arrows {
+            @apply
+            h-11
+            flex
+            justify-between
+            items-start;
+        }
+
+        & .splide__arrow {
+            @apply
+            pointer-events-auto
+            h-full;
+        }
+    }
+
     .splide .splide__pagination__page {
         @apply
-        p-1
+        px-1
+        py-4
         before:content-['']
         before:block
         before:w-3
@@ -15,10 +32,46 @@
         before:border-gray-400
         before:transition-colors
         hover:before:border-gold-dark;
+
+        &.is-active {
+            @apply
+            before:border-gold-dark
+            before:bg-gold-dark;
+        }
     }
-    .splide .splide__pagination__page.is-active {
+
+    .splide--arrows-bottom {
         @apply
-        before:border-gold-dark
-        before:bg-gold-dark;
+        order-1;
+
+        & .splide__body {
+            @apply
+            flex
+            flex-col
+            relative;
+        }
+
+        & .splide__track {
+            @apply
+            -order-1;
+        }
+
+        & .splide__pagination {
+            @apply
+            -mt-11
+            mx-10
+            ;
+        }
+    }
+
+    .splide__slide__link {
+        @apply
+        hover:text-gold-dark
+        after:content-['']
+        after:absolute
+        after:left-0
+        after:right-0
+        after:top-0
+        after:bottom-0;
     }
 }

@@ -12,6 +12,11 @@ if (app()->environment() == 'local') {
             return YamlFrontMatter::parseFile(resource_path('_data/config.md'));
         }
 
+        public static function pages()
+        {
+            return YamlFrontMatter::parseFile(resource_path('_data/_qa/pages.md'))->matter();
+        }
+
         public static function screens()
         {
             return YamlFrontMatter::parseFile(resource_path('_data/screens.md'));
