@@ -62,6 +62,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'logo-glyph': "url('/resources/images/logo-glyph.svg')",
       },
       maxWidth: {
         '8xl': '90rem',

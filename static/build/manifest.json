@@ -1,43 +1,83 @@
 {
-  "resources/fonts/BebasNeuePro-Bold.woff2": {
-    "file": "assets/BebasNeuePro-Bold.0b299d08.woff2",
-    "src": "resources/fonts/BebasNeuePro-Bold.woff2"
-  },
   "resources/fonts/BebasNeuePro-BoldItalic.woff2": {
     "file": "assets/BebasNeuePro-BoldItalic.0a72c668.woff2",
     "src": "resources/fonts/BebasNeuePro-BoldItalic.woff2"
   },
-  "resources/images/Earth.jpg": {
-    "file": "assets/Earth.b20851bb.jpg",
-    "src": "resources/images/Earth.jpg"
+  "resources/fonts/BebasNeuePro-Bold.woff2": {
+    "file": "assets/BebasNeuePro-Bold.0b299d08.woff2",
+    "src": "resources/fonts/BebasNeuePro-Bold.woff2"
   },
   "resources/images/coach-00.jpg": {
-    "file": "assets/coach-00.c724fbfc.jpg",
+    "file": "assets/coach-00.972d0994.jpg",
     "src": "resources/images/coach-00.jpg"
   },
-  "resources/images/hero-01.jpg": {
-    "file": "assets/hero-01.18991103.jpg",
-    "src": "resources/images/hero-01.jpg"
+  "resources/images/coach-00@2x.jpg": {
+    "file": "assets/coach-00@2x.16e44e13.jpg",
+    "src": "resources/images/coach-00@2x.jpg"
+  },
+  "resources/images/coach-01.jpg": {
+    "file": "assets/coach-01.a71bc155.jpg",
+    "src": "resources/images/coach-01.jpg"
+  },
+  "resources/images/coach-01@2x.jpg": {
+    "file": "assets/coach-01@2x.ff45cc21.jpg",
+    "src": "resources/images/coach-01@2x.jpg"
   },
   "resources/fonts/BebasNeuePro-Italic.woff2": {
     "file": "assets/BebasNeuePro-Italic.fe612f40.woff2",
     "src": "resources/fonts/BebasNeuePro-Italic.woff2"
   },
-  "resources/images/hero-02.jpg": {
-    "file": "assets/hero-02.e6655520.jpg",
-    "src": "resources/images/hero-02.jpg"
+  "resources/images/Earth.jpg": {
+    "file": "assets/Earth.b20851bb.jpg",
+    "src": "resources/images/Earth.jpg"
   },
-  "resources/images/hero-04.jpg": {
-    "file": "assets/hero-04.83e070ca.jpg",
-    "src": "resources/images/hero-04.jpg"
+  "resources/images/coach-02.jpg": {
+    "file": "assets/coach-02.434eefcc.jpg",
+    "src": "resources/images/coach-02.jpg"
+  },
+  "resources/fonts/BebasNeuePro-Regular.woff2": {
+    "file": "assets/BebasNeuePro-Regular.28bd8f10.woff2",
+    "src": "resources/fonts/BebasNeuePro-Regular.woff2"
+  },
+  "resources/images/coach-03.jpg": {
+    "file": "assets/coach-03.1c166abd.jpg",
+    "src": "resources/images/coach-03.jpg"
+  },
+  "resources/images/coach-02@2x.jpg": {
+    "file": "assets/coach-02@2x.420fc7e2.jpg",
+    "src": "resources/images/coach-02@2x.jpg"
+  },
+  "resources/images/coach-04.jpg": {
+    "file": "assets/coach-04.cbb3776d.jpg",
+    "src": "resources/images/coach-04.jpg"
+  },
+  "resources/images/coach-04@2x.jpg": {
+    "file": "assets/coach-04@2x.1f8bffe9.jpg",
+    "src": "resources/images/coach-04@2x.jpg"
+  },
+  "resources/images/coach-03@2x.jpg": {
+    "file": "assets/coach-03@2x.98a41b3c.jpg",
+    "src": "resources/images/coach-03@2x.jpg"
+  },
+  "resources/images/hero-01.jpg": {
+    "file": "assets/hero-01.18991103.jpg",
+    "src": "resources/images/hero-01.jpg"
   },
   "resources/images/hero-00.png": {
     "file": "assets/hero-00.85829c9d.png",
     "src": "resources/images/hero-00.png"
   },
+  "resources/images/hero-02.jpg": {
+    "file": "assets/hero-02.e6655520.jpg",
+    "src": "resources/images/hero-02.jpg"
+  },
   "resources/images/hero-03.png": {
     "file": "assets/hero-03.64567176.png",
     "src": "resources/images/hero-03.png"
+  },
+  "resources/images/hero-04.jpg": {
+    "file": "assets/hero-04.83e070ca.jpg",
+    "src": "resources/images/hero-04.jpg"
   },
   "resources/images/hero-05.jpg": {
     "file": "assets/hero-05.50760fb9.jpg",
@@ -46,10 +86,6 @@
   "resources/images/hero-05@2x.jpg": {
     "file": "assets/hero-05@2x.ee2a0b88.jpg",
     "src": "resources/images/hero-05@2x.jpg"
-  },
-  "resources/fonts/BebasNeuePro-Regular.woff2": {
-    "file": "assets/BebasNeuePro-Regular.28bd8f10.woff2",
-    "src": "resources/fonts/BebasNeuePro-Regular.woff2"
   },
   "resources/images/ideil.svg": {
     "file": "assets/ideil.f8577898.svg",
@@ -67,13 +103,29 @@
     "file": "assets/logo.c3a886bc.svg",
     "src": "resources/images/logo.svg"
   },
+  "resources/images/logo-glyph.svg": {
+    "file": "assets/logo-glyph.21590166.svg",
+    "src": "resources/images/logo-glyph.svg"
+  },
+  "resources/images/product-00.png": {
+    "file": "assets/product-00.3849a3a9.png",
+    "src": "resources/images/product-00.png"
+  },
   "resources/images/ui/arrow-ltr.svg": {
     "file": "assets/arrow-ltr.bb6a006e.svg",
     "src": "resources/images/ui/arrow-ltr.svg"
   },
+  "resources/images/ui/instagram-gold.svg": {
+    "file": "assets/instagram-gold.3b8b9aad.svg",
+    "src": "resources/images/ui/instagram-gold.svg"
+  },
   "resources/images/ui/facebook-gold.svg": {
     "file": "assets/facebook-gold.10f8e111.svg",
     "src": "resources/images/ui/facebook-gold.svg"
+  },
+  "resources/images/ui/telegram-gold.svg": {
+    "file": "assets/telegram-gold.48701690.svg",
+    "src": "resources/images/ui/telegram-gold.svg"
   },
   "resources/images/ui/viber-gold.svg": {
     "file": "assets/viber-gold.9806054c.svg",
@@ -83,12 +135,12 @@
     "file": "assets/hero-03@2x.147be96b.png",
     "src": "resources/images/hero-03@2x.png"
   },
-  "resources/images/ui/telegram-gold.svg": {
-    "file": "assets/telegram-gold.48701690.svg",
-    "src": "resources/images/ui/telegram-gold.svg"
+  "resources/images/ui/tiktok-gold.svg": {
+    "file": "assets/tiktok-gold.f82e3959.svg",
+    "src": "resources/images/ui/tiktok-gold.svg"
   },
   "resources/js/app.js": {
-    "file": "assets/app.baff0b5c.js",
+    "file": "assets/app.4388145d.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "css": [
@@ -100,7 +152,7 @@
     "src": "resources/js/app.css"
   },
   "resources/css/tailwind.css": {
-    "file": "assets/tailwind.a775b3f4.css",
+    "file": "assets/tailwind.fcadb34a.css",
     "src": "resources/css/tailwind.css",
     "isEntry": true
   }
