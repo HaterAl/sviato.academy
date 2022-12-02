@@ -46,7 +46,11 @@ export default defineConfig(({ mode }) => {
     build: {
       commonjsOptions: {
         include: [
-          path.resolve(__dirname, 'screens.config.js'), // required for `npm run build`
+          // resolve `import` of CommonJS plugins
+          // required for `npm run build`
+          path.resolve(__dirname, 'screens.config.js'),
+          path.resolve(__dirname, 'node_modules/lodash.throttle/index.js'),
+          path.resolve(__dirname, 'node_modules/lodash.debounce/index.js'),
         ],
       },
     },

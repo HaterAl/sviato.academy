@@ -95,33 +95,50 @@
             before:bg-center
             before:opacity-0
             before:transition-opacity
-            before:duration-[400ms];
+            before:duration-300
+            before:ease-in;
         }
 
         & .splide__slide {
-            @apply
-            opacity-30
-            transition-opacity
-            duration-300;
+            /*@apply opacity-30 transition-opacity duration-300;*/
+
+            & > * {
+                @apply
+                opacity-0
+                transition-opacity
+                duration-300
+                ease-in;
+            }
+
+            & .splide__slide__img {
+                @apply opacity-30;
+            }
 
             &.is-active {
-                @apply
-                opacity-100;
+                @apply opacity-100;
+
+                & > * {
+                    @apply opacity-100;
+                }
 
                 & .splide__slide__img {
-                    @apply
-                    before:opacity-100;
+                    @apply before:opacity-100;
                 }
             }
         }
 
-        & [aria-busy=true] .splide__slide.is-active {
-            @apply
-            opacity-30;
+        &.splide--transition .splide__slide.is-active {
+            & > * {
+                @apply opacity-0;
+            }
+
+            & .splide__slide__img {
+                @apply
+                opacity-30
+                before:opacity-0;
+            }
         }
     }
-
-    .splide__slide__img {}
 }
 
 @layer components {

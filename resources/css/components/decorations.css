@@ -30,3 +30,9 @@
         mask-image: linear-gradient(#000 25%, transparent 100%);
     }
 }
+
+@layer components {
+    .aos-init {
+        @apply opacity-0;
+    }
+}

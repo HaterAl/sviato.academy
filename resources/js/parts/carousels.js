@@ -7,7 +7,10 @@ import ScreenMatch from '@helper/screen-match'
 
 const screens = new ScreenMatch().thresholds // sm md lg xl 2xl 3xl
 
-new Splide('[data-carousel-row]', {
+
+//## Row
+
+new Splide( '[data-carousel-row]', {
     // type: 'loop',
     // clones: 1,
     rewind: true,
@@ -28,13 +31,14 @@ new Splide('[data-carousel-row]', {
             perPage: 5,
         },
     },
-}).mount()
+} ).mount()
 
 
-
-
+//## Showcase
 
 import { EventInterface } from '@splidejs/splide'
+
+const transitionClassname = 'splide--transition'
 
 export function MyTransition( Splide, Components ) {
     const { bind } = EventInterface( Splide )
@@ -43,9 +47,18 @@ export function MyTransition( Splide, Components ) {
 
     let endCallback
 
+    let indexCurrent = Splide.index
+    let isIndexChanged = false
+
     function mount() {
-        bind(list, 'transitionend', e => {
+        bind( list, 'transitionend', e => {
             if ( e.target === list && endCallback ) {
+                if (isIndexChanged) {
+                    isIndexChanged = false
+
+                    Splide.root.classList.remove(transitionClassname)
+                }
+
                 // Removes the transition property
                 cancel()
 
@@ -58,10 +71,16 @@ export function MyTransition( Splide, Components ) {
     function start( index, done ) {
         // Converts the index to the position
         const destination = Move.toPosition( index, true )
-        console.log('>>> index:', index)
 
         // Applies the CSS transition
-        list.style.transition = 'transform 800ms cubic-bezier(.44,.65,.07,1.01)'
+        list.style.transition = 'transform 300ms cubic-bezier(.44,.65,.07,1.01)'
+
+        isIndexChanged = indexCurrent !== index
+        if (isIndexChanged) {
+            indexCurrent = index
+
+            Splide.root.classList.add(transitionClassname)
+        }
 
         // Moves the carousel to the destination.
         Move.translate( destination )
@@ -81,16 +100,16 @@ export function MyTransition( Splide, Components ) {
     }
 }
 
-new Splide('[data-carousel-showcase]', {
+new Splide( '[data-carousel-showcase]', {
     type: 'loop',
     clones: 2,
+    arrows: false,
 
-    // mediaQuery: 'min',
-    // breakpoints: {
-    //     [screens.md]: {
-    //         perPage: 3,
-    //     },
-    // },
-}).mount({}, MyTransition).on('move', (newIndex, prevIndex, destIndex) => {
-    console.log('>>> newIndex, prevIndex, destIndex:', newIndex, prevIndex, destIndex)
-})
+    mediaQuery: 'min',
+    breakpoints: {
+        [screens.md]: {
+            arrows: true,
+            pagination: false,
+        },
+    },
+} ).mount( {}, MyTransition )

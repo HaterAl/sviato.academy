@@ -17,53 +17,49 @@
                     src="{{ Vite::image('hero-00.png') }}"
                     width="840"
                     height="840"
-                    class="c-mask-opacity-to-bottom-5 relative"
                     alt="Sviato Otchenash from {{ $config->name }}"
+                    class="c-mask-opacity-to-bottom-5 relative"
                     >
                 </div>
             </div>
 
             <section class="relative -mt-28 sm:-mt-48 lg:-mt-28 2xl:-mt-36 3xl:-mt-40">
                 <div class="lg:absolute lg:left-0 lg:right-0 lg:bottom-full lg:flex 3xl:items-center">
-                    <div class="lg:w-1/3 xl:w-1/2">
+                    <div class="lg:w-1/3 xl:w-1/2 aos-init" data-aos="fade-up">
                         <h2>Redefining <div class="u-text--primary italic pl-[2.47em] pr-2 -mr-2">Beauty</div></h2>
                     </div>
 
                     <div class="md:pt-0 sm:flex lg:w-2/3 xl:w-1/2">
-                        <div class="text-sm pl-9 sm:w-1/2">
+                        <div class="text-sm pl-9 sm:w-1/2 aos-init" data-aos="fade-up">
                             <p>In the four years since we started, Sviato Academy has redefined the standards of <span class="u-text--primary">the permanent makeup industry</span>. Led by one of the world’s leading permanent makeup artists, Sviatoslav Otchenash, we have become <span class="u-text--primary">the go-to institution</span> for gifted individuals seeking to perfect their craft.</p>
                         </div>
 
-                        <div class="text-sm pl-9 sm:w-1/2">
+                        <div class="text-sm pl-9 sm:w-1/2 aos-init" data-aos="fade-up">
                             <p>Our techniques and training methods are the results of over a decade of the tireless <span class="u-text--primary">pursuit of perfection</span>. We have proven time and time again that our innovative approach and constant evolution stand head and shoulders above other academies.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="mx-auto max-sm:max-w-md md:pt-28 md:flex md:justify-center">
-                    <div @class([
-                        'pr-[24%] mb-6',
-                        'md:px-4 md:pt-28',
-                    ])>
+                    <div class="pr-[24%] mb-6 md:px-4 md:pt-28">
                         <img
                         src="{{ Vite::image('hero-01.jpg') }}"
                         width="640"
                         height="570"
-                        class="rounded-md"
                         alt="Sviato Otchenash from {{ $config->name }}"
+                        class="rounded-md aos-init"
+                        data-aos="fade-up"
                         >
                     </div>
 
-                    <div @class([
-                        'pl-[24%] mb-6',
-                        'md:px-4',
-                    ])>
+                    <div class="pl-[24%] mb-6 md:px-4">
                         <img
                         src="{{ Vite::image('hero-02.jpg') }}"
                         width="640"
                         height="570"
-                        class="rounded-md"
                         alt="Sviato Otchenash from {{ $config->name }}"
+                        class="rounded-md aos-init"
+                        data-aos="fade-up"
                         >
                     </div>
                 </div>
@@ -75,32 +71,33 @@
                 <img
                 src="{{ Vite::image('logo-3d.jpg') }}"
                 srcset="{{ Vite::image('logo-3d@2x.jpg').' 2x' }}"
-                class="mix-blend-lighten"
                 width="300"
                 height="220"
                 alt="{{ $config->name.' 3D logo' }}"
+                class="mix-blend-lighten aos-init"
+                data-aos="fade-up"
                 >
             </div>
 
             <div class="mx-auto lg:max-xl:max-w-3xl">
                 <div class="relative z-10">
-                    <h2 class="b-h1 mb-0 flex flex-col">
+                    <h2 class="b-h1 mb-0 flex flex-col aos-init" data-aos="fade-up">
                         Sviato Academy
                         <div class="ml-auto">by <span class="inline-block u-text--primary italic px-3 -mx-3">the numbers</span></div>
                     </h2>
 
                     <div class="text-white text-sm flex flex-wrap justify-between md:text-lg">
-                        <dl class="flex flex-col-reverse items-end">
+                        <dl class="flex flex-col-reverse items-end aos-init" data-aos="fade-up">
                             <dt>Trainers</dt>
                             <dd class="b-h1 text-inherit mb-0 md:mb-1 max-sm:text-4xl">+190</dd>
                         </dl>
 
-                        <dl class="flex flex-col-reverse items-end">
+                        <dl class="flex flex-col-reverse items-end aos-init" data-aos="fade-up">
                             <dt>Students</dt>
                             <dd class="b-h1 text-inherit mb-0 md:mb-1 max-sm:text-4xl">16 000</dd>
                         </dl>
 
-                        <dl class="flex flex-col-reverse items-end">
+                        <dl class="flex flex-col-reverse items-end aos-init" data-aos="fade-up">
                             <dt>Countries</dt>
                             <dd class="b-h1 text-inherit mb-0 md:mb-1 max-sm:text-4xl">44</dd>
                         </dl>
@@ -110,10 +107,11 @@
                 <div class="px-[15%] mb-6 lg:px-[19%]">
                     <img
                     src="{{ Vite::image('Earth.jpg') }}"
-                    class="mix-blend-screen mx-auto -mt-28 md:-mt-[34.5%]"
                     width="840"
                     height="840"
                     alt="Earth"
+                    class="mix-blend-screen mx-auto -mt-28 md:-mt-[34.5%] aos-init"
+                    data-aos="fade-up"
                     >
                 </div>
             </div>
@@ -124,6 +122,7 @@
                 srcset="{{ Vite::image('hero-03@2x.png').' 2x' }}"
                 width="384"
                 height="800"
+                alt="Sviato Otchenash from {{ $config->name }}"
                 @class([
                     'c-mask-opacity-to-bottom-75',
                     'mx-auto max-w-[15rem] h-auto absolute left-0 right-0 top-0',
@@ -133,18 +132,23 @@
                     'xl:max-w-none xl:left-[42.3rem] xl:top-[2%]',
                     '2xl:left-[51rem] 2xl:-top-[12%]',
                     '3xl:left-[51.7rem]',
+                    'aos-init',
                 ])
-                alt="Sviato Otchenash from {{ $config->name }}"
+                data-aos="fade-up"
                 >
 
-                <div @class([
+                <div
+                @class([
                     'mx-auto w-full max-w-xs relative',
                     'sm:max-w-md',
                     'md:ml-[5%] md:mr-0 md:max-w-[25rem]',
                     'lg:max-w-[34rem]',
                     'xl:max-w-[40rem] xl:ml-[7%]',
                     '2xl:max-w-[49rem]',
-                ])>
+                    'aos-init',
+                ])
+                data-aos="fade-up"
+                >
                     <p class="b-h5">In my over <span class="u-text--primary">10 years</span> working in the permanent makeup industry, I’ve held over <span class="u-text--primary">400 masterclasses worldwide</span> and trained some of the world’s top artists. But, my interest in beauty goes back much longer.</p>
                 </div>
             </div>
@@ -155,14 +159,15 @@
                     src="{{ Vite::image('hero-04.jpg') }}"
                     width="560"
                     height="496"
-                    class="rounded-md"
                     alt="Sviato Otchenash from {{ $config->name }}"
+                    class="rounded-md aos-init"
+                    data-aos="fade-up"
                     >
                 </div>
 
                 <div class="sm:px-6 md:pl-6 md:w-1/2 lg:px-[3%] lg:w-[46.5%] 2xl:w-[27rem]">
-                    <p>Before becoming a PMU trainer, I spent years working professionally as a <span class="u-text--primary">tattoo artist</span> <span class="u-text--primary">and art educator</span>. That foundation allowed me quickly develop the skills needed for elite-level PMU. But, it was my years spent in art education that gave me the patience, people skills, and creativity needed to develop my own unique approach to training and PMU.</p>
-                    <p>The techniques I’ve developed have since become industry staples and the continuous improvement of these techniques continues to drive my dedication to perfection.</p>
+                    <p class="aos-init" data-aos="fade-up">Before becoming a PMU trainer, I spent years working professionally as a <span class="u-text--primary">tattoo artist</span> <span class="u-text--primary">and art educator</span>. That foundation allowed me quickly develop the skills needed for elite-level PMU. But, it was my years spent in art education that gave me the patience, people skills, and creativity needed to develop my own unique approach to training and PMU.</p>
+                    <p class="aos-init" data-aos="fade-up">The techniques I’ve developed have since become industry staples and the continuous improvement of these techniques continues to drive my dedication to perfection.</p>
                 </div>
             </div>
 
@@ -172,18 +177,19 @@
                 srcset="{{ Vite::image('hero-05@2x.jpg').' 2x' }}"
                 width="192"
                 height="288"
-                class="rounded-md"
                 alt="Sviato Otchenash from {{ $config->name }}"
+                class="rounded-md aos-init"
+                data-aos="fade-up"
                 >
             </div>
         </section>
 
         <div class="overflow-hidden">
             <section class="c-sheet splide splide--arrows-bottom pt-20 md:pt-28" data-carousel-row>
-                <h2 class="b-h1 mb-6 md:text-center md:mb-14">Our <span class="u-text--primary italic px-2 -mx-2">trainers</span></h2>
+                <h2 class="b-h1 mb-6 md:text-center md:mb-14 aos-init" data-aos="fade-up">Our <span class="u-text--primary italic px-2 -mx-2">trainers</span></h2>
 
-                <div class="splide__body md:max-xl:mx-6">
-                    <div class="splide__arrows">
+                <div class="splide__body md:max-xl:mx-6 aos-init" data-aos="fade-up">
+                    <div class="splide__arrows aos-init" data-aos="fade-up">
                         <button class="splide__arrow splide__arrow--prev">@svg('arrow-ltr', '-scale-x-1')</button>
 
                         <button class="splide__arrow splide__arrow--next">@svg('arrow-ltr')</button>
@@ -228,8 +234,8 @@
                                         {{-- srcset="{{ Vite::image('hero-05@2x.jpg').' 2x' }}" --}}
                                         width="252"
                                         height="252"
-                                        class="rounded mb-4"
                                         alt="{{ $coache['fname'] }} {{ $coache['lname'] }}"
+                                        class="rounded mb-4"
                                         >
                                     </article>
                                 </div>
@@ -241,36 +247,36 @@
         </div>
 
         <section class="max-w-xl mx-auto px-6 pt-20 sm:max-w-xl md:pt-28 md:max-w-2xl xl:max-w-4xl">
-            <h2 class="mb-5 max-w-lg max-sm:text-4xl sm:text-center md:mb-9 md:max-w-none xl:mb-14">Here are the steps how to join and advance within the <span class="inline-block u-text--primary italic px-2 -mx-2">Sviato Academy</span> team</h2>
+            <h2 class="mb-5 max-w-lg max-sm:text-4xl sm:text-center md:mb-9 md:max-w-none xl:mb-14 aos-init" data-aos="fade-up">Here are the steps how to join and advance within the <span class="inline-block u-text--primary italic px-2 -mx-2">Sviato Academy</span> team</h2>
 
             <div class="px-[7%] sm:px-[14%] md:[&>*]:mb-7 xl:[&>*]:mb-12">
-                <p>Find and sign up for a Basic course or Masterclass on the Sviato Academy website, which includes practice on live models</p>
+                <p class="aos-init" data-aos="fade-up">Find and sign up for a Basic course or Masterclass on the Sviato Academy website, which includes practice on live models</p>
 
-                <p>After the class, practice hard. Every time you have a client, take a picture of your work and send it to your Trainer. If the Trainer says that you did an excellent job, publish the work on social pages and make sure you tag your Trainer in the post. 10 works like this and you get the logo with 1 star!</p>
+                <p class="aos-init" data-aos="fade-up">After the class, practice hard. Every time you have a client, take a picture of your work and send it to your Trainer. If the Trainer says that you did an excellent job, publish the work on social pages and make sure you tag your Trainer in the post. 10 works like this and you get the logo with 1 star!</p>
 
-                <p>To become a Stylist, you need to take further training and to publish 20 high-quality works with the 1-star logo on social pages. Again, your Trainer should check your works, and you should tag her/him in the description of each post</p>
+                <p class="aos-init" data-aos="fade-up">To become a Stylist, you need to take further training and to publish 20 high-quality works with the 1-star logo on social pages. Again, your Trainer should check your works, and you should tag her/him in the description of each post</p>
 
-                <p>To obtain the status of a Trainer, you must post on your social media profiles at least 50 high-quality works with the Stylist logo that have been accepted by your Trainer</p>
+                <p class="aos-init" data-aos="fade-up">To obtain the status of a Trainer, you must post on your social media profiles at least 50 high-quality works with the Stylist logo that have been accepted by your Trainer</p>
 
-                <p>In terms of skill, there is no difference between Trainers and Top Trainers. Becoming a Top Trainer is a matter of personality. Top Trainers must be good people, agreeable, highly professional, admired and respected by a large number of students.</p>
+                <p class="aos-init" data-aos="fade-up">In terms of skill, there is no difference between Trainers and Top Trainers. Becoming a Top Trainer is a matter of personality. Top Trainers must be good people, agreeable, highly professional, admired and respected by a large number of students.</p>
             </div>
         </section>
 
         <div class="overflow-hidden">
             <section class="c-sheet splide splide--arrows-center splide--branded pt-20 md:pt-28" data-carousel-showcase>
-                <h2 class="b-h1 text-center mb-20">Our <span class="u-text--primary px-2 -mx-2 italic">products</span></h2>
+                <h2 class="b-h1 text-center mb-20 aos-init" data-aos="fade-up">Our <span class="u-text--primary px-2 -mx-2 italic">products</span></h2>
 
-                <div class="relative">
-                    <div class="splide__arrows">
+                <div class="relative aos-init" data-aos="fade-up">
+                    <div class="splide__arrows aos-init" data-aos="fade-up">
                         <button class="splide__arrow splide__arrow--prev">@svg('arrow-ltr', '-scale-x-1')</button>
 
                         <button class="splide__arrow splide__arrow--next">@svg('arrow-ltr')</button>
                     </div>
 
-                    <div class="splide__track overflow-visible mx-auto w-3/4">
+                    <div class="splide__track overflow-visible mx-auto md:w-3/5">
                         <div class="splide__list">
                             @foreach ($products as $product)
-                                <article class="splide__slide text-center px-12">
+                                <article class="splide__slide text-center md:px-12">
                                     <h3 class="mb-8">{{ $product['name'] }}</h3>
 
                                     <div class="splide__slide__img mb-16">
