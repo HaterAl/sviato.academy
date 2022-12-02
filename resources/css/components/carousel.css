@@ -6,6 +6,7 @@
     .splide {
         & .splide__arrows {
             @apply
+            pointer-events-none
             h-11
             flex
             justify-between
@@ -15,7 +16,9 @@
         & .splide__arrow {
             @apply
             pointer-events-auto
-            h-full;
+            text-white
+            h-full
+            hover:text-gold-dark;
         }
     }
 
@@ -26,7 +29,6 @@
 
         & .splide__pagination__page {
             @apply px-1 py-2
-            before:content-['']
             before:block
             before:w-3
             before:h-3
@@ -34,7 +36,7 @@
             before:border
             before:border-gray-400
             before:transition-colors
-            hover:before:border-gold-dark;
+            hover:before:border-white;
 
             &.is-active {
                 @apply
@@ -64,10 +66,68 @@
         }
     }
 
+    .splide--arrows-center {
+        & .splide__arrows {
+            @apply
+            absolute
+            z-10
+            left-0
+            right-0
+            top-1/2
+            -translate-y-1/2;
+        }
+    }
+
+    .splide--branded {
+        & .splide__slide__img {
+            @apply
+            flex
+            justify-center
+            relative
+            before:absolute
+            before:left-0
+            before:right-0
+            before:top-0
+            before:bottom-0
+            before:bg-logo-glyph
+            before:bg-no-repeat
+            before:bg-contain
+            before:bg-center
+            before:opacity-0
+            before:transition-opacity
+            before:duration-[400ms];
+        }
+
+        & .splide__slide {
+            @apply
+            opacity-30
+            transition-opacity
+            duration-300;
+
+            &.is-active {
+                @apply
+                opacity-100;
+
+                & .splide__slide__img {
+                    @apply
+                    before:opacity-100;
+                }
+            }
+        }
+
+        & [aria-busy=true] .splide__slide.is-active {
+            @apply
+            opacity-30;
+        }
+    }
+
+    .splide__slide__img {}
+}
+
+@layer components {
     .splide__slide__link {
         @apply
         hover:text-gold-dark
-        after:content-['']
         after:absolute
         after:left-0
         after:right-0

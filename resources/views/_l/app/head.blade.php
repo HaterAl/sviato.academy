@@ -13,7 +13,7 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
 @vite([
-    'resources/css/tailwind.css',
+    'resources/css/app.css',
 ])
 
 @stack('styles')

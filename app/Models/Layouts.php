@@ -36,5 +36,10 @@ if (app()->environment() == 'local') {
         {
             return YamlFrontMatter::parseFile(resource_path('_data/_qa/coaches.md'))->matter();
         }
+
+        public static function products()
+        {
+            return YamlFrontMatter::parseFile(resource_path('_data/_qa/products.md'))->matter();
+        }
     }
 }

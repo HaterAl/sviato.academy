@@ -2,6 +2,8 @@
 
 @php
     $config = App\Models\Layouts::config();
+    $coaches = App\Models\Layouts::coaches();
+    $products = App\Models\Layouts::products();
 @endphp
 
 @section('main')
@@ -177,18 +179,14 @@
         </section>
 
         <div class="overflow-hidden">
-            <section class="c-sheet splide splide--arrows-bottom pt-20 md:pt-28 js-carousel">
+            <section class="c-sheet splide splide--arrows-bottom pt-20 md:pt-28" data-carousel-row>
                 <h2 class="b-h1 mb-6 md:text-center md:mb-14">Our <span class="u-text--primary italic px-2 -mx-2">trainers</span></h2>
-
-                @php
-                    $coaches = App\Models\Layouts::coaches();
-                @endphp
 
                 <div class="splide__body md:max-xl:mx-6">
                     <div class="splide__arrows">
-                        <button class="splide__arrow splide__arrow--prev hover:text-gold-dark">@svg('arrow-ltr', '-scale-x-1')</button>
+                        <button class="splide__arrow splide__arrow--prev">@svg('arrow-ltr', '-scale-x-1')</button>
 
-                        <button class="splide__arrow splide__arrow--next hover:text-gold-dark">@svg('arrow-ltr')</button>
+                        <button class="splide__arrow splide__arrow--next">@svg('arrow-ltr')</button>
                     </div>
 
                     <div class="splide__track overflow-visible -mx-6">
@@ -258,26 +256,43 @@
             </div>
         </section>
 
-        <section class="c-sheet pt-20 md:pt-28">
-            <h2 class="b-h1 text-center mb-20">Our <span class="u-text--primary px-2 -mx-2 italic">products</span></h2>
+        <div class="overflow-hidden">
+            <section class="c-sheet splide splide--arrows-center splide--branded pt-20 md:pt-28" data-carousel-showcase>
+                <h2 class="b-h1 text-center mb-20">Our <span class="u-text--primary px-2 -mx-2 italic">products</span></h2>
 
-            <article class="text-center mx-auto w-1/2">
-                <h3 class="mb-8">S-Liner Basic</h3>
+                <div class="relative">
+                    <div class="splide__arrows">
+                        <button class="splide__arrow splide__arrow--prev">@svg('arrow-ltr', '-scale-x-1')</button>
 
-                <div class="mb-16 bg-logo-glyph bg-no-repeat bg-contain bg-center flex items-center justify-center">
-                    <img
-                    src="{{ Vite::image('product-00.png') }}"
-                    width="358"
-                    height="358"
-                    alt="S-Liner Basic">
+                        <button class="splide__arrow splide__arrow--next">@svg('arrow-ltr')</button>
+                    </div>
+
+                    <div class="splide__track overflow-visible mx-auto w-3/4">
+                        <div class="splide__list">
+                            @foreach ($products as $product)
+                                <article class="splide__slide text-center px-12">
+                                    <h3 class="mb-8">{{ $product['name'] }}</h3>
+
+                                    <div class="splide__slide__img mb-16">
+                                        <img
+                                        src="{{ Vite::image($product['img']) }}"
+                                        width="358"
+                                        height="358"
+                                        alt="{{ $product['name'] }}"
+                                        class="relative">
+                                    </div>
+
+                                    <dl>
+                                        <dt class="sr-only">Price</dt>
+                                        <dd class="u-text--primary b-h3">{{ $product['price'] }}</dd>
+                                    </dl>
+                                </article>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
-
-                <dl>
-                    <dt class="sr-only">Price</dt>
-                    <dd class="u-text--primary b-h3">€1,000.00</dd>
-                </dl>
-            </article>
-        </section>
+            </section>
+        </div>
     </main>
 @endsection
 

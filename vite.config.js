@@ -16,7 +16,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       laravel({
         input: [
-          'resources/css/tailwind.css',
+          'resources/css/app.css',
           'resources/js/app.js',
         ],
         refresh: [
