@@ -1,0 +1,15 @@
+image: busybox
+
+pages:
+  tags:
+    - docker
+  script:
+    - mkdir public
+    - cp -r static/html public
+    - cp -r static/build public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == "gitlab-ci"
+

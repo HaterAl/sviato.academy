@@ -15,7 +15,11 @@ const PAGES_OUTPUT = 'static/html/'
 const PAGES_LIST = [
     {
         label: 'index',
-        slug: '/',
+        slug: '/_l/',
+    },
+    {
+        label: 'home',
+        slug: '/_l/home',
     },
 ]
 
@@ -26,7 +30,8 @@ if (!process.env.APP_URL) {
     const APP_URL = process.env.APP_URL
 
     const replaceSorcesPath = (html) => {
-        return html.replaceAll(`${APP_URL}/static`, '..')
+        console.log('${APP_URL}/build/:', `${APP_URL}/build/`)
+        return html.replaceAll(`${APP_URL}/build/`, '../build/')
     }
 
     del.sync([path.join(PAGES_OUTPUT, '*')])
@@ -34,6 +39,7 @@ if (!process.env.APP_URL) {
     if (!fse.existsSync(PAGES_OUTPUT)) fse.mkdir(PAGES_OUTPUT)
 
     PAGES_LIST.forEach(Page => {
+        console.log('APP_URL + Page.slug:', APP_URL + Page.slug)
         getHTML(APP_URL + Page.slug).then(html => {
             const output = `${PAGES_OUTPUT}/${Page.label}.html`
 

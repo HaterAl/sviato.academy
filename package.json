@@ -3,7 +3,7 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "html": "node webpack/html-templates.mjs"
+        "html": "node node-scripts/html-templates.mjs"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.13",
