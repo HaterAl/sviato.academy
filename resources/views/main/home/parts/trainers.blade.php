@@ -27,14 +27,14 @@
                                     </dl>
                                     <dl>
                                         <dt class="sr-only">Type of courses</dt>
-                                        <dd>{{ $trainer['courses'] }}</dd>
+                                        <dd>{{ $trainer['treatment'] }}</dd>
                                     </dl>
                                     @if (count($trainer['socials']))
                                         <dl class="-mx-1 -mt-3 flex">
                                             <dt class="sr-only">Accounts in social networks</dt>
                                             @foreach($trainer['socials'] as $key => $link)
                                                 <dd>
-                                                    <a href="{{ $link }}" class="block p-1" rel="nofollow noopener">
+                                                    <a href="{{ $link }}" target="_blank" class="block p-1" rel="nofollow noopener">
                                                         <span class="sr-only">{{ $key }}</span>
                                                         @svg($key.'-gold')
                                                     </a>
@@ -46,8 +46,8 @@
                                 <img
                                     width="224"
                                     height="224"
-                                    src="{{ $trainer['img']['1x'] }}"
-                                    srcset="{{ $trainer['img']['2x'] }} 2x"
+                                    src="{{ asset($trainer['img']['1x']) }}"
+                                    srcset="{{ asset($trainer['img']['2x']) }} 2x"
                                     alt="{{ $trainer['first_name'] }} {{ $trainer['last_name'] }}"
                                     class="rounded mb-4"
                                 >
