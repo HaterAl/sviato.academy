@@ -16,7 +16,7 @@
                 <div class="splide__list">
                     @foreach(config('products.list') as $product)
                         <article class="splide__slide text-center md:px-12">
-                            <a href="google.com" target="_blank" rel="nofollow noopener">
+                            <a href="{{ $product['url'] }}" target="_blank" rel="nofollow noopener">
                                 <h3 class="mb-8">
                                     {{ $product['name'] }}
                                 </h3>
@@ -32,7 +32,7 @@
                                 </div>
                                 <dl>
                                     <dt class="sr-only">Price</dt>
-                                    <dd class="u-text--primary b-h3">€{{ number_format($product['price']) }}</dd>
+                                    <dd class="u-text--primary b-h3">€{{ number_format($product['price'], 2) }}</dd>
                                 </dl>
                             </a>
                         </article>
