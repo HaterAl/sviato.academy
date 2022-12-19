@@ -3,15 +3,18 @@
         {{ __('Sviato Academy') }}
     </h1>
     <div class="flex justify-center md:px-[13%]">
-        <div class="c-spotlight">
+        <picture class="c-spotlight">
+            <source media="(max-width: 420px)" srcset="{{ Vite::image('hero-00-420px.png') }} 1x, {{ Vite::image('hero-00-420px@2x.png') }} 2x">
+            <source media="(max-width: 1024px)" srcset="{{ Vite::image('hero-00-1024px.png') }} 1x, {{ Vite::image('hero-00-1024px@2x.png') }} 2x">
             <img
-                src="{{ Vite::image('hero-00.png') }}"
                 width="840"
                 height="840"
+                src="{{ Vite::image('hero-00.png') }}"
+                srcset="{{ Vite::image('hero-00@2x.png') }} 2x"
                 alt="Sviatoslav Otchenash"
                 class="c-mask-opacity-to-bottom-5 relative"
             >
-        </div>
+        </picture>
     </div>
     <section class="relative -mt-28 sm:-mt-48 lg:-mt-28 2xl:-mt-36 3xl:-mt-40">
         <div class="lg:absolute lg:left-0 lg:right-0 lg:bottom-full lg:flex 3xl:items-center">

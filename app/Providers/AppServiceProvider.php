@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\Seo;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,6 +17,10 @@ class AppServiceProvider extends ServiceProvider
     {
         // Change 'public' path to 'static'
         $this->app->bind('path.public', fn() => base_path('static'));
+
+        $this->app->singleton('seo', function ($app) {
+            return new Seo($app->request);
+        });
     }
 
     /**
