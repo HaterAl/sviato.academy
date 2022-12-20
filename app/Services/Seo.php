@@ -33,11 +33,11 @@ class Seo
     {
         $this->request = $request;
 
-        $this->data = $this->defaults();
-
         $this->title = __('Sviato Academy');
 
-        $this->description = __('');
+        $this->description = '';
+
+        $this->data = $this->defaults();
     }
 
     /**
