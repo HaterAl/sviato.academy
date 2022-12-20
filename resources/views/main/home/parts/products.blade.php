@@ -24,10 +24,10 @@
                                     <img
                                         width="358"
                                         height="358"
-                                        src="{{ $product['img']['1x'] }}"
-                                        srcset="{{ $product['img']['2x'] }} 2x"
+                                        data-src="{{ $product['img']['1x'] }}"
+                                        data-srcset="{{ $product['img']['2x'] }} 2x"
                                         alt="{{ $product['name'] }}"
-                                        class="relative"
+                                        class="lazy relative"
                                     >
                                 </div>
                                 <dl>

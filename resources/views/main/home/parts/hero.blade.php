@@ -49,17 +49,17 @@
                     width="640"
                     height="570"
                     alt="Sviatoslav Otchenash"
-                    class="rounded-md aos-init"
+                    class="lazy rounded-md aos-init"
                     data-aos="fade-up"
                 >
             </div>
             <div class="pl-[24%] mb-6 md:px-4">
                 <img
-                    src="{{ Vite::image('hero-02.jpg') }}"
+                    data-src="{{ Vite::image('hero-02.jpg') }}"
                     width="640"
                     height="570"
                     alt="Sviatoslav Otchenash"
-                    class="rounded-md aos-init"
+                    class="lazy rounded-md aos-init"
                     data-aos="fade-up"
                 >
             </div>

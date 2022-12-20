@@ -46,10 +46,10 @@
                                 <img
                                     width="224"
                                     height="224"
-                                    src="{{ asset($trainer['img']['1x']) }}"
-                                    srcset="{{ asset($trainer['img']['2x']) }} 2x"
+                                    data-src="{{ asset($trainer['img']['1x']) }}"
+                                    data-srcset="{{ asset($trainer['img']['2x']) }} 2x"
                                     alt="{{ $trainer['first_name'] }} {{ $trainer['last_name'] }}"
-                                    class="rounded mb-4"
+                                    class="lazy rounded mb-4"
                                 >
                             </article>
                         </div>
