@@ -1,12 +1,12 @@
 <section class="c-sheet max-sm:max-w-sm pt-20 md:pt-28">
     <div class="mb-3 mx-auto flex justify-center max-w-[30%] sm:max-w-[11rem] xl:max-w-none">
         <img
-            src="{{ Vite::image('logo-3d.jpg') }}"
-            srcset="{{ Vite::image('logo-3d@2x.jpg').' 2x' }}"
             width="300"
             height="220"
+            data-src="{{ Vite::image('logo-3d.jpg') }}"
+            data-srcset="{{ Vite::image('logo-3d@2x.jpg') }} 2x"
             alt="Sviato Academy"
-            class="mix-blend-lighten aos-init"
+            class="lazy mix-blend-lighten aos-init"
             data-aos="fade-up"
         >
     </div>
@@ -35,21 +35,21 @@
         </div>
         <div class="px-[15%] mb-6 lg:px-[19%]">
             <img
-                src="{{ Vite::image('Earth.jpg') }}"
                 width="840"
                 height="840"
+                data-src="{{ Vite::image('Earth.jpg') }}"
                 alt="Earth"
-                class="mix-blend-screen mx-auto -mt-28 md:-mt-[34.5%] aos-init"
+                class="lazy mix-blend-screen mx-auto -mt-28 md:-mt-[34.5%] aos-init"
                 data-aos="fade-up"
             >
         </div>
     </div>
     <div class="pt-[12.5rem] mt-20 relative sm:pt-[13.5rem] md:pt-[4.5rem]">
         <img
-            src="{{ Vite::image('hero-03.png') }}"
-            srcset="{{ Vite::image('hero-03@2x.png').' 2x' }}"
             width="384"
             height="800"
+            data-src="{{ Vite::image('hero-03.png') }}"
+            data-srcset="{{ Vite::image('hero-03@2x.png') }} 2x"
             alt="Sviatoslav Otchenash"
             @class([
                 'c-mask-opacity-to-bottom-75',
@@ -61,6 +61,7 @@
                 '2xl:left-[51rem] 2xl:-top-[12%]',
                 '3xl:left-[51.7rem]',
                 'aos-init',
+                'lazy',
             ])
             data-aos="fade-up"
         >
@@ -77,16 +78,19 @@
     </div>
     <div class="pt-20 mx-auto relative z-10 max-md:max-w-md md:pt-28 md:flex md:items-end lg:items-center">
         <div class="mb-6 md:mb-5 md:w-1/2 lg:pr-[7%]">
-            <img
-                src="{{ Vite::image('hero-04.jpg') }}"
-                width="560"
-                height="496"
-                alt="Sviatoslav Otchenash"
-                class="rounded-md aos-init"
-                data-aos="fade-up"
-            >
+            <picture>
+                <source media="(max-width: 420px)" srcset="{{ asset('images/hero-04-420px.jpg') }} 1x, {{ asset('images/hero-04-420px@2x.jpg') }} 2x">
+                <img
+                    width="560"
+                    height="496"
+                    data-src="{{ asset('images/hero-04.jpg') }}"
+                    data-srcset="{{ asset('images/hero-04@2x.jpg') }} 2x"
+                    class="lazy rounded-md aos-init"
+                    data-aos="fade-up"
+                    alt="Sviatoslav Otchenash"
+                >
+            </picture>
         </div>
-
         <div class="sm:px-6 md:pl-6 md:w-1/2 lg:px-[3%] lg:w-[46.5%] 2xl:w-[27rem]">
             <p class="aos-init" data-aos="fade-up">
                 Before becoming a&nbsp;PMU trainer, I&nbsp;spent years working
@@ -104,12 +108,12 @@
     </div>
     <div class="pl-[43%] md:max-lg:pl-[50%] pt-1">
         <img
-            src="{{ Vite::image('hero-05.jpg') }}"
-            srcset="{{ Vite::image('hero-05@2x.jpg').' 2x' }}"
             width="192"
             height="288"
+            data-src="{{ Vite::image('hero-05.jpg') }}"
+            data-srcset="{{ Vite::image('hero-05@2x.jpg') }} 2x"
             alt="Sviatoslav Otchenash"
-            class="rounded-md aos-init"
+            class="lazy rounded-md aos-init"
             data-aos="fade-up"
         >
     </div>
