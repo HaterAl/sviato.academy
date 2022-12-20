@@ -1,5 +1,5 @@
 <footer class="c-sheet pt-20 pb-28 md:pt-28 md:pb-36">
-    <div class="-mx-4 md:flex justify-between">
+    <div class="-mx-4 md:flex justify-between" id="contacts">
         <dl class="b-h4 px-4 flex flex-col justify-between">
             @if ($phone = config('contacts.phone'))
                 <dt class="sr-only">{{ __('Phone number') }}:</dt>

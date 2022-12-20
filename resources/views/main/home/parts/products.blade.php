@@ -1,6 +1,6 @@
 <div class="overflow-hidden">
     <section class="c-sheet splide splide--arrows-center splide--branded pt-20 md:pt-28" data-carousel-showcase>
-        <h2 class="b-h1 text-center mb-20 aos-init" data-aos="fade-up">
+        <h2 class="b-h1 text-center mb-20 aos-init" data-aos="fade-up" id="products">
             {{ __('Our') }} <span class="u-text--primary px-2 -mx-2 italic">{{ __('products') }}</span>
         </h2>
         <div class="relative aos-init" data-aos="fade-up">

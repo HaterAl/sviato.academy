@@ -1,5 +1,5 @@
 <section class="c-sheet max-sm:max-w-sm pt-20 md:pt-28">
-    <div class="mb-3 mx-auto flex justify-center max-w-[30%] sm:max-w-[11rem] xl:max-w-none">
+    <div class="mb-3 mx-auto flex justify-center max-w-[30%] sm:max-w-[11rem] xl:max-w-none" id="about">
         <img
             width="300"
             height="220"
