@@ -24,7 +24,7 @@
             <div class="md:pt-0 sm:flex lg:w-2/3 xl:w-1/2">
                 <div class="text-sm pl-9 sm:w-1/2 aos-init" data-aos="fade-up">
                     <p>
-                        In&nbsp;the four years since we&nbsp;started, Sviato Academy has redefined the standards of&nbsp;
+                        In&nbsp;the four years since we&nbsp;started, Sviato Academy has redefined the standards of
                         <span class="u-text--primary">the permanent makeup industry</span>. Led by&nbsp;one of&nbsp;the
                         world’s leading permanent makeup artists, Sviatoslav Otchenash, we&nbsp;have become
                         <span class="u-text--primary">the go-to institution</span> for gifted individuals seeking to
