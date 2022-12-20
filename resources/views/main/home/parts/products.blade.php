@@ -16,24 +16,22 @@
                 <div class="splide__list">
                     @foreach(config('products.list') as $product)
                         <article class="splide__slide text-center md:px-12">
-                            <a href="{{ $product['url'] }}" target="_blank" rel="nofollow noopener">
-                                <h3 class="mb-8">
-                                    {{ $product['name'] }}
-                                </h3>
-                                <div class="splide__slide__img mb-16">
-                                    <img
+                            <h3 class="mb-8">
+                                {{ $product['name'] }}
+                            </h3>
+                            <div class="splide__slide__img mb-16">
+                                <img
                                         width="358"
                                         height="358"
                                         src="{{ Vite::image($product['img']['1x']) }}"
                                         alt="{{ $product['name'] }}"
                                         class="relative"
-                                    >
-                                </div>
-                                <dl>
-                                    <dt class="sr-only">Price</dt>
-                                    <dd class="u-text--primary b-h3">€{{ number_format($product['price'], 2) }}</dd>
-                                </dl>
-                            </a>
+                                >
+                            </div>
+                            <dl>
+                                <dt class="sr-only">Price</dt>
+                                <dd class="u-text--primary b-h3">€{{ number_format($product['price'], 2) }}</dd>
+                            </dl>
                         </article>
                     @endforeach
                 </div>
