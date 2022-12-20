@@ -24,10 +24,9 @@
                                     <img
                                         width="358"
                                         height="358"
-                                        data-src="{{ $product['img']['1x'] }}"
-                                        data-srcset="{{ $product['img']['2x'] }} 2x"
+                                        src="{{ Vite::image($product['img']['1x']) }}"
                                         alt="{{ $product['name'] }}"
-                                        class="lazy relative"
+                                        class="relative"
                                     >
                                 </div>
                                 <dl>
