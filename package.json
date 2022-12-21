@@ -22,6 +22,8 @@
     },
     "dependencies": {
         "@splidejs/splide": "^4.1.4",
-        "aos": "^3.0.0-beta.6"
+        "aos": "^3.0.0-beta.6",
+        "smoothscroll-polyfill": "^0.4.4",
+        "vanilla-lazyload": "^17.8.3"
     }
 }

@@ -60,12 +60,9 @@ export default defineConfig(({ mode }) => {
     server: {
       host: true,
       open: '/_l',
-      hmr: {
-        host: '10.30.30.223',
-      },
-      proxy: {
-        '/_l': `${env.APP_URL}`,
-      },
+      // hmr: {
+      //   host: '10.30.30.223',
+      // },
     },
   }
 })

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', fn() => view('_l.pages._dump'));
-
 require_once(__DIR__ . '/layouts.php');
+
+Route::get('/', [PagesController::class, 'home']);
