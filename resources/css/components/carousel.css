@@ -6,7 +6,7 @@
     .splide {
         & .splide__arrows {
             @apply
-            /* pointer-events-none — can't be set */
+            pointer-events-none
             h-11
             flex
             justify-between

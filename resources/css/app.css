@@ -49,6 +49,7 @@
 @import 'base/font';
 @import 'base/normalize';
 @import 'base/type';
+@import 'base/grid';
 
 @import 'components/layout';
 @import 'components/decorations';

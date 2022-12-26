@@ -21,6 +21,10 @@ const PAGES_LIST = [
         label: 'home',
         slug: '/_l/home',
     },
+    {
+        label: 'error',
+        slug: '/_l/error',
+    },
 ]
 
 //## Setup

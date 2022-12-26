@@ -47,4 +47,18 @@
     p, ul, ol, dl {
         @apply mb-5;
     }
+
+    .b-d1 {
+        @apply
+        font-bold
+        text-gray-500
+        text-[10rem]
+        leading-[0.8]
+        mb-4
+        sm:text-[12rem]
+        md:text-[14rem]
+        lg:text-[18rem]
+        xl:text-[19rem]
+        2xl:text-[22rem];
+    }
 }

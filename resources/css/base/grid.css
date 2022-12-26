@@ -1,0 +1,11 @@
+/* Base: Grid */
+
+@layer base {
+    body {
+        @apply flex flex-col;
+    }
+
+    main {
+        @apply flex-grow;
+    }
+}

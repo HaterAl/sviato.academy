@@ -6,6 +6,7 @@
     .c-sheet {
         @apply
         mx-auto px-6
+        w-full
         max-w-xl
         md:max-w-3xl
         lg:max-w-5xl
