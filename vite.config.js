@@ -26,6 +26,13 @@ export default defineConfig(({ mode }) => {
         ],
         publicDirectory: 'static',
       }),
+        {
+            name: 'laravel-fix',
+            enforce: 'post',
+            config(userConfig) {
+                userConfig.base = './';
+            },
+        },
     ],
     resolve: {
       alias: {
