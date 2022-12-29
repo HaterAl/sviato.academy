@@ -17,15 +17,18 @@
                     @foreach(config('products.list') as $product)
                         <article class="splide__slide text-center md:px-12">
                             <h3 class="mb-8">
-                                {{ $product['name'] }}
+                                <a href="{{ $product['url'] }}" target="_blank" rel="nofollow noopener" class="splide__slide__link">
+                                    {{ $product['name'] }}
+                                </a>
                             </h3>
                             <div class="splide__slide__img mb-16">
                                 <img
-                                        width="358"
-                                        height="358"
-                                        src="{{ Vite::image($product['img']['1x']) }}"
-                                        alt="{{ $product['name'] }}"
-                                        class="relative"
+                                    width="358"
+                                    height="358"
+                                    data-src="{{ asset($product['img']['1x']) }}"
+                                    data-srcset="{{ asset($product['img']['2x']) }} 2x"
+                                    alt="{{ $product['name'] }}"
+                                    class="lazy relative"
                                 >
                             </div>
                             <dl>
