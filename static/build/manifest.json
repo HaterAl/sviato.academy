@@ -1,19 +1,15 @@
 {
-  "resources/fonts/BebasNeuePro-Bold.woff2": {
-    "file": "assets/BebasNeuePro-Bold.0b299d08.woff2",
-    "src": "resources/fonts/BebasNeuePro-Bold.woff2"
+  "resources/fonts/BebasNeuePro-BoldItalic.woff2": {
+    "file": "assets/BebasNeuePro-BoldItalic.0a72c668.woff2",
+    "src": "resources/fonts/BebasNeuePro-BoldItalic.woff2"
   },
   "resources/fonts/BebasNeuePro-Italic.woff2": {
     "file": "assets/BebasNeuePro-Italic.fe612f40.woff2",
     "src": "resources/fonts/BebasNeuePro-Italic.woff2"
   },
-  "resources/fonts/BebasNeuePro-BoldItalic.woff2": {
-    "file": "assets/BebasNeuePro-BoldItalic.0a72c668.woff2",
-    "src": "resources/fonts/BebasNeuePro-BoldItalic.woff2"
-  },
-  "resources/images/coach-00.jpg": {
-    "file": "assets/coach-00.972d0994.jpg",
-    "src": "resources/images/coach-00.jpg"
+  "resources/fonts/BebasNeuePro-Bold.woff2": {
+    "file": "assets/BebasNeuePro-Bold.0b299d08.woff2",
+    "src": "resources/fonts/BebasNeuePro-Bold.woff2"
   },
   "resources/fonts/BebasNeuePro-Regular.woff2": {
     "file": "assets/BebasNeuePro-Regular.28bd8f10.woff2",
@@ -23,17 +19,21 @@
     "file": "assets/Earth.b20851bb.jpg",
     "src": "resources/images/Earth.jpg"
   },
-  "resources/images/coach-01.jpg": {
-    "file": "assets/coach-01.a71bc155.jpg",
-    "src": "resources/images/coach-01.jpg"
-  },
   "resources/images/coach-00@2x.jpg": {
     "file": "assets/coach-00@2x.16e44e13.jpg",
     "src": "resources/images/coach-00@2x.jpg"
   },
+  "resources/images/coach-01.jpg": {
+    "file": "assets/coach-01.a71bc155.jpg",
+    "src": "resources/images/coach-01.jpg"
+  },
   "resources/images/coach-01@2x.jpg": {
     "file": "assets/coach-01@2x.ff45cc21.jpg",
     "src": "resources/images/coach-01@2x.jpg"
+  },
+  "resources/images/coach-00.jpg": {
+    "file": "assets/coach-00.972d0994.jpg",
+    "src": "resources/images/coach-00.jpg"
   },
   "resources/images/coach-02.jpg": {
     "file": "assets/coach-02.434eefcc.jpg",
@@ -43,33 +43,33 @@
     "file": "assets/coach-03.1c166abd.jpg",
     "src": "resources/images/coach-03.jpg"
   },
-  "resources/images/coach-04.jpg": {
-    "file": "assets/coach-04.cbb3776d.jpg",
-    "src": "resources/images/coach-04.jpg"
-  },
   "resources/images/coach-02@2x.jpg": {
     "file": "assets/coach-02@2x.420fc7e2.jpg",
     "src": "resources/images/coach-02@2x.jpg"
+  },
+  "resources/images/coach-04.jpg": {
+    "file": "assets/coach-04.cbb3776d.jpg",
+    "src": "resources/images/coach-04.jpg"
   },
   "resources/images/coach-03@2x.jpg": {
     "file": "assets/coach-03@2x.98a41b3c.jpg",
     "src": "resources/images/coach-03@2x.jpg"
   },
-  "resources/images/hero-00-1024px.png": {
-    "file": "assets/hero-00-1024px.d9ffa35a.png",
-    "src": "resources/images/hero-00-1024px.png"
-  },
   "resources/images/coach-04@2x.jpg": {
     "file": "assets/coach-04@2x.1f8bffe9.jpg",
     "src": "resources/images/coach-04@2x.jpg"
   },
-  "resources/images/hero-00-420px.png": {
-    "file": "assets/hero-00-420px.728dd604.png",
-    "src": "resources/images/hero-00-420px.png"
+  "resources/images/hero-00-1024px.png": {
+    "file": "assets/hero-00-1024px.d9ffa35a.png",
+    "src": "resources/images/hero-00-1024px.png"
   },
   "resources/images/hero-00-1024px@2x.png": {
     "file": "assets/hero-00-1024px@2x.2b9777e5.png",
     "src": "resources/images/hero-00-1024px@2x.png"
+  },
+  "resources/images/hero-00-420px.png": {
+    "file": "assets/hero-00-420px.728dd604.png",
+    "src": "resources/images/hero-00-420px.png"
   },
   "resources/images/hero-00-420px@2x.png": {
     "file": "assets/hero-00-420px@2x.fc195145.png",
@@ -79,69 +79,53 @@
     "file": "assets/hero-00.f66087f1.png",
     "src": "resources/images/hero-00.png"
   },
-  "resources/images/hero-01.jpg": {
-    "file": "assets/hero-01.18991103.jpg",
-    "src": "resources/images/hero-01.jpg"
-  },
-  "resources/images/hero-00@2x.png": {
-    "file": "assets/hero-00@2x.9ac23290.png",
-    "src": "resources/images/hero-00@2x.png"
-  },
   "resources/images/hero-02.jpg": {
     "file": "assets/hero-02.e6655520.jpg",
     "src": "resources/images/hero-02.jpg"
+  },
+  "resources/images/hero-01.jpg": {
+    "file": "assets/hero-01.18991103.jpg",
+    "src": "resources/images/hero-01.jpg"
   },
   "resources/images/hero-03.png": {
     "file": "assets/hero-03.64567176.png",
     "src": "resources/images/hero-03.png"
   },
-  "resources/images/hero-05.jpg": {
-    "file": "assets/hero-05.50760fb9.jpg",
-    "src": "resources/images/hero-05.jpg"
+  "resources/images/hero-04.jpg": {
+    "file": "assets/hero-04.83e070ca.jpg",
+    "src": "resources/images/hero-04.jpg"
+  },
+  "resources/images/hero-00@2x.png": {
+    "file": "assets/hero-00@2x.9ac23290.png",
+    "src": "resources/images/hero-00@2x.png"
   },
   "resources/images/ideil.svg": {
     "file": "assets/ideil.f8577898.svg",
     "src": "resources/images/ideil.svg"
   },
-  "resources/images/hero-04.jpg": {
-    "file": "assets/hero-04.83e070ca.jpg",
-    "src": "resources/images/hero-04.jpg"
-  },
-  "resources/images/logo-3d.jpg": {
-    "file": "assets/logo-3d.17ec9902.jpg",
-    "src": "resources/images/logo-3d.jpg"
-  },
-  "resources/images/logo-glyph.svg": {
-    "file": "assets/logo-glyph.21590166.svg",
-    "src": "resources/images/logo-glyph.svg"
-  },
-  "resources/images/logo.svg": {
-    "file": "assets/logo.c3a886bc.svg",
-    "src": "resources/images/logo.svg"
+  "resources/images/hero-05.jpg": {
+    "file": "assets/hero-05.50760fb9.jpg",
+    "src": "resources/images/hero-05.jpg"
   },
   "resources/images/hero-05@2x.jpg": {
     "file": "assets/hero-05@2x.ee2a0b88.jpg",
     "src": "resources/images/hero-05@2x.jpg"
   },
+  "resources/images/logo-glyph.svg": {
+    "file": "assets/logo-glyph.21590166.svg",
+    "src": "resources/images/logo-glyph.svg"
+  },
+  "resources/images/logo-3d.jpg": {
+    "file": "assets/logo-3d.17ec9902.jpg",
+    "src": "resources/images/logo-3d.jpg"
+  },
   "resources/images/product-00.png": {
     "file": "assets/product-00.3849a3a9.png",
     "src": "resources/images/product-00.png"
   },
-  "resources/images/logo-3d@2x.jpg": {
-    "file": "assets/logo-3d@2x.726fc1a8.jpg",
-    "src": "resources/images/logo-3d@2x.jpg"
-  },
-  "resources/images/hero-03@2x.png": {
-    "file": "assets/hero-03@2x.147be96b.png",
-    "src": "resources/images/hero-03@2x.png"
-  },
-  "resources/images/product-01.png": {
-    "file": "assets/product-01.f192230e.png",
-    "src": "resources/images/product-01.png"
-  },
-  "resources/images/product-02.png": {
-    "file": "assets/product-02.8117a09c.png",
-    "src": "resources/images/product-02.png"
+  "resources/images/logo.svg": {
+    "file": "assets/logo.c3a886bc.svg",
+    "src": "resources/images/logo.svg"
   },
   "resources/images/ui/arrow-ltr.svg": {
     "file": "assets/arrow-ltr.bb6a006e.svg",
@@ -158,6 +142,22 @@
   "resources/images/ui/telegram-gold.svg": {
     "file": "assets/telegram-gold.48701690.svg",
     "src": "resources/images/ui/telegram-gold.svg"
+  },
+  "resources/images/logo-3d@2x.jpg": {
+    "file": "assets/logo-3d@2x.726fc1a8.jpg",
+    "src": "resources/images/logo-3d@2x.jpg"
+  },
+  "resources/images/product-02.png": {
+    "file": "assets/product-02.8117a09c.png",
+    "src": "resources/images/product-02.png"
+  },
+  "resources/images/product-01.png": {
+    "file": "assets/product-01.f192230e.png",
+    "src": "resources/images/product-01.png"
+  },
+  "resources/images/hero-03@2x.png": {
+    "file": "assets/hero-03@2x.147be96b.png",
+    "src": "resources/images/hero-03@2x.png"
   },
   "resources/images/ui/tiktok-gold.svg": {
     "file": "assets/tiktok-gold.f82e3959.svg",
@@ -180,7 +180,7 @@
     "src": "resources/js/app.css"
   },
   "resources/css/app.css": {
-    "file": "assets/app.b72e6118.css",
+    "file": "assets/app.3833ec10.css",
     "src": "resources/css/app.css",
     "isEntry": true
   }
