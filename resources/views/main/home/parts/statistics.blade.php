@@ -79,7 +79,7 @@
     <div class="pt-20 mx-auto relative z-10 max-md:max-w-md md:pt-28 md:flex md:items-end lg:items-center">
         <div class="mb-6 md:mb-5 md:w-1/2 lg:pr-[7%]">
             <picture>
-                <source media="(max-width: 420px)" srcset="{{ asset('images/hero-04-420px.jpg') }} 1x, {{ asset('images/hero-04-420px@2x.jpg') }} 2x">
+                <source media="(max-width: 420px)" data-srcset="{{ asset('images/hero-04-420px.jpg') }} 1x, {{ asset('images/hero-04-420px@2x.jpg') }} 2x">
                 <img
                     width="560"
                     height="496"

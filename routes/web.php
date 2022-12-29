@@ -16,4 +16,5 @@ use App\Http\Controllers\PagesController;
 
 require_once(__DIR__ . '/layouts.php');
 
-Route::get('/', [PagesController::class, 'home']);
+Route::get('/', [PagesController::class, 'home'])
+    ->name('home');

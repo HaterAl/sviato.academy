@@ -35,7 +35,7 @@ class Seo
 
         $this->title = __('Sviato Academy');
 
-        $this->description = '';
+        $this->description = __('');
 
         $this->data = $this->defaults();
     }

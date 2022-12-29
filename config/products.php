@@ -67,7 +67,7 @@ return [
         ],
         [
             'name' => 'Sviato Collection Black Luxury Uniform',
-            'url' => 'https://sviato.shop/product/sviato-collection-red-luxury-uniform',
+            'url' => 'https://sviato.shop/product/sviato-collection-black-luxury-uniform',
             'price' => 117,
             'img' => [
                 '1x' => 'images/products/s_liner_luxury_uniform_black.png',

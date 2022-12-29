@@ -10,8 +10,8 @@
     @include('main.layouts.parts.styles')
 </head>
 <body id="app">
-    @include('main.layouts.parts.header')
-    <main>
+    @include('main.layouts.parts.header', ['hasNavigation' => $hasNavigation ?? true])
+    <main class="@yield('main-class')">
         @yield('content')
     </main>
     @include('main.layouts.parts.footer')
