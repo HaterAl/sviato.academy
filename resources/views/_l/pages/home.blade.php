@@ -277,7 +277,9 @@
                         <div class="splide__list">
                             @foreach ($products as $product)
                                 <article class="splide__slide text-center md:px-12">
-                                    <h3 class="mb-8">{{ $product['name'] }}</h3>
+                                    <h3 class="mb-8">
+                                        <a href="#" class="splide__slide__link">{{ $product['name'] }}</a>
+                                    </h3>
 
                                     <div class="splide__slide__img mb-16">
                                         <img

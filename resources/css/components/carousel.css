@@ -11,6 +11,10 @@
             flex
             justify-between
             items-start;
+
+            &.aos-animate {
+                @apply pointer-events-none;
+            }
         }
 
         & .splide__arrow {
@@ -146,6 +150,7 @@
         @apply
         hover:text-gold-dark
         after:absolute
+        after:z-10
         after:left-0
         after:right-0
         after:top-0
