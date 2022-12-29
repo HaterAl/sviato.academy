@@ -21,7 +21,7 @@
                                     {{ $product['name'] }}
                                 </a>
                             </h3>
-                            <div class="splide__slide__img mb-16">
+                            <div class="splide__slide__img mb-16 before:will-change-transform">
                                 <img
                                     width="358"
                                     height="358"
