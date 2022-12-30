@@ -91,7 +91,8 @@
             before:absolute
             before:left-0
             before:right-0
-            before:top-0
+            /*before:top-0*/
+            before:-top-1
             before:bottom-0
             before:bg-logo-glyph
             before:bg-no-repeat
