@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @include('main.layouts.parts.seo')
     @include('main.layouts.parts.favicon')
+    @include('main.layouts.parts.preload')
     @include('main.layouts.parts.styles')
 </head>
 <body id="app">
