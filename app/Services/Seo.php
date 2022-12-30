@@ -33,9 +33,12 @@ class Seo
     {
         $this->request = $request;
 
-        $this->title = __('Sviato Academy');
+        $this->title = __('Sviato Academy by Sviatoslav Otchenash');
 
-        $this->description = __('');
+        $this->description = __(
+            'Learn from the best at Sviato Academy, a world-class permanent'
+            . ' make-up training institution. Join us and take your permanent make-up career to the next level.'
+        );
 
         $this->data = $this->defaults();
     }
