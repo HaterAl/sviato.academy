@@ -34,14 +34,18 @@
             </div>
         </div>
         <div class="px-[15%] mb-6 lg:px-[19%]">
-            <img
-                width="840"
-                height="840"
-                data-src="{{ Vite::image('Earth.jpg') }}"
-                alt="Earth"
-                class="lazy aspect-square mix-blend-screen mx-auto -mt-28 md:-mt-[34.5%] aos-init"
-                data-aos="fade-up"
-            >
+            <picture>
+                <source media="(max-width: 640px)" data-srcset="{{ asset('images/earth-640px.png') }} 1x, {{ asset('images/earth-640px@2x.png') }} 2x">
+                <img
+                    width="840"
+                    height="840"
+                    data-src="{{ asset('images/earth.png') }}"
+                    data-srcset="{{ asset('images/earth@2x.png') }} 2x"
+                    class="lazy aspect-square mix-blend-screen mx-auto -mt-28 md:-mt-[34.5%] aos-init"
+                    data-aos="fade-up"
+                    alt="Earth"
+                >
+            </picture>
         </div>
     </div>
     <div class="pt-[12.5rem] mt-20 relative sm:pt-[13.5rem] md:pt-[4.5rem]">
