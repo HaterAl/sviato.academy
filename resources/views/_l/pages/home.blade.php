@@ -12,13 +12,13 @@
             <h1 class="sr-only">{{ $config->name }}</h1>
 
             <div class="flex justify-center md:px-[13%]">
-                <div class="c-spotlight">
+                <div class="c-spotlight max-w-full">
                     <img
                     src="{{ Vite::image('hero-00.png') }}"
                     width="840"
                     height="840"
                     alt="Sviato Otchenash from {{ $config->name }}"
-                    class="c-mask-opacity-to-bottom-5 relative"
+                    class="c-mask-opacity-to-bottom-5 relative aspect-square"
                     >
                 </div>
             </div>
@@ -41,24 +41,24 @@
                 </div>
 
                 <div class="mx-auto max-sm:max-w-md md:pt-28 md:flex md:justify-center">
-                    <div class="pr-[24%] mb-6 md:px-4 md:pt-28">
+                    <div class="pr-[24%] mb-6 md:w-1/2 md:px-4 md:pt-28">
                         <img
                         src="{{ Vite::image('hero-01.jpg') }}"
                         width="640"
                         height="570"
                         alt="Sviato Otchenash from {{ $config->name }}"
-                        class="rounded-md aos-init"
+                        class="aspect-[64/57] rounded-md aos-init"
                         data-aos="fade-up"
                         >
                     </div>
 
-                    <div class="pl-[24%] mb-6 md:px-4">
+                    <div class="pl-[24%] mb-6 md:w-1/2 md:px-4">
                         <img
                         src="{{ Vite::image('hero-02.jpg') }}"
                         width="640"
                         height="570"
                         alt="Sviato Otchenash from {{ $config->name }}"
-                        class="rounded-md aos-init"
+                        class="aspect-[64/57] rounded-md aos-init"
                         data-aos="fade-up"
                         >
                     </div>
@@ -74,7 +74,7 @@
                 width="300"
                 height="220"
                 alt="{{ $config->name.' 3D logo' }}"
-                class="mix-blend-lighten aos-init"
+                class="aspect-[30/22] mix-blend-lighten aos-init"
                 data-aos="fade-up"
                 >
             </div>
@@ -110,7 +110,7 @@
                     width="840"
                     height="840"
                     alt="Earth"
-                    class="mix-blend-screen mx-auto -mt-28 md:-mt-[34.5%] aos-init"
+                    class="aspect-square mix-blend-screen mx-auto -mt-28 md:-mt-[34.5%] aos-init"
                     data-aos="fade-up"
                     >
                 </div>
@@ -124,6 +124,7 @@
                 height="800"
                 alt="Sviato Otchenash from {{ $config->name }}"
                 @class([
+                    'aspect-[12/25]',
                     'c-mask-opacity-to-bottom-75',
                     'mx-auto max-w-[15rem] h-auto absolute left-0 right-0 top-0',
                     'sm:max-w-[16rem]',
@@ -160,7 +161,7 @@
                     width="560"
                     height="496"
                     alt="Sviato Otchenash from {{ $config->name }}"
-                    class="rounded-md aos-init"
+                    class="aspect-[35/31] rounded-md aos-init"
                     data-aos="fade-up"
                     >
                 </div>
@@ -178,7 +179,7 @@
                 width="192"
                 height="288"
                 alt="Sviato Otchenash from {{ $config->name }}"
-                class="rounded-md aos-init"
+                class="aspect-[2/3] rounded-md aos-init"
                 data-aos="fade-up"
                 >
             </div>
@@ -231,11 +232,10 @@
 
                                         <img
                                         src="{{ Vite::image($coache['img']) }}"
-                                        {{-- srcset="{{ Vite::image('hero-05@2x.jpg').' 2x' }}" --}}
                                         width="252"
                                         height="252"
                                         alt="{{ $coache['fname'] }} {{ $coache['lname'] }}"
-                                        class="rounded mb-4"
+                                        class="aspect-square rounded mb-4"
                                         >
                                     </article>
                                 </div>
@@ -287,7 +287,7 @@
                                         width="358"
                                         height="358"
                                         alt="{{ $product['name'] }}"
-                                        class="relative">
+                                        class="aspect-square relative">
                                     </div>
 
                                     <dl>

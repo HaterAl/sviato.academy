@@ -11,6 +11,8 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   const screensConfig = () => path.resolve(__dirname, 'screens.config.js')
 
+  console.log('>>> `${env.APP_URL}`:', `${env.APP_URL}`)
+
   return {
     // css: {postcss: { plugins: [autoprefixer] }} // Is NOT compatible w/ Tailwind
     plugins: [
@@ -26,13 +28,13 @@ export default defineConfig(({ mode }) => {
         ],
         publicDirectory: 'static',
       }),
-        {
-            name: 'laravel-fix',
-            enforce: 'post',
-            config(userConfig) {
-                userConfig.base = './';
-            },
+      {
+        name: 'laravel-fix',
+        enforce: 'post',
+        config(userConfig) {
+          userConfig.base = './'
         },
+      },
     ],
     resolve: {
       alias: {
@@ -68,7 +70,10 @@ export default defineConfig(({ mode }) => {
       host: true,
       open: '/_l',
       // hmr: {
-      //   host: '10.30.30.223',
+      //   host: '10.30.30.228',
+      // },
+      // proxy: {
+      //   '/_l': `${env.APP_URL}`,
       // },
     },
   }

@@ -30,8 +30,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Vite::macro('fonts', fn ($asset) => $this->asset("resources/fonts/{$asset}"));
-
+        Vite::macro('font', fn ($asset) => $this->asset("resources/fonts/{$asset}"));
 
         Vite::macro('image', fn ($asset) => $this->asset("resources/images/{$asset}"));
     }

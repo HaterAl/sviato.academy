@@ -88,15 +88,17 @@
             flex
             justify-center
             relative
+            overflow-hidden
+            before:aspect-[507/336]
             before:absolute
             before:left-0
             before:right-0
             before:top-0
             before:bottom-0
+            before:m-auto
             before:bg-logo-glyph
             before:bg-no-repeat
-            before:bg-contain
-            before:bg-center
+            before:bg-cover
             before:opacity-0
             before:transition-opacity
             before:duration-300
