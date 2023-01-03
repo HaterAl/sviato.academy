@@ -1,12 +1,12 @@
-<section class="c-sheet max-sm:max-w-sm pt-20 md:pt-28">
-    <div class="mb-3 mx-auto flex justify-center max-w-[30%] sm:max-w-[11rem] xl:max-w-none" id="about">
+<section class="c-sheet max-sm:max-w-sm pt-20 md:pt-28" id="about">
+    <div class="mb-3 mx-auto flex justify-center max-w-[30%] sm:max-w-[11rem] xl:max-w-none">
         <img
             width="300"
             height="220"
             data-src="{{ Vite::image('logo-3d.jpg') }}"
             data-srcset="{{ Vite::image('logo-3d@2x.jpg') }} 2x"
             alt="Sviato Academy"
-            class="lazy mix-blend-lighten aos-init"
+            class="lazy aspect-[30/22] mix-blend-lighten aos-init"
             data-aos="fade-up"
         >
     </div>
@@ -39,7 +39,7 @@
                 height="840"
                 data-src="{{ Vite::image('Earth.jpg') }}"
                 alt="Earth"
-                class="lazy mix-blend-screen mx-auto -mt-28 md:-mt-[34.5%] aos-init"
+                class="lazy aspect-square mix-blend-screen mx-auto -mt-28 md:-mt-[34.5%] aos-init"
                 data-aos="fade-up"
             >
         </div>
@@ -52,6 +52,7 @@
             data-srcset="{{ Vite::image('hero-03@2x.png') }} 2x"
             alt="Sviatoslav Otchenash"
             @class([
+                'aspect-[12/25]',
                 'c-mask-opacity-to-bottom-75',
                 'mx-auto max-w-[15rem] h-auto absolute left-0 right-0 top-0',
                 'sm:max-w-[16rem]',
@@ -85,7 +86,7 @@
                     height="496"
                     data-src="{{ asset('images/hero-04.jpg') }}"
                     data-srcset="{{ asset('images/hero-04@2x.jpg') }} 2x"
-                    class="lazy rounded-md aos-init"
+                    class="lazy aspect-[35/31] rounded-md aos-init"
                     data-aos="fade-up"
                     alt="Sviatoslav Otchenash"
                 >
@@ -113,7 +114,7 @@
             data-src="{{ Vite::image('hero-05.jpg') }}"
             data-srcset="{{ Vite::image('hero-05@2x.jpg') }} 2x"
             alt="Sviatoslav Otchenash"
-            class="lazy rounded-md aos-init"
+            class="lazy aspect-[2/3] rounded-md aos-init"
             data-aos="fade-up"
         >
     </div>

@@ -3,7 +3,7 @@
         {{ __('Sviato Academy') }}
     </h1>
     <div class="flex justify-center md:px-[13%]">
-        <picture class="c-spotlight">
+        <picture class="c-spotlight max-w-full">
             <source media="(max-width: 420px)" srcset="{{ Vite::image('hero-00-420px.png') }} 1x, {{ Vite::image('hero-00-420px@2x.png') }} 2x">
             <source media="(max-width: 1024px)" srcset="{{ Vite::image('hero-00-1024px.png') }} 1x, {{ Vite::image('hero-00-1024px@2x.png') }} 2x">
             <img
@@ -12,7 +12,7 @@
                 src="{{ Vite::image('hero-00.png') }}"
                 srcset="{{ Vite::image('hero-00@2x.png') }} 2x"
                 alt="Sviatoslav Otchenash"
-                class="c-mask-opacity-to-bottom-5 relative"
+                class="c-mask-opacity-to-bottom-5 relative aspect-square"
             >
         </picture>
     </div>
@@ -52,7 +52,7 @@
                         height="556"
                         data-src="{{ asset('images/hero-02.jpg') }}"
                         data-srcset="{{ asset('images/hero-02@2x.jpg') }} 2x"
-                        class="lazy rounded-md aos-init"
+                        class="lazy aspect-[64/57] rounded-md aos-init"
                         data-aos="fade-up"
                         alt="Sviatoslav Otchenash"
                     >
@@ -67,7 +67,7 @@
                         height="556"
                         data-src="{{ asset('images/hero-01.jpg') }}"
                         data-srcset="{{ asset('images/hero-01@2x.jpg') }} 2x"
-                        class="lazy rounded-md aos-init"
+                        class="lazy aspect-[64/57] rounded-md aos-init"
                         data-aos="fade-up"
                         alt="Sviatoslav Otchenash"
                     >
