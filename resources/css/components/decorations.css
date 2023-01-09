@@ -21,6 +21,105 @@
 }
 
 @layer components {
+    .c-play {
+        @apply relative;
+
+        &:before {
+            @apply
+                content-['']
+                absolute
+                top-[50%]
+                left-[50%]
+                -translate-x-1/2
+                -translate-y-1/2
+                transition-transform
+                w-16
+                h-16
+                bg-gradient-to-r
+                from-gold-light
+                to-gold-dark
+            ;
+            clip-path:
+                polygon(
+                    24% 5%,
+                    100% 50%,
+                    24% 95%
+                );
+        }
+
+        &:hover {
+
+            &:before {
+                @apply scale-110;
+            }
+        }
+    }
+}
+
+@layer components {
+    .c-player {
+        @apply
+            fixed
+            z-50
+            bg-gray-900/90
+            inset-0
+            p-6
+            xl:px-16
+            flex
+            items-center
+            opacity-0
+            invisible
+            transition-[opacity,visibility]
+        ;
+
+        &__close {
+            @apply
+                absolute
+                top-2.5
+                right-2.5
+                w-10
+                h-10
+                grid
+                place-content-center
+                text-gray-500
+                hover:text-gold-dark
+            ;
+
+            @screen lg {
+                @apply top-8 right-8;
+            }
+
+            svg {
+                @apply w-5 h-5;
+            }
+        }
+
+        &__inner {
+            @apply
+                aspect-video
+                relative
+                w-full
+                max-h-full
+                bg-gray-900
+            ;
+
+            iframe {
+                @apply
+                    absolute
+                    inset-0
+                    w-full
+                    h-full
+                ;
+            }
+        }
+
+        .is-player-open & {
+            @apply opacity-100 visible;
+        }
+    }
+}
+
+@layer components {
     .c-mask-opacity-to-bottom-5 {
         mask-image: linear-gradient(#000 95%, transparent 100%);
     }

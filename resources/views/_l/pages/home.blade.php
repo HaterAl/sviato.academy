@@ -12,13 +12,13 @@
             <h1 class="sr-only">{{ $config->name }}</h1>
 
             <div class="flex justify-center md:px-[13%]">
-                <div class="c-spotlight max-w-full">
+                <div class="max-w-full c-spotlight">
                     <img
-                    src="{{ Vite::image('hero-00.png') }}"
-                    width="840"
-                    height="840"
-                    alt="Sviato Otchenash from {{ $config->name }}"
-                    class="c-mask-opacity-to-bottom-5 relative aspect-square"
+                        src="{{ Vite::image('hero-00.png') }}"
+                        width="840"
+                        height="840"
+                        alt="Sviato Otchenash from {{ $config->name }}"
+                        class="relative c-mask-opacity-to-bottom-5 aspect-square"
                     >
                 </div>
             </div>
@@ -42,64 +42,68 @@
 
                 <div class="mx-auto max-sm:max-w-md md:pt-28 md:flex md:justify-center">
                     <div class="pr-[24%] mb-6 md:w-1/2 md:px-4 md:pt-28">
-                        <img
-                        src="{{ Vite::image('hero-01.jpg') }}"
-                        width="640"
-                        height="570"
-                        alt="Sviato Otchenash from {{ $config->name }}"
-                        class="aspect-[64/57] rounded-md aos-init"
-                        data-aos="fade-up"
-                        >
+                        <button class="c-play" data-player-open="76979871">
+                            <img
+                                src="{{ Vite::image('hero-01.jpg') }}"
+                                width="640"
+                                height="570"
+                                alt="Sviato Otchenash from {{ $config->name }}"
+                                class="aspect-[64/57] rounded-md aos-init"
+                                data-aos="fade-up"
+                            >
+                        </button>
                     </div>
 
                     <div class="pl-[24%] mb-6 md:w-1/2 md:px-4">
-                        <img
-                        src="{{ Vite::image('hero-02.jpg') }}"
-                        width="640"
-                        height="570"
-                        alt="Sviato Otchenash from {{ $config->name }}"
-                        class="aspect-[64/57] rounded-md aos-init"
-                        data-aos="fade-up"
-                        >
+                        <button class="c-play" data-player-open="787594424">
+                            <img
+                                src="{{ Vite::image('hero-02.jpg') }}"
+                                width="640"
+                                height="570"
+                                alt="Sviato Otchenash from {{ $config->name }}"
+                                class="aspect-[64/57] rounded-md aos-init"
+                                data-aos="fade-up"
+                            >
+                        </button>
                     </div>
                 </div>
             </section>
         </div>
 
-        <section class="c-sheet max-sm:max-w-sm pt-20 md:pt-28">
+        <section class="pt-20 c-sheet max-sm:max-w-sm md:pt-28">
             <div class="mb-3 mx-auto flex justify-center max-w-[30%] sm:max-w-[11rem] xl:max-w-none">
                 <img
-                src="{{ Vite::image('logo-3d.jpg') }}"
-                srcset="{{ Vite::image('logo-3d@2x.jpg').' 2x' }}"
-                width="300"
-                height="220"
-                alt="{{ $config->name.' 3D logo' }}"
-                class="aspect-[30/22] mix-blend-lighten aos-init"
-                data-aos="fade-up"
+                    src="{{ Vite::image('logo-3d.jpg') }}"
+                    srcset="{{ Vite::image('logo-3d@2x.jpg').' 2x' }}"
+                    width="300"
+                    height="220"
+                    alt="{{ $config->name.' 3D logo' }}"
+                    class="aspect-[30/22] mix-blend-lighten aos-init"
+                    data-aos="fade-up"
                 >
             </div>
 
             <div class="mx-auto lg:max-xl:max-w-3xl">
                 <div class="relative z-10">
-                    <h2 class="b-h1 mb-0 flex flex-col aos-init" data-aos="fade-up">
+                    <h2 class="flex flex-col mb-0 b-h1 aos-init" data-aos="fade-up">
                         Sviato Academy
-                        <div class="ml-auto">by <span class="inline-block u-text--primary italic px-3 -mx-3">the numbers</span></div>
+                        <div class="ml-auto">by <span class="inline-block px-3 -mx-3 italic u-text--primary">the numbers</span></div>
                     </h2>
 
-                    <div class="text-white text-sm flex flex-wrap justify-between md:text-lg">
+                    <div class="flex flex-wrap justify-between text-sm text-white md:text-lg">
                         <dl class="flex flex-col-reverse items-end aos-init" data-aos="fade-up">
                             <dt>Trainers</dt>
-                            <dd class="b-h1 text-inherit mb-0 md:mb-1 max-sm:text-4xl">+190</dd>
+                            <dd class="mb-0 b-h1 text-inherit md:mb-1 max-sm:text-4xl">+190</dd>
                         </dl>
 
                         <dl class="flex flex-col-reverse items-end aos-init" data-aos="fade-up">
                             <dt>Students</dt>
-                            <dd class="b-h1 text-inherit mb-0 md:mb-1 max-sm:text-4xl">16 000</dd>
+                            <dd class="mb-0 b-h1 text-inherit md:mb-1 max-sm:text-4xl">16 000</dd>
                         </dl>
 
                         <dl class="flex flex-col-reverse items-end aos-init" data-aos="fade-up">
                             <dt>Countries</dt>
-                            <dd class="b-h1 text-inherit mb-0 md:mb-1 max-sm:text-4xl">44</dd>
+                            <dd class="mb-0 b-h1 text-inherit md:mb-1 max-sm:text-4xl">44</dd>
                         </dl>
                     </div>
                 </div>
@@ -118,24 +122,24 @@
 
             <div class="pt-[12.5rem] mt-20 relative sm:pt-[13.5rem] md:pt-[4.5rem]">
                 <img
-                src="{{ Vite::image('hero-03.png') }}"
-                srcset="{{ Vite::image('hero-03@2x.png').' 2x' }}"
-                width="384"
-                height="800"
-                alt="Sviato Otchenash from {{ $config->name }}"
-                @class([
-                    'aspect-[12/25]',
-                    'c-mask-opacity-to-bottom-75',
-                    'mx-auto max-w-[15rem] h-auto absolute left-0 right-0 top-0',
-                    'sm:max-w-[16rem]',
-                    'md:mx-0 md:left-[24.6rem] md:max-w-[19.9rem] md:z-10',
-                    'lg:left-[34.5rem] lg:-top-[9%]',
-                    'xl:max-w-none xl:left-[42.3rem] xl:top-[2%]',
-                    '2xl:left-[51rem] 2xl:-top-[12%]',
-                    '3xl:left-[51.7rem]',
-                    'aos-init',
-                ])
-                data-aos="fade-up"
+                    src="{{ Vite::image('hero-03.png') }}"
+                    srcset="{{ Vite::image('hero-03@2x.png').' 2x' }}"
+                    width="384"
+                    height="800"
+                    alt="Sviato Otchenash from {{ $config->name }}"
+                    @class([
+                        'aspect-[12/25]',
+                        'c-mask-opacity-to-bottom-75',
+                        'mx-auto max-w-[15rem] h-auto absolute left-0 right-0 top-0',
+                        'sm:max-w-[16rem]',
+                        'md:mx-0 md:left-[24.6rem] md:max-w-[19.9rem] md:z-10',
+                        'lg:left-[34.5rem] lg:-top-[9%]',
+                        'xl:max-w-none xl:left-[42.3rem] xl:top-[2%]',
+                        '2xl:left-[51rem] 2xl:-top-[12%]',
+                        '3xl:left-[51.7rem]',
+                        'aos-init',
+                    ])
+                    data-aos="fade-up"
                 >
 
                 <div
@@ -154,7 +158,7 @@
                 </div>
             </div>
 
-            <div class="pt-20 mx-auto relative z-10 max-md:max-w-md md:pt-28 md:flex md:items-end lg:items-center">
+            <div class="relative z-10 pt-20 mx-auto max-md:max-w-md md:pt-28 md:flex md:items-end lg:items-center">
                 <div class="mb-6 md:mb-5 md:w-1/2 lg:pr-[7%]">
                     <img
                     src="{{ Vite::image('hero-04.jpg') }}"
@@ -186,8 +190,8 @@
         </section>
 
         <div class="overflow-hidden">
-            <section class="c-sheet splide splide--arrows-bottom pt-20 md:pt-28" data-carousel-row>
-                <h2 class="b-h1 mb-6 md:text-center md:mb-14 aos-init" data-aos="fade-up">Our <span class="u-text--primary italic px-2 -mx-2">trainers</span></h2>
+            <section class="pt-20 c-sheet splide splide--arrows-bottom md:pt-28" data-carousel-row>
+                <h2 class="mb-6 b-h1 md:text-center md:mb-14 aos-init" data-aos="fade-up">Our <span class="px-2 -mx-2 italic u-text--primary">trainers</span></h2>
 
                 <div class="splide__body md:max-xl:mx-6 aos-init" data-aos="fade-up">
                     <div class="splide__arrows aos-init" data-aos="fade-up">
@@ -196,18 +200,18 @@
                         <button class="splide__arrow splide__arrow--next">@svg('arrow-ltr')</button>
                     </div>
 
-                    <div class="splide__track overflow-visible -mx-6">
+                    <div class="-mx-6 overflow-visible splide__track">
                         <div class="splide__list">
                             @foreach ($coaches as $coache)
-                                <div class="splide__slide pl-6 md:pr-6 w-1/5">
+                                <div class="w-1/5 pl-6 splide__slide md:pr-6">
                                     <article class="relative flex flex-col-reverse text-sm">
                                         <div class="flex flex-col">
-                                            <h3 class="b-h6 italic text-white mb-1">
+                                            <h3 class="mb-1 italic text-white b-h6">
                                                 {{-- <a href="#" class="splide__slide__link">{{ $coache['fname'] }} <div class="pl-[15%]">{{ $coache['lname'] }}</div></a> --}}
                                                 {{ $coache['fname'] }} <div class="pl-[15%]">{{ $coache['lname'] }}</div>
                                             </h3>
 
-                                            <dl class="-order-1 -mt-px absolute right-0">
+                                            <dl class="absolute right-0 -mt-px -order-1">
                                                 <dt class="sr-only">Country</dt>
                                                 <dd>{{ $coache['country'] }}</dd>
                                             </dl>
@@ -217,7 +221,7 @@
                                                 <dd>{{ $coache['specialty'] }}</dd>
                                             </dl>
 
-                                            <dl class="-mx-1 -mt-3 flex">
+                                            <dl class="flex -mx-1 -mt-3">
                                                 <dt class="sr-only">Accounts in social networks</dt>
                                                 @foreach ($coache['socials'] as $social)
                                                     <dd>
@@ -235,7 +239,7 @@
                                         width="252"
                                         height="252"
                                         alt="{{ $coache['fname'] }} {{ $coache['lname'] }}"
-                                        class="aspect-square rounded mb-4"
+                                        class="mb-4 rounded aspect-square"
                                         >
                                     </article>
                                 </div>
@@ -246,8 +250,8 @@
             </section>
         </div>
 
-        <section class="max-w-xl mx-auto px-6 pt-20 sm:max-w-xl md:pt-28 md:max-w-2xl xl:max-w-4xl">
-            <h2 class="mb-5 max-w-lg max-sm:text-4xl sm:text-center md:mb-9 md:max-w-none xl:mb-14 aos-init" data-aos="fade-up">Here are the steps how to join and advance within the <span class="inline-block u-text--primary italic px-2 -mx-2">Sviato Academy</span> team</h2>
+        <section class="max-w-xl px-6 pt-20 mx-auto sm:max-w-xl md:pt-28 md:max-w-2xl xl:max-w-4xl">
+            <h2 class="max-w-lg mb-5 max-sm:text-4xl sm:text-center md:mb-9 md:max-w-none xl:mb-14 aos-init" data-aos="fade-up">Here are the steps how to join and advance within the <span class="inline-block px-2 -mx-2 italic u-text--primary">Sviato Academy</span> team</h2>
 
             <div class="px-[7%] sm:px-[14%] md:[&>*]:mb-7 xl:[&>*]:mb-12">
                 <p class="aos-init" data-aos="fade-up">Find and sign up for a Basic course or Masterclass on the Sviato Academy website, which includes practice on live models</p>
@@ -263,8 +267,8 @@
         </section>
 
         <div class="overflow-hidden">
-            <section class="c-sheet splide splide--arrows-center splide--branded pt-20 md:pt-28" data-carousel-showcase>
-                <h2 class="b-h1 text-center mb-20 aos-init" data-aos="fade-up">Our <span class="u-text--primary px-2 -mx-2 italic">products</span></h2>
+            <section class="pt-20 c-sheet splide splide--arrows-center splide--branded md:pt-28" data-carousel-showcase>
+                <h2 class="mb-20 text-center b-h1 aos-init" data-aos="fade-up">Our <span class="px-2 -mx-2 italic u-text--primary">products</span></h2>
 
                 <div class="relative aos-init" data-aos="fade-up">
                     <div class="splide__arrows aos-init" data-aos="fade-up">
@@ -273,21 +277,21 @@
                         <button class="splide__arrow splide__arrow--next">@svg('arrow-ltr')</button>
                     </div>
 
-                    <div class="splide__track overflow-visible mx-auto md:w-3/5">
+                    <div class="mx-auto overflow-visible splide__track md:w-3/5">
                         <div class="splide__list">
                             @foreach ($products as $product)
-                                <article class="splide__slide text-center md:px-12">
+                                <article class="text-center splide__slide md:px-12">
                                     <h3 class="mb-8">
                                         <a href="#" class="splide__slide__link">{{ $product['name'] }}</a>
                                     </h3>
 
-                                    <div class="splide__slide__img mb-16">
+                                    <div class="mb-16 splide__slide__img">
                                         <img
                                         src="{{ Vite::image($product['img']) }}"
                                         width="358"
                                         height="358"
                                         alt="{{ $product['name'] }}"
-                                        class="aspect-square relative">
+                                        class="relative aspect-square">
                                     </div>
 
                                     <dl>
@@ -302,6 +306,14 @@
             </section>
         </div>
     </main>
+
+    <div class="c-player" data-player>
+        <button class="c-player__close" data-player-close>
+            @svg('close')
+        </button>
+
+        <div class="c-player__inner" data-player-inner></div>
+    </div>
 @endsection
 
 {{-- @section('beforeFooter') @parent @endsection --}}
