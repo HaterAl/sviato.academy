@@ -30,14 +30,15 @@ import VPlayer from '@vimeo/player'
                 if (`${oldVideoId}` !== `${videoId}`) {
                     await player.loadVideo(videoId)
                 }
+
+                player.play()
             } else {
                 player = new VPlayer(innerEl, {
                     id: videoId,
                     color: 'ffda55',
+                    autoplay: true,
                 })
             }
-
-            player.play()
         }, false)
     })
 
