@@ -33,9 +33,9 @@ if (!process.env.APP_URL) {
 } else {
     const APP_URL = process.env.APP_URL
 
-    const replaceSorcesPath = (html) => {
-        console.log('${APP_URL}/build/:', `${APP_URL}/build/`)
-        return html.replaceAll(`${APP_URL}/build/`, '../build/')
+    const replaceSourcesPath = (html) => {
+        console.log('${APP_URL}/static/build/:', `${APP_URL}/static/build/`)
+        return html.replaceAll(`${APP_URL}/static/build/`, '../build/')
     }
 
     del.sync([path.join(PAGES_OUTPUT, '*')])
@@ -47,7 +47,7 @@ if (!process.env.APP_URL) {
         getHTML(APP_URL + Page.slug).then(html => {
             const output = `${PAGES_OUTPUT}/${Page.label}.html`
 
-            fse.writeFileSync(output, replaceSorcesPath(html))
+            fse.writeFileSync(output, replaceSourcesPath(html))
         })
     })
 }
