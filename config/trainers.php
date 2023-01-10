@@ -230,8 +230,8 @@ return [
                 'instagram' => 'https://www.instagram.com/nastasya_novoselya',
             ],
             'img' => [
-                '1x' => 'images/trainers/natalja_otchenash.png',
-                '2x' => 'images/trainers/natalja_otchenash@2x.png',
+                '1x' => 'images/trainers/nastasya_novoselya.png',
+                '2x' => 'images/trainers/nastasya_novoselya@2x.png',
             ],
         ],
         [

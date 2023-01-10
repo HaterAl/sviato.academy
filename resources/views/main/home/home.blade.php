@@ -7,3 +7,7 @@
     @include('main.home.parts.join')
     @include('main.home.parts.products')
 @endsection
+
+@push('modals')
+    @include('main.shared.player')
+@endpush

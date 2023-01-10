@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="mx-auto max-sm:max-w-md md:pt-28 md:flex md:justify-center">
-            <div class="pr-[24%] mb-6 md:px-4 md:pt-28">
+            <div class="pr-[24%] mb-6 md:w-1/2 md:px-4 md:pt-28">
                 <picture>
                     <source media="(max-width: 420px)" data-srcset="{{ asset('images/hero-02-420px.jpg') }} 1x, {{ asset('images/hero-02-420px@2x.jpg') }} 2x">
                     <source media="(max-width: 1024px)" data-srcset="{{ asset('images/hero-02-1024px.jpg') }} 1x, {{ asset('images/hero-02-1024px@2x.jpg') }} 2x">
@@ -58,7 +58,7 @@
                     >
                 </picture>
             </div>
-            <div class="pl-[24%] mb-6 md:px-4">
+            <div class="pl-[24%] mb-6 md:w-1/2 md:px-4">
                 <picture>
                     <source media="(max-width: 420px)" data-srcset="{{ asset('images/hero-01-420px.jpg') }} 1x, {{ asset('images/hero-01-420px@2x.jpg') }} 2x">
                     <source media="(max-width: 1024px)" data-srcset="{{ asset('images/hero-01-1024px.jpg') }} 1x, {{ asset('images/hero-01-1024px@2x.jpg') }} 2x">

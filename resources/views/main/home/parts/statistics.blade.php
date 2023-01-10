@@ -112,14 +112,16 @@
         </div>
     </div>
     <div class="pl-[43%] md:max-lg:pl-[50%] pt-1">
-        <img
-            width="192"
-            height="288"
-            data-src="{{ Vite::image('hero-05.jpg') }}"
-            data-srcset="{{ Vite::image('hero-05@2x.jpg') }} 2x"
-            alt="Sviatoslav Otchenash"
-            class="lazy aspect-[2/3] rounded-md aos-init"
-            data-aos="fade-up"
-        >
+        <button class="c-play" data-player-open="787594424">
+            <img
+                width="192"
+                height="288"
+                data-src="{{ Vite::image('hero-05.jpg') }}"
+                data-srcset="{{ Vite::image('hero-05@2x.jpg') }} 2x"
+                alt="Sviatoslav Otchenash"
+                class="lazy aspect-[2/3] rounded-md aos-init"
+                data-aos="fade-up"
+            >
+        </button>
     </div>
 </section>

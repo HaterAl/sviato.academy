@@ -15,6 +15,7 @@
     <main class="@yield('main-class')">
         @yield('content')
     </main>
+    @stack('modals')
     @include('main.layouts.parts.footer')
     @include('main.layouts.parts.scripts')
 </body>
