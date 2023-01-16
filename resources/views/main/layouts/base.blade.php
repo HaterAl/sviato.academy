@@ -9,6 +9,7 @@
     @include('main.layouts.parts.favicon')
     @include('main.layouts.parts.preload')
     @include('main.layouts.parts.styles')
+    @include('main.layouts.parts.tagmanager')
 </head>
 <body id="app">
     @include('main.layouts.parts.header', ['hasNavigation' => $hasNavigation ?? true])

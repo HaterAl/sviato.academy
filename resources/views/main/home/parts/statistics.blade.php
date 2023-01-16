@@ -111,15 +111,15 @@
             </p>
         </div>
     </div>
-    <div class="pl-[43%] md:max-lg:pl-[50%] pt-1">
+    <div class="sm:pl-[43%] md:max-lg:pl-[50%] pt-1">
         <button class="c-play" data-player-open="787594424">
             <img
-                width="192"
-                height="288"
-                data-src="{{ Vite::image('hero-05.jpg') }}"
-                data-srcset="{{ Vite::image('hero-05@2x.jpg') }} 2x"
+                width="367"
+                height="215"
+                src="{{ Vite::image('hero-06.jpg') }}"
+                srcset="{{ Vite::image('hero-06@2x.jpg') }} 2x"
                 alt="Sviatoslav Otchenash"
-                class="lazy aspect-[2/3] rounded-md aos-init"
+                class="lazy aspect-[367/215] rounded-md aos-init"
                 data-aos="fade-up"
             >
         </button>
