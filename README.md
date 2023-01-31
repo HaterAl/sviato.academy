@@ -29,3 +29,4 @@ ASSET_URL=http://sviato.academy/static
 ```
 php artisan key:generate
 ```
+5. Database is not required
