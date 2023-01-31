@@ -21,6 +21,7 @@ cp .env.example .env
 and update .env
 ```
 APP_NAME="Sviato Academy"
+APP_ENV=production
 APP_DEBUG=false
 APP_URL=http://sviato.academy
 ASSET_URL=http://sviato.academy/static
