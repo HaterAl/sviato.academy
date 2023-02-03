@@ -116,8 +116,8 @@
             <img
                 width="367"
                 height="215"
-                src="{{ Vite::image('hero-06.jpg') }}"
-                srcset="{{ Vite::image('hero-06@2x.jpg') }} 2x"
+                data-src="{{ Vite::image('hero-06.jpg') }}"
+                data-srcset="{{ Vite::image('hero-06@2x.jpg') }} 2x"
                 alt="Sviatoslav Otchenash"
                 class="lazy aspect-[367/215] rounded-md aos-init"
                 data-aos="fade-up"
