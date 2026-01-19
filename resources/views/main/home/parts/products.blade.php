@@ -32,8 +32,8 @@
                                 >
                             </div>
                             <dl>
-                                <dt class="sr-only">Price</dt>
-                                <dd class="u-text--primary b-h3">€{{ number_format($product['price'], 2) }}</dd>
+                                {{--<dt class="sr-only">Price</dt> --}}
+                                {{--<dd class="u-text--primary b-h3">€{{ number_format($product['price'], 2) }}</dd> --}}
                             </dl>
                         </article>
                     @endforeach

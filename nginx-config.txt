@@ -1,0 +1,99 @@
+# Конфигурация Nginx для https://hretsko.com/sviato
+# Добавьте этот блок в существующий server {} для hretsko.com
+
+# Внутри блока server { ... } добавьте:
+
+location /sviato {
+    alias /var/www/hretsko.com/html/sviato/public;
+    try_files $uri $uri/ @sviato;
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;  # Проверьте версию PHP!
+        fastcgi_param SCRIPT_FILENAME $request_filename;
+        fastcgi_param SCRIPT_NAME /sviato/index.php;
+    }
+}
+
+location @sviato {
+    rewrite ^/sviato/(.*)$ /sviato/index.php?/$1 last;
+}
+
+# Для статических файлов (CSS, JS, изображения)
+location ~ ^/sviato/(static|build|css|js|images|fonts)/ {
+    alias /var/www/hretsko.com/html/sviato/public/$1/;
+    expires 1y;
+    access_log off;
+    add_header Cache-Control "public, immutable";
+}
+
+# -------------------------------------------
+# ПОЛНАЯ КОНФИГУРАЦИЯ (если нужно создать новый файл):
+# -------------------------------------------
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name hretsko.com www.hretsko.com;
+
+    # Редирект на HTTPS
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name hretsko.com www.hretsko.com;
+
+    # SSL сертификаты (замените на ваши пути)
+    ssl_certificate /etc/letsencrypt/live/hretsko.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/hretsko.com/privkey.pem;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+
+    # Корневая директория основного сайта (если есть)
+    root /var/www/html;
+    index index.html index.htm index.php;
+
+    # Основная локация для корня сайта
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    # Локация для /sviato
+    location /sviato {
+        alias /var/www/hretsko.com/html/sviato/public;
+        try_files $uri $uri/ @sviato;
+
+        location ~ \.php$ {
+            include snippets/fastcgi-php.conf;
+            fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+            fastcgi_param SCRIPT_FILENAME $request_filename;
+            fastcgi_param SCRIPT_NAME /sviato/index.php;
+        }
+    }
+
+    location @sviato {
+        rewrite ^/sviato/(.*)$ /sviato/index.php?/$1 last;
+    }
+
+    # Статические файлы для /sviato
+    location ~ ^/sviato/(static|build|css|js|images|fonts)/ {
+        alias /var/www/hretsko.com/html/sviato/public/$1/;
+        expires 1y;
+        access_log off;
+        add_header Cache-Control "public, immutable";
+    }
+
+    # Логи
+    access_log /var/log/nginx/hretsko.com-access.log;
+    error_log /var/log/nginx/hretsko.com-error.log;
+}
+
+# -------------------------------------------
+# ВАЖНЫЕ ЗАМЕЧАНИЯ:
+# -------------------------------------------
+# 1. Замените php8.1-fpm.sock на вашу версию PHP
+# 2. Проверьте пути к SSL сертификатам
+# 3. После изменений выполните: sudo nginx -t && sudo systemctl reload nginx

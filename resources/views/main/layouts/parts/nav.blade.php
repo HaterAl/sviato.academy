@@ -1,14 +1,17 @@
 <nav class="hidden lg:flex lg:justify-center lg:w-8/12">
-    <a href="#about" class="px-6 py-3 hover:text-gold-dark xl:px-8">
+    <a href="{{ route('about.index') }}" class="px-6 py-3 hover:text-gold-dark xl:px-8">
         {{ __('About') }}
     </a>
-    <a href="#trainers" data-scroll class="px-6 py-3 hover:text-gold-dark xl:px-8">
-        {{ __('Trainers') }}
+    <a href="{{ route('community.index') }}" class="px-6 py-3 hover:text-gold-dark xl:px-8">
+        {{ __('Our Community') }}
     </a>
-    <a href="#products" data-scroll class="px-6 py-3 hover:text-gold-dark xl:px-8">
+    <a href="{{ route('events.index') }}" class="px-6 py-3 hover:text-gold-dark xl:px-8">
+        {{ __('Events') }}
+    </a>
+    <a href="{{ route('products.index') }}" class="px-6 py-3 hover:text-gold-dark xl:px-8">
         {{ __('Products') }}
     </a>
-    <a href="#contacts" data-scroll class="px-6 py-3 hover:text-gold-dark xl:px-8">
+    <a href="{{ route('contact-us.index') }}" class="px-6 py-3 hover:text-gold-dark xl:px-8">
         {{ __('Contact us') }}
     </a>
 </nav>

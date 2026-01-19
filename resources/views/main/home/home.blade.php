@@ -5,6 +5,7 @@
     @include('main.home.parts.statistics')
     @include('main.home.parts.trainers')
     @include('main.home.parts.join')
+    @include('main.home.parts.events')
     @include('main.home.parts.products')
 @endsection
 

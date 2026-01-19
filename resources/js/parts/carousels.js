@@ -10,28 +10,30 @@ const screens = new ScreenMatch().thresholds // sm md lg xl 2xl 3xl
 
 //## Row
 
-new Splide( '[data-carousel-row]', {
-    // type: 'loop',
-    // clones: 1,
-    rewind: true,
-    arrows: false,
-    fixedWidth: '244px',
+document.querySelectorAll('[data-carousel-row]').forEach(element => {
+    new Splide(element, {
+        // type: 'loop',
+        // clones: 1,
+        rewind: true,
+        arrows: false,
+        fixedWidth: '244px',
 
-    mediaQuery: 'min',
-    breakpoints: {
-        [screens.md]: {
-            fixedWidth: 0,
-            perPage: 3,
-            arrows: true,
+        mediaQuery: 'min',
+        breakpoints: {
+            [screens.md]: {
+                fixedWidth: 0,
+                perPage: 3,
+                arrows: true,
+            },
+            [screens.lg]: {
+                perPage: 4,
+            },
+            [screens['3xl']]: {
+                perPage: 5,
+            },
         },
-        [screens.lg]: {
-            perPage: 4,
-        },
-        [screens['3xl']]: {
-            perPage: 5,
-        },
-    },
-} ).mount()
+    }).mount()
+})
 
 
 //## Showcase

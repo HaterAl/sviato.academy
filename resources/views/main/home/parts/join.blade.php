@@ -1,30 +1,52 @@
 <section class="max-w-xl mx-auto px-6 pt-20 sm:max-w-xl md:pt-28 md:max-w-2xl xl:max-w-4xl">
     <h2 class="mb-5 max-w-lg max-sm:text-4xl sm:text-center md:mb-9 md:max-w-none xl:mb-14 aos-init" data-aos="fade-up">
-        {!! __('How to join and advance within') !!} <span class="inline-block u-text--primary italic px-2 -mx-2">{{ __('Sviato Academy') }}</span>
+       {!! __('Sviato Academy    ') !!} <span class="inline-block u-text--primary italic px-2 -mx-2">{{ __('    Growth plan') }}</span>
     </h2>
     <div class="px-[7%] sm:px-[14%] md:[&>*]:mb-7 xl:[&>*]:mb-12">
-        <p class="aos-init" data-aos="fade-up">
-            Find a Basic course or Masterclass with practice on models the Sviato Academy Training events page, and sign up!
-        </p>
-        <p class="aos-init" data-aos="fade-up">
-            After the class, practice hard. Every time you have a client, take
-            a picture of your work and send it to your Trainer. If the Trainer says that you did an excellent job,
-            publish the work on social pages and make sure you tag your Trainer in the post. 10 works like this and you
-            get the logo with 1 star!
-        </p>
-        <p class="aos-init" data-aos="fade-up">
-            To become a Stylist, you need to take further training and to publish 20
-            high-quality works with the 1-star logo on social pages. Again, your Trainer should check your works, and
-            you should tag her/him in the description of each post
-        </p>
-        <p class="aos-init" data-aos="fade-up">
-            To obtain the status of a Trainer, you must post on your social media
-            profiles at least 50 high-quality works with the Stylist logo that have been accepted by your Trainer
-        </p>
-        <p class="aos-init" data-aos="fade-up">
-            In terms of skill, there is no difference between Trainers and Top
-            Trainers. Becoming a Top Trainer is a matter of personality. Top Trainers must be good people, agreeable,
-            highly professional, admired and respected by a large number of students.
-        </p>
+        <div class="aos-init" data-aos="fade-up">
+            <h3 class="text-xl font-bold u-text--primary">STUDENT</h3>
+            <p class="mt-2">
+                A Student must choose a specialty (PMU, Removal, Mini Tattoo, Hairstrokes, Scalp Micropigmentation, Areola, S-Eyes, S-Lips, or S-Brows) and complete a Basic Course or Masterclass with a Sviato Academy Trainer, including work on models.
+                <span class="text-sm text-gray-600">(Masterclass allowed only for advanced students).</span>
+            </p>
+        </div>
+    
+        <div class="aos-init" data-aos="fade-up">
+            <h3 class="text-xl font-bold mt-6 u-text--primary">STYLIST</h3>
+            <p class="mt-2">
+                To become a Stylist, post ten Trainer-approved works on social media, tag the @the Trainer, 
+                <strong class="u-text--primary"><a href="https://www.instagram.com/sviatoslavotchenash" target="_blank" class="u-text--primary">@sviatoslavotchenash</a></strong>, and  
+                     <strong class="u-text--primary"><a href="https://www.instagram.com/sviato_academy" target="_blank" class="u-text--primary">@sviato_academy</a></strong>, use only Sviato Academy products, 
+                and agree to the Stylist Contract. 
+            </p>
+        </div>
+    
+        <div class="aos-init" data-aos="fade-up">
+            <h3 class="text-xl font-bold mt-6 u-text--primary">MASTER</h3>
+            <p class="mt-2">
+                To achieve Master status, complete a course with a Sviato Academy Trainer, working on at least two models. 
+                Post the Trainer-approved works online with the correct tags, use only Academy products, and agree to the Master Contract.
+            </p>
+        </div>
+    
+        <div class="aos-init" data-aos="fade-up">
+            <h3 class="text-xl font-bold mt-6 u-text--primary">TRAINER</h3>
+            <p class="mt-2">
+                A Trainer must hold Master status for at least three months and share twenty quality works online, tagging the required accounts. 
+                Exclusive use of Sviato Academy products and a signed Trainer Contract are also mandatory.   
+            </p>
+        </div>
+    
+        <div class="aos-init" data-aos="fade-up">
+            <h3 class="text-xl font-bold mt-6 u-text--primary">TOP TRAINER</h3>
+            <p class="mt-2">
+                To become a Top Trainer, hold Trainer status for at least twelve months, 
+                train or organize training for fifty students each year, 
+                purchase products worth 15,000€ annually, and comply with the Trainer Contract.
+            </p>
+        </div>
     </div>
+    
+    
+
 </section>

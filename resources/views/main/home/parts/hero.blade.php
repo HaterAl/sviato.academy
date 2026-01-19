@@ -19,25 +19,23 @@
     <section class="relative -mt-28 sm:-mt-48 lg:-mt-28 2xl:-mt-36 3xl:-mt-40">
         <div class="lg:absolute lg:left-0 lg:right-0 lg:bottom-full lg:flex 3xl:items-center">
             <div class="lg:w-1/3 xl:w-1/2 aos-init" data-aos="fade-up">
-                <h2>{{ __('Redefining') }} <div class="u-text--primary italic pl-[2.47em] pr-2 -mr-2">{{ __('Beauty') }}</div></h2>
+                <h2>{{ __('PMU FOR ALL,') }} <div class="u-text--primary italic pl-[2.4em] pr-2 -mr-2">{{ __('ALL FOR PMU') }}</div></h2>
             </div>
             <div class="md:pt-0 sm:flex lg:w-2/3 xl:w-1/2">
                 <div class="text-sm pl-9 sm:w-1/2 aos-init" data-aos="fade-up">
                     <p>
-                        In&nbsp;the four years since we&nbsp;started, Sviato Academy has redefined the standards of
-                        <span class="u-text--primary">the permanent makeup industry</span>. Led by&nbsp;one of&nbsp;the
-                        world’s leading permanent makeup artists, Sviatoslav Otchenash, we&nbsp;have become
-                        <span class="u-text--primary">the go-to institution</span> for gifted individuals seeking to
-                        perfect their craft.
+					Leaders in the beauty industry's permanent makeup, 
+					 <span class="u-text--primary">Sviato Academy</span> values exceptional mastery. 
+					We've set  <span class="u-text--primary">new standards</span>, and our place is where talented artists refine their skills.
+                        
                     </p>
                 </div>
 
                 <div class="text-sm pl-9 sm:w-1/2 aos-init" data-aos="fade-up">
                     <p>
-                        Our techniques and training methods are the results of&nbsp;over a&nbsp;decade of&nbsp;the
-                        tireless <span class="u-text--primary">pursuit of&nbsp;perfection</span>. We&nbsp;have proven
-                        time and time again that our innovative approach and constant evolution stand head and shoulders
-                        above other academies.
+					We've spent a decade perfecting <span class="u-text--primary">our techniques</span>, standing out through innovation and continuous improvement.
+					That's why we're <span class="u-text--primary">the top choice among academies.</span>
+
                     </p>
                 </div>
             </div>

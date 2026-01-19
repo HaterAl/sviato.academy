@@ -19,17 +19,17 @@
             <div class="text-white text-sm flex flex-wrap justify-between md:text-lg">
                 <dl class="flex flex-col-reverse items-end aos-init aos-animate" data-aos="fade-up">
                     <dt>{{ __('Trainers') }}</dt>
-                    <dd class="b-h1 text-inherit mb-0 md:mb-1 max-sm:text-4xl">+190</dd>
+                    <dd class="b-h1 text-inherit mb-0 md:mb-1 max-sm:text-4xl">+96</dd>
                 </dl>
 
                 <dl class="flex flex-col-reverse items-end aos-init aos-animate" data-aos="fade-up">
                     <dt>{{ __('Students') }}</dt>
-                    <dd class="b-h1 text-inherit mb-0 md:mb-1 max-sm:text-4xl">+16 000</dd>
+                    <dd class="b-h1 text-inherit mb-0 md:mb-1 max-sm:text-4xl">+25 703</dd>
                 </dl>
 
                 <dl class="flex flex-col-reverse items-end aos-init aos-animate" data-aos="fade-up">
                     <dt>{{ __('Countries') }}</dt>
-                    <dd class="b-h1 text-inherit mb-0 md:mb-1 max-sm:text-4xl">+44</dd>
+                    <dd class="b-h1 text-inherit mb-0 md:mb-1 max-sm:text-4xl">+34</dd>
                 </dl>
             </div>
         </div>
@@ -74,10 +74,8 @@
             class="mx-auto w-full max-w-xs relative sm:max-w-md md:ml-[5%] md:mr-0 md:max-w-[25rem] lg:max-w-[34rem] xl:max-w-[40rem] xl:ml-[7%] 2xl:max-w-[49rem] aos-init" data-aos="fade-up"
         >
             <p class="b-h5">
-                In&nbsp;my&nbsp;over <span class="u-text--primary">10 years</span> working in&nbsp;the
-                permanent makeup industry, I’ve held over
-                <span class="u-text--primary">400 masterclasses worldwide</span> and trained some of&nbsp;the world’s
-                top artists. But, my&nbsp;interest in&nbsp;beauty goes back much longer.
+			<span class="u-text--primary">A key figure in the history of beauty industry - Sviatoslav Otchenash</span> is an internationally recognised <span class="u-text--primary">top PMU 
+			Master and Top Trainer</span> with over a decade of extensive experience in the craft of permanent makeup.
             </p>
         </div>
     </div>
@@ -98,30 +96,15 @@
         </div>
         <div class="sm:px-6 md:pl-6 md:w-1/2 lg:px-[3%] lg:w-[46.5%] 2xl:w-[27rem]">
             <p class="aos-init" data-aos="fade-up">
-                Before becoming a&nbsp;PMU trainer, I&nbsp;spent years working
-                professionally as&nbsp;a&nbsp;<span class="u-text--primary">tattoo artist</span>
-                <span class="u-text--primary">and art educator</span>. That foundation allowed me&nbsp;quickly develop
-                the skills needed for elite-level PMU. But, it&nbsp;was my&nbsp;years spent in&nbsp;art education that
-                gave me&nbsp;the patience, people skills, and creativity needed to&nbsp;develop my&nbsp;own unique
-                approach to&nbsp;training and PMU.
+			He has started <span class="u-text--primary">his professional journey</span> from the field of art tattoo. 
+			Having a higher artistic education, creative skills, and deep knowledge of both fine arts and tattoo machines operation, 
+			<span class="u-text--primary">Sviatoslav has quickly moved up the career stairs</span>, and achieved the top-class results in the PMU craft within a short 
+			period of time.
             </p>
             <p class="aos-init" data-aos="fade-up">
-                The techniques I’ve developed have since become industry staples and
-                the continuous improvement of&nbsp;these techniques continues to&nbsp;drive my&nbsp;dedication to&nbsp;perfection.
+			The unique new-generation techniques he created are known and popular throughout the world. To date, 
+			Sviatoslav has conducted more than 450 international masterclasses on PMU that were taking place in every part of the globe.
             </p>
         </div>
-    </div>
-    <div class="sm:pl-[43%] md:max-lg:pl-[50%] pt-1">
-        <button class="c-play" data-player-open="787594424">
-            <img
-                width="367"
-                height="215"
-                data-src="{{ Vite::image('hero-06.jpg') }}"
-                data-srcset="{{ Vite::image('hero-06@2x.jpg') }} 2x"
-                alt="Sviatoslav Otchenash"
-                class="lazy aspect-[367/215] rounded-md aos-init"
-                data-aos="fade-up"
-            >
-        </button>
     </div>
 </section>

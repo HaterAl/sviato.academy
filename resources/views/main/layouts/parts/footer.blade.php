@@ -29,12 +29,12 @@
     </div>
     <div class="justify-between -mx-4 md:flex">
         <div class="px-4 mb-3 md:mb-0">© {{ now()->format('Y') }} SVIATO.ACADEMY</div>
-        <div class="px-4 lowercase">
+        <!--<div class="px-4 lowercase">
             <a class="flex gap-x-1" rel="nofollow noopener" target="_blank" href="https://www.ideil.com/">
                 made by
                 <span class="sr-only">ideil.</span>
                 <img src="{{ Vite::asset('resources/images/ideil.svg') }}" width="42" height="14" alt="ideil">
             </a>
-        </div>
+        </div>-->
     </div>
 </footer>

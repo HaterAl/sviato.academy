@@ -31,4 +31,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'master_event' => [
+        'key' => env('MASTER_EVENT_KEY'),
+    ],
+
 ];
