@@ -4,7 +4,7 @@
 @section('content')
     <section class="p-4">
         <div class="container mx-auto">
-           <section class="py-24 ">
+           <section class="py-12 ">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <h2 class="font-manrope text-center font-bold text-gray-900 mb-4 u-text--primary italic pl-[2.4em] pr-2 -mr-2">Privacy Policy </h2>
                 <p class="aos-init " data-aos="fade-up">

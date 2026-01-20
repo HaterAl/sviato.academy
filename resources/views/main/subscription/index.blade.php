@@ -2,15 +2,15 @@
 @section('content')
     <section class="p-4">
         <div class="container mx-auto">
-           <section class="py-24 ">
+           <section class="py-12 ">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="mb-12">
-                <h2 class="font-manrope text-center font-bold text-gray-900 mb-4 u-text--primary italic pl-[2.4em] pr-2 -mr-2">Choose your plan </h2>
+                <h2 class="font-manrope text-center font-bold text-gray-900 mb-4 u-text--primary italic">Choose your plan </h2>
                 <p class="u-text--primary text-center leading-6 mb-9">Choose a plan according to your level of training.</br>
                     Consumers not eligible for the subscription plans will receive a refund and will be denied access to the subscription services.</p>
                     <div class="text-center"> Please read these
-                        <a href="https://sviato.academy/subscriptions/terms-and-conditions" class="u-text--primary">Terms and Conditions</a> &
-                        <a href="https://sviato.academy/subscriptions/privacy-policy" class="u-text--primary">Privacy Policy</a> before using Our Service.
+                        <a href="https://sviato.academy/terms-and-conditions" class="u-text--primary">Terms and Conditions</a> &
+                        <a href="https://sviato.academy/privacy-policy" class="u-text--primary">Privacy Policy</a> before using Our Service.
                     </div>
                     
             </div>
