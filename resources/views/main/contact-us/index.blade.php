@@ -3,7 +3,7 @@
 @section('content')
 <section class="p-4">
     <div class="container mx-auto">
-        <section class="py-24">
+        <section class="py-12">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <!-- Header -->
                 <div class="mb-12">

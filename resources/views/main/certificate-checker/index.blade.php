@@ -3,7 +3,7 @@
 @section('content')
 <section class="p-4">
     <div class="container mx-auto">
-        <section class="py-24">
+        <section class="py-12">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <!-- Header -->
                 <div class="mb-12">
@@ -110,7 +110,7 @@
                                         </div>
                                         <div class="ml-3">
                                             <h3 class="text-lg font-bold text-red-800 m-0 leading-none">Certificate is Invalid</h3>
-                                            <p class="mt-2 text-sm text-red-700 leading-none m-0">The certificate number you entered could not be verified. Please check the number and try again.</p>
+                                            <p class="mt-2 text-sm text-red-700 leading-none m-0lfkm">The certificate number you entered could not be verified. Please check the number and try again.</p>
                                         </div>
                                     </div>
                                 </div>
