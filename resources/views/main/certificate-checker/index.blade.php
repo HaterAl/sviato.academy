@@ -88,7 +88,7 @@
                                     </div>
 
                                     <div class="border-b border-gray-200 pb-4">
-                                        <p class="text-sm font-semibold text-gray-500 mb-1">Event</p>
+                                        <p class="text-sm font-semibold text-gray-500 mb-1">Event Date</p>
                                         <p class="text-lg font-bold text-gray-900" id="cert-event-date"></p>
                                     </div>
 
