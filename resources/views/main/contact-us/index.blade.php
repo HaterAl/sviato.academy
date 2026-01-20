@@ -22,7 +22,7 @@
                                     </svg>
                                 </div>
                                 <div class="ml-3">
-                                    <p class="text-base font-semibold text-green-800 leading-tight">{{ session('success') }}</p>
+                                    <p class="text-base font-semibold text-green-800 m-0 leading-none">{{ session('success') }}</p>
                                 </div>
                             </div>
                         </div>
