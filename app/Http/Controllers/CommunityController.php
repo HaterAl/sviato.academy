@@ -14,7 +14,7 @@ class CommunityController extends Controller
     public function index(Request $request)
     {
         // Return JSON if requested via AJAX
-        if ($request->wantsJson() || $request->ajax()) {
+        if ($request->ajax()) {
             $page = $request->query('page', 1);
 
             try {
