@@ -6,7 +6,7 @@
         <div class="container mx-auto">
            <section class="py-12 ">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-             <h2 class="font-manrope text-center font-bold text-gray-900 mb-4 u-text--primary italic pl-[2.4em] pr-2 -mr-2">Terms and Conditions</h2>  
+             <h2 class="font-manrope text-center font-bold text-gray-900 mb-4 u-text--primary italic">Terms and Conditions</h2>  
              <p class="aos-init " data-aos="fade-up">
                     Last updated: January 21, 2025<br>
                     Please read these terms and conditions carefully before using Our Service.
