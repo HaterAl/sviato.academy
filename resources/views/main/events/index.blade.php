@@ -325,7 +325,7 @@
             const container = document.getElementById('events-container');
 
             if (!events || events.length === 0) {
-                container.innerHTML = '<div class="text-center py-12"><p class="u-text--primary text-xl">No events available at the moment.</p></div>';
+                container.innerHTML = '<div class="text-center py-12"><p class="u-text--primary text-xl">No events available at the moment</p></div>';
                 return;
             }
 
