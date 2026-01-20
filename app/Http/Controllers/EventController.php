@@ -17,6 +17,10 @@ class EventController extends Controller
      */
     public function index(Request $request)
     {
+        // Set SEO title and description
+        app('seo')->setTitle('Upcoming Events | Sviato Academy')
+            ->setDescription('Browse upcoming events and training courses from Sviato Academy. Join our world-class trainers and expand your professional skills.');
+
         // Return JSON if requested via AJAX
         if ($request->ajax()) {
             $page = $request->query('page', 1);
@@ -27,7 +31,7 @@ class EventController extends Controller
 
                 $params = [
                     'page' => $page,
-                    'per_page' => 9,
+                    'per_page' => 8,
                     'date_from' =>  $today, 
                     'sort_by' => 'date',
                     'sort_order' => 'ASC',
@@ -57,11 +61,13 @@ class EventController extends Controller
                     $params['technique'] = $request->technique;
                 }
 
+                $apiUrl = config('services.master_event.api_url');
+
                 $response = Http::withOptions([
                     'verify' => false // Disable SSL verification for local development
                 ])->withHeaders([
                     'X-MasterEvent-Key' => $apiKey
-                ])->get('https://old.sviato.academy/wp-json/master-event/v1/feed', $params);
+                ])->get("{$apiUrl}/feed", $params);
 
                 if ($response->successful()) {
                     $data = $response->json();
@@ -113,12 +119,13 @@ class EventController extends Controller
             }
 
             $apiKey = config('services.master_event.key');
+            $apiUrl = config('services.master_event.api_url');
 
             $response = Http::withOptions([
                 'verify' => false
             ])->withHeaders([
                 'X-MasterEvent-Key' => $apiKey
-            ])->get("https://old.sviato.academy/wp-json/master-event/v1/feed/{$eventId}");
+            ])->get("{$apiUrl}/feed/{$eventId}");
 
             if ($response->successful()) {
                 $event = $response->json();

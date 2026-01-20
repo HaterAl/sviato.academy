@@ -14,6 +14,10 @@ class ProductsController extends Controller
      */
     public function index(Request $request)
     {
+        // Set SEO title and description
+        app('seo')->setTitle('Our Products | Sviato Academy')
+            ->setDescription('Discover our premium selection of professional PMU products and supplies.');
+
         // Return JSON if requested via AJAX
         if ($request->ajax()) {
             $products = $this->getProducts();
@@ -56,9 +60,11 @@ class ProductsController extends Controller
     private function getProducts(): array
     {
         try {
+            $apiUrl = config('services.products.api_url');
+
             $response = Http::withOptions([
                 'verify' => false
-            ])->get('https://sviato.shop/media/googlefeed/products.xml');
+            ])->get($apiUrl);
 
             if ($response->successful()) {
                 $xml = simplexml_load_string($response->body());

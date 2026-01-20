@@ -46,17 +46,11 @@
     @if($hasNavigation)
     <div
         id="mobile-menu"
-        class="lg:hidden fixed inset-0 z-50 transform translate-x-full transition-transform duration-300 ease-in-out"
+        class="lg:hidden fixed right-0 top-0 bottom-0 w-64 z-50 transform translate-x-full transition-transform duration-300 ease-in-out bg-white shadow-xl"
         style="display: none;"
     >
-        <!-- Overlay -->
-        <div
-            id="mobile-menu-overlay"
-            class="absolute inset-0 bg-black bg-opacity-50"
-        ></div>
-
         <!-- Menu Panel -->
-        <div class="absolute right-0 top-0 bottom-0 w-64 bg-white shadow-xl">
+        <div class="h-full">
             <div class="flex flex-col h-full">
                 <!-- Close Button -->
                 <div class="flex justify-end p-4">
@@ -102,14 +96,12 @@
         const menuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         const menuClose = document.getElementById('mobile-menu-close');
-        const menuOverlay = document.getElementById('mobile-menu-overlay');
 
         function openMenu() {
             mobileMenu.style.display = 'block';
             setTimeout(() => {
                 mobileMenu.classList.remove('translate-x-full');
             }, 10);
-            document.body.style.overflow = 'hidden';
         }
 
         function closeMenu() {
@@ -117,7 +109,6 @@
             setTimeout(() => {
                 mobileMenu.style.display = 'none';
             }, 300);
-            document.body.style.overflow = '';
         }
 
         if (menuButton) {
@@ -126,10 +117,6 @@
 
         if (menuClose) {
             menuClose.addEventListener('click', closeMenu);
-        }
-
-        if (menuOverlay) {
-            menuOverlay.addEventListener('click', closeMenu);
         }
 
         // Close menu when clicking on a link

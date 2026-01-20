@@ -29,6 +29,10 @@ class PagesController extends Controller
      */
     public function about(): View
     {
+        // Set SEO title and description
+        app('seo')->setTitle('About Us | Sviato Academy')
+            ->setDescription('Learn about Sviato Academy, a world-class permanent make-up training institution founded by Sviatoslav Otchenash.');
+
         return view('main.about.index');
     }
 
@@ -37,6 +41,10 @@ class PagesController extends Controller
      */
     public function contactUs(): View
     {
+        // Set SEO title and description
+        app('seo')->setTitle('Contact Us | Sviato Academy')
+            ->setDescription('Get in touch with Sviato Academy. Contact us for inquiries about our permanent make-up training courses and programs.');
+
         return view('main.contact-us.index');
     }
 
@@ -66,6 +74,86 @@ class PagesController extends Controller
     }
 
     /**
+     * Show certificate checker page and handle validation
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Http\JsonResponse
+     */
+    public function certificateChecker(Request $request)
+    {
+        // Set SEO title and description
+        app('seo')->setTitle('Certificate Checker | Sviato Academy')
+            ->setDescription('Verify your Sviato Academy certificate authenticity.');
+
+        // Handle AJAX request for certificate validation
+        if ($request->ajax() && $request->has('cert')) {
+            $validated = $request->validate([
+                'cert' => 'required|string',
+            ]);
+
+            try {
+                $apiKey = config('services.master_event.key');
+                $apiUrl = config('services.master_event.api_url');
+
+                $response = Http::withOptions([
+                    'verify' => false
+                ])->withHeaders([
+                    'X-MasterEvent-Key' => $apiKey
+                ])->get("{$apiUrl}/validate-certificate", [
+                    'cert' => $validated['cert']
+                ]);
+
+                if ($response->successful()) {
+                    $data = $response->json();
+
+                    // Mask last name if member name exists
+                    if (isset($data['member']['name'])) {
+                        $data['member']['name'] = $this->maskLastName($data['member']['name']);
+                    }
+
+                    return response()->json($data);
+                }
+
+                return response()->json([
+                    'error' => 'Failed to validate certificate'
+                ], $response->status());
+
+            } catch (\Exception $e) {
+                Log::error('Certificate validation failed', [
+                    'message' => $e->getMessage(),
+                    'cert' => $validated['cert']
+                ]);
+
+                return response()->json([
+                    'error' => 'An error occurred while validating the certificate'
+                ], 500);
+            }
+        }
+
+        return view('main.certificate-checker.index');
+    }
+
+    /**
+     * Mask last name in full name
+     *
+     * @param string $fullName
+     * @return string
+     */
+    private function maskLastName(string $fullName): string
+    {
+        $parts = explode(' ', $fullName);
+
+        if (count($parts) > 1) {
+            $lastName = array_pop($parts);
+            $maskedLastName = mb_substr($lastName, 0, 1) . str_repeat('*', mb_strlen($lastName) - 1);
+            $parts[] = $maskedLastName;
+            return implode(' ', $parts);
+        }
+
+        return $fullName;
+    }
+
+    /**
      * Get upcoming events from API
      *
      * @param int $limit
@@ -75,13 +163,14 @@ class PagesController extends Controller
     {
         try {
             $apiKey = config('services.master_event.key');
+            $apiUrl = config('services.master_event.api_url');
             $today = Carbon::today()->format('Y-m-d');
 
             $response = Http::withOptions([
                 'verify' => false
             ])->withHeaders([
                 'X-MasterEvent-Key' => $apiKey
-            ])->get('https://old.sviato.academy/wp-json/master-event/v1/feed', [
+            ])->get("{$apiUrl}/feed", [
                 'page' => 1,
                 'per_page' => $limit,
                 'date_from' => $today,

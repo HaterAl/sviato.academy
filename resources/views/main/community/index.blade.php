@@ -236,11 +236,34 @@
             'linear-gradient(to top right, #fb7185, #c026d3, #9333ea)',
         ];
 
+        let isFirstLoad = true;
+
         // Load members via AJAX
         async function loadMembers(page = 1) {
             const locationInput = document.getElementById('location');
             const memberTypeSelect = document.getElementById('member_type');
             const clearBtn = document.getElementById('clear-location');
+            const container = document.getElementById('members-container');
+
+            // Scroll to container with offset only during pagination (not on first load)
+            if (!isFirstLoad) {
+                const containerRect = container.getBoundingClientRect();
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const targetPosition = containerRect.top + scrollTop - 100; // 100px above the container
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+
+                // Add blur effect
+                container.style.filter = 'blur(3px)';
+                container.style.pointerEvents = 'none';
+                container.style.opacity = '0.6';
+                container.style.transition = 'filter 0.2s ease, opacity 0.2s ease';
+            }
+
+            isFirstLoad = false;
 
             // Build query parameters
             const params = new URLSearchParams();
@@ -267,17 +290,14 @@
 
                 const data = await response.json();
                 renderMembers(data.members, data.pagination, data.member_type);
-
-                // Scroll to the members container
-                if (page > 1) {
-                    const container = document.getElementById('members-container');
-                    if (container) {
-                        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }
             } catch (error) {
                 console.error('Error loading members:', error);
-                document.getElementById('members-container').innerHTML = '<div class="text-center py-12"><p class="u-text--primary text-xl">Failed to load community members. Please try again.</p></div>';
+                container.innerHTML = '<div class="text-center py-12"><p class="u-text--primary text-xl">Failed to load community members. Please try again.</p></div>';
+            } finally {
+                // Remove blur effect
+                container.style.filter = '';
+                container.style.pointerEvents = '';
+                container.style.opacity = '';
             }
         }
 

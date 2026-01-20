@@ -13,6 +13,10 @@ class CommunityController extends Controller
      */
     public function index(Request $request)
     {
+        // Set SEO title and description
+        app('seo')->setTitle('Our Community | Sviato Academy')
+            ->setDescription('Meet our talented masters from around the world. Join our community of professional PMU artists.');
+
         // Return JSON if requested via AJAX
         if ($request->ajax()) {
             $page = $request->query('page', 1);
@@ -36,11 +40,13 @@ class CommunityController extends Controller
                     $params['location'] = $request->location;
                 }
 
+                $apiUrl = config('services.master_event.api_url');
+
                 $response = Http::withOptions([
                     'verify' => false // Disable SSL verification for local development
                 ])->withHeaders([
                     'X-MasterEvent-Key' => $apiKey
-                ])->get('https://old.sviato.academy/wp-json/master-event/v1/feed', $params);
+                ])->get("{$apiUrl}/feed", $params);
 
                 if ($response->successful()) {
                     $data = $response->json();

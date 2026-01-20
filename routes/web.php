@@ -45,6 +45,9 @@ Route::get('/contact-us', [PagesController::class, 'contactUs'])
 Route::post('/contact-us', [PagesController::class, 'submitContact'])
     ->name('contact-us.submit');
 
+Route::get('/certificate-checker', [PagesController::class, 'certificateChecker'])
+    ->name('certificate-checker.index');
+
 Route::view('/subscriptions', 'main.subscription.index')->name('subscriptions.index');
 Route::view('/subscriptions/privacy-policy', 'main.subscription.privacy-policy.index')->name('privacy-policy.index');
 Route::view('/subscriptions/terms-and-conditions', 'main.subscription.terms-and-conditions.index')->name('terms-and-conditions.index');

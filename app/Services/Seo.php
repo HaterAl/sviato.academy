@@ -82,6 +82,36 @@ class Seo
     }
 
     /**
+     * Set the page title
+     *
+     * @param string $title
+     * @return self
+     */
+    public function setTitle(string $title): self
+    {
+        $this->data['title'] = $title;
+        $this->data['opengraph']['title'] = $title;
+        $this->data['twitter']['title'] = $title;
+
+        return $this;
+    }
+
+    /**
+     * Set the page description
+     *
+     * @param string $description
+     * @return self
+     */
+    public function setDescription(string $description): self
+    {
+        $this->data['meta']['description'] = $description;
+        $this->data['opengraph']['description'] = $description;
+        $this->data['twitter']['description'] = $description;
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function render(): string

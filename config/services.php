@@ -33,6 +33,11 @@ return [
 
     'master_event' => [
         'key' => env('MASTER_EVENT_KEY'),
+        'api_url' => env('MASTER_EVENT_API_URL', 'https://old.sviato.academy/wp-json/master-event/v1'),
+    ],
+
+    'products' => [
+        'api_url' => env('PRODUCTS_API_URL', 'https://sviato.shop/media/googlefeed/products.xml'),
     ],
 
 ];
