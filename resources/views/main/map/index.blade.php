@@ -341,13 +341,8 @@
                         });
                     });
 
-                    // Fit map to show all markers
-                    if (bounds.length > 0) {
-                        map.fitBounds(bounds, {
-                            padding: [50, 50],
-                            maxZoom: 12
-                        });
-                    }
+                    // Don't auto-zoom to fit markers
+                    // Keep the initial view centered on Europe
                 }
 
                 // Hide loader
