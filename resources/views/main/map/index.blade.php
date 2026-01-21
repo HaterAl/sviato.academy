@@ -202,7 +202,7 @@
             maxBoundsViscosity: 1.0, // Makes bounds completely rigid
             worldCopyJump: false,
             zoomControl: false // Remove zoom buttons
-        }).setView([54, 15], 4); // Europe center
+        }).setView([57, 15], 5); // Europe center, slightly higher
 
         // Add dark tile layer
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
