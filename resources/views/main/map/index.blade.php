@@ -158,7 +158,7 @@
 
         .loader-spinner {
             border: 4px solid #374151;
-            border-top: 4px solid #9333ea;
+            border-top: 4px solid #DCB04B;
             border-radius: 50%;
             width: 50px;
             height: 50px;
@@ -205,11 +205,14 @@
             attributionControl: false // Remove attribution
         }).setView([50.06, 19.94], 6); // Krakow center
 
-        // Add dark tile layer
+        // Add dark tile layer with retina support
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
             subdomains: 'abcd',
-            maxZoom: 19
+            maxZoom: 19,
+            detectRetina: true,
+            updateWhenIdle: false,
+            keepBuffer: 2
         }).addTo(map);
 
         // Fix map size after initialization
@@ -341,9 +344,25 @@
                             className: 'custom-popup'
                         });
 
-                        // Center map on marker when clicked
+                        // Center map on marker when clicked (horizontally centered, vertically at bottom)
                         marker.on('click', function() {
-                            map.setView([lat, lng], map.getZoom());
+                            // Calculate target position: marker at bottom 30% of screen
+                            const point = map.project([lat, lng], map.getZoom());
+                            const mapHeight = map.getSize().y;
+                            const offsetY = mapHeight * 0.3;
+
+                            // Adjust point so marker will be at bottom when centered
+                            point.y -= offsetY;
+
+                            // Convert back to coordinates
+                            const targetLatLng = map.unproject(point, map.getZoom());
+
+                            // Smoothly pan to target position in one movement
+                            map.setView(targetLatLng, map.getZoom(), {
+                                animate: true,
+                                duration: 1.0,
+                                easeLinearity: 0.2
+                            });
                         });
                     });
 

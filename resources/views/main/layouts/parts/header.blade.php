@@ -25,6 +25,10 @@
                 <span class="sr-only">Tiktok</span>
                 @svg('tiktok-gold')
             </a>
+            <a href="{{ route('map.index') }}" id="map-toggle" class="py-3 px-3 text-xl lg:px-4" title="Sviato Map">
+                <span class="sr-only">Map</span>
+                @svg('map-gold')
+            </a>
 
             <!-- Mobile Menu Button -->
             @if($hasNavigation)
@@ -127,3 +131,19 @@
     });
 </script>
 @endif
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const mapToggle = document.getElementById('map-toggle');
+
+        if (mapToggle) {
+            mapToggle.addEventListener('click', function(e) {
+                // Check if we're currently on the map page
+                if (window.location.pathname === '/map') {
+                    e.preventDefault();
+                    window.history.back();
+                }
+            });
+        }
+    });
+</script>
