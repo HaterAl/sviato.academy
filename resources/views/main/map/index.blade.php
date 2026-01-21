@@ -201,8 +201,9 @@
             ],
             maxBoundsViscosity: 1.0, // Makes bounds completely rigid
             worldCopyJump: false,
-            zoomControl: false // Remove zoom buttons
-        }).setView([57, 15], 5); // Europe center, slightly higher
+            zoomControl: false, // Remove zoom buttons
+            attributionControl: false // Remove attribution
+        }).setView([46, 25], 7); // Romania center
 
         // Add dark tile layer
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
