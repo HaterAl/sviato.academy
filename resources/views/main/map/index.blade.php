@@ -203,7 +203,7 @@
             worldCopyJump: false,
             zoomControl: false, // Remove zoom buttons
             attributionControl: false // Remove attribution
-        }).setView([46, 25], 3); // Romania center
+        }).setView([50.06, 19.94], 6); // Krakow center
 
         // Add dark tile layer
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
