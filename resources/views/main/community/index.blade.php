@@ -6,7 +6,7 @@
             <section class="py-12">
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div class="mb-12">
-                        <h2 class="font-manrope text-center font-bold text-gray-900 mb-4 u-text--primary italic">Our
+                        <h2 class="font-manrope text-center font-bold text-gray-900 mb-4 u-text--primary italic">Sviato
                             Community</h2>
                         <p class="u-text--primary text-center leading-6 mb-9">Meet our talented masters from around the
                             world.</br>
