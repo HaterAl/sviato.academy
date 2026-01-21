@@ -11,7 +11,7 @@
                     </div>
 
                     <!-- Content Section -->
-                    <div class="prose prose-lg max-w-none text-transform: none;">
+                    <div class="prose prose-lg max-w-none normal-case">
                         <div class="bg-white rounded-2xl shadow-md p-8 md:p-12">
 
                             <p class="text-gray-600 leading-relaxed mb-6">
