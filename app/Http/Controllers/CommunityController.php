@@ -14,7 +14,7 @@ class CommunityController extends Controller
     public function index(Request $request)
     {
         // Set SEO title and description
-        app('seo')->setTitle('Our Community | Sviato Academy')
+        app('seo')->setTitle('Sviato Community | Sviato Academy')
             ->setDescription('Meet our talented masters from around the world. Join our community of professional PMU artists.');
 
         // Return JSON if requested via AJAX

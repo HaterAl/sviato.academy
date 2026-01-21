@@ -72,7 +72,7 @@
                         {{ __('About') }}
                     </a>
                     <a href="{{ route('community.index') }}" class="block py-3 px-4 hover:bg-gray-100 rounded-lg transition-colors">
-                        {{ __('Our Community') }}
+                        {{ __('Sviato Community') }}
                     </a>
                     <a href="{{ route('events.index') }}" class="block py-3 px-4 hover:bg-gray-100 rounded-lg transition-colors">
                         {{ __('Events') }}
