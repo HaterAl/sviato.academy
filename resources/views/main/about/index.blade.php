@@ -1,7 +1,7 @@
 @extends('main.layouts.base')
 
 @section('content')
-    <section class="p-4" style="text-transform: none;">
+    <section class="p-4">
         <div class="container mx-auto">
             <section class="py-12">
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -11,7 +11,7 @@
                     </div>
 
                     <!-- Content Section -->
-                    <div class="prose prose-lg max-w-none">
+                    <div class="prose prose-lg max-w-none text-transform: none;">
                         <div class="bg-white rounded-2xl shadow-md p-8 md:p-12">
 
                             <p class="text-gray-600 leading-relaxed mb-6">
