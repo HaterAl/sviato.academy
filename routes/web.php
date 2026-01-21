@@ -5,6 +5,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\MapController;
 use Illuminate\Support\Facades\Config;
 use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\SurveyController;
@@ -36,6 +37,9 @@ Route::get('/events', [EventController::class, 'index'])
 
 Route::get('/community', [CommunityController::class, 'index'])
     ->name('community.index');
+
+Route::get('/map', [MapController::class, 'index'])
+    ->name('map.index');
 
 Route::get('/products', [ProductsController::class, 'index'])
     ->name('products.index');
