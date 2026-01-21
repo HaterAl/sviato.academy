@@ -340,6 +340,11 @@
                             maxWidth: 300,
                             className: 'custom-popup'
                         });
+
+                        // Center map on marker when clicked
+                        marker.on('click', function() {
+                            map.setView([lat, lng], map.getZoom());
+                        });
                     });
 
                     // Don't auto-zoom to fit markers
