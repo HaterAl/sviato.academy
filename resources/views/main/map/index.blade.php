@@ -192,7 +192,7 @@
     </div>
 
     <script>
-        // Initialize the map
+        // Initialize the map centered on Europe
         const map = L.map('map', {
             minZoom: 2,
             maxBounds: [
@@ -202,10 +202,7 @@
             maxBoundsViscosity: 1.0, // Makes bounds completely rigid
             worldCopyJump: false,
             zoomControl: false // Remove zoom buttons
-        }).fitBounds([
-            [-85, -180],  // Southwest corner
-            [85, 180]     // Northeast corner
-        ]);
+        }).setView([54, 15], 4); // Europe center
 
         // Add dark tile layer
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
