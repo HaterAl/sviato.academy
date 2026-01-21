@@ -6,19 +6,28 @@
             <section class="py-12">
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div class="mb-12">
-                        <h2 class="font-manrope text-center font-bold text-gray-900 mb-4 u-text--primary italic">Our Products</h2>
-                        <p class="u-text--primary text-center leading-6 mb-9">Discover our premium selection of professional PMU products and supplies.</p>
+                        <h2 class="font-manrope text-center font-bold text-gray-900 u-text--primary italic">Our Products</h2>
+                        <p class="u-text--primary text-center leading-6 mt-4">Discover our premium selection of professional PMU products and supplies.</p>
                     </div>
+
+                    {{-- Category filter temporarily disabled --}}
+                    {{-- <div class="mb-6 overflow-hidden">
+                        <div class="float-none md:float-right w-[280px] md:w-[600px]">
+                            <select id="category-filter" onchange="handleCategoryChange()" class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-yellow-500 transition-colors duration-300 bg-white text-gray-900 font-semibold">
+                                <option value="">All Categories</option>
+                            </select>
+                        </div>
+                    </div> --}}
 
                     <div id="products-container">
                         @if(count($products) > 0)
                             <div class="grid gap-6 items-stretch" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));" id="products-grid">
                                 @foreach($products as $product)
                                     <div class="bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl flex flex-col h-full transform hover:scale-[1.03]">
-                                        <div class="p-6 flex flex-col flex-1">
-                                            <!-- Product image (rounded) -->
+                                        <div class="flex flex-col flex-1 p-6" style="background-color: #F5F6FA;">
+                                            <!-- Product image -->
                                             <div class="flex justify-center mb-4">
-                                                <div class="w-40 h-40 rounded-full overflow-hidden border-4 border-gray-100 shadow-lg">
+                                                <div class="w-40 h-40 overflow-hidden">
                                                     <img src="{{ $product['image'] }}"
                                                          alt="{{ $product['title'] }}"
                                                          class="w-full h-full object-cover"
@@ -120,9 +129,12 @@
 
     <script>
         let isFirstLoad = true;
+        // let categories = []; // Disabled
 
         // Load products via AJAX
         async function loadProducts(page = 1) {
+            // category parameter disabled
+            // async function loadProducts(page = 1, category = '') {
             const container = document.getElementById('products-container');
 
             // Scroll to container with offset only during pagination (not on first load)
@@ -147,6 +159,7 @@
 
             const params = new URLSearchParams();
             if (page > 1) params.append('page', page);
+            // if (category) params.append('category', category); // Disabled
 
             const newUrl = params.toString() ? `{{ route('products.index') }}?${params.toString()}` : '{{ route('products.index') }}';
             window.history.pushState({}, '', newUrl);
@@ -162,6 +175,13 @@
                 if (!response.ok) throw new Error('Failed to load products');
 
                 const data = await response.json();
+
+                // Update categories dropdown if received - DISABLED
+                // if (data.categories && data.categories.length > 0) {
+                //     categories = data.categories;
+                //     updateCategoriesDropdown();
+                // }
+
                 renderProducts(data.products, data.pagination);
             } catch (error) {
                 console.error('Error loading products:', error);
@@ -174,9 +194,35 @@
             }
         }
 
+        // Update categories dropdown - DISABLED
+        // function updateCategoriesDropdown() {
+        //     const select = document.getElementById('category-filter');
+        //     if (!select || categories.length === 0) return;
+        //     const currentValue = select.value;
+        //     select.innerHTML = '<option value="">All Categories</option>';
+        //     categories.forEach(category => {
+        //         const option = document.createElement('option');
+        //         option.value = category;
+        //         option.textContent = category;
+        //         select.appendChild(option);
+        //     });
+        //     if (currentValue) {
+        //         select.value = currentValue;
+        //     }
+        // }
+
+        // Handle category filter change - DISABLED
+        // function handleCategoryChange() {
+        //     const select = document.getElementById('category-filter');
+        //     const category = select.value;
+        //     loadProducts(1, category);
+        // }
+
         // Render products HTML
         function renderProducts(products, pagination) {
             const container = document.getElementById('products-container');
+            // const categoryFilter = document.getElementById('category-filter'); // Disabled
+            // const currentCategory = categoryFilter ? categoryFilter.value : ''; // Disabled
 
             if (!products || products.length === 0) {
                 container.innerHTML = '<div class="text-center py-12"><p class="u-text--primary text-xl">No products available at the moment.</p></div>';
@@ -200,9 +246,9 @@
 
                 html += `
                     <div class="bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl flex flex-col h-full transform hover:scale-[1.03]">
-                        <div class="p-6 flex flex-col flex-1">
+                        <div class="flex flex-col flex-1 p-6" style="background-color: #F5F6FA;">
                             <div class="flex justify-center mb-4">
-                                <div class="w-40 h-40 rounded-full overflow-hidden border-4 border-gray-100 shadow-lg">
+                                <div class="w-40 h-40 overflow-hidden">
                                     <img src="${image}" alt="${title}" class="w-full h-full object-cover" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(title)}&size=300&background=f3f4f6&color=6b7280'">
                                 </div>
                             </div>
@@ -257,6 +303,14 @@
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const page = urlParams.get('page') || 1;
+            // const category = urlParams.get('category') || ''; // Disabled
+
+            // Set category filter if exists in URL - DISABLED
+            // const categoryFilter = document.getElementById('category-filter');
+            // if (categoryFilter && category) {
+            //     categoryFilter.value = category;
+            // }
+
             loadProducts(page);
         });
     </script>

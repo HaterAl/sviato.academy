@@ -45,8 +45,8 @@ class CommunityController extends Controller
                 $response = Http::withOptions([
                     'verify' => false // Disable SSL verification for local development
                 ])->withHeaders([
-                    'X-MasterEvent-Key' => $apiKey
-                ])->get("{$apiUrl}/feed", $params);
+                            'X-MasterEvent-Key' => $apiKey
+                        ])->get("{$apiUrl}/feed", $params);
 
                 if ($response->successful()) {
                     $data = $response->json();
@@ -74,7 +74,11 @@ class CommunityController extends Controller
                 'members' => $members,
                 'pagination' => $pagination,
                 'member_type' => $currentMemberType
-            ]);
+            ])
+                ->header('Vary', 'X-Requested-With')
+                ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0')
+                ->header('Pragma', 'no-cache')
+                ->header('Expires', 'Sat, 01 Jan 2000 00:00:00 GMT');
         }
 
         // Return empty view for initial page load - data will be loaded via AJAX

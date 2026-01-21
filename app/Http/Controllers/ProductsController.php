@@ -21,6 +21,16 @@ class ProductsController extends Controller
         // Return JSON if requested via AJAX
         if ($request->ajax()) {
             $products = $this->getProducts();
+
+            // Category filtering temporarily disabled
+            // $category = $request->get('category');
+            // if ($category) {
+            //     $products = array_filter($products, function($product) use ($category) {
+            //         return $product['category'] === $category;
+            //     });
+            //     $products = array_values($products);
+            // }
+
             $perPage = 20;
             $page = $request->get('page', 1);
 
@@ -80,6 +90,16 @@ class ProductsController extends Controller
                 $xml->registerXPathNamespace('g', 'http://base.google.com/ns/1.0');
 
                 foreach ($xml->channel->item as $item) {
+                    $category = (string)$item->children('g', true)->product_type;
+
+                    // Remove "Sviato Academy Shop > " prefix and get subcategory
+                    $category = str_replace('Sviato Academy Shop > ', '', $category);
+
+                    // Skip products without subcategory
+                    if ($category === 'Sviato Academy Shop' || empty($category)) {
+                        continue;
+                    }
+
                     $products[] = [
                         'id' => (string)$item->children('g', true)->id,
                         'title' => (string)$item->children('g', true)->title,
@@ -90,7 +110,7 @@ class ProductsController extends Controller
                         'sale_price' => (string)$item->children('g', true)->sale_price,
                         'availability' => (string)$item->children('g', true)->availability,
                         'brand' => (string)$item->children('g', true)->brand,
-                        'category' => (string)$item->children('g', true)->product_type,
+                        'category' => $category,
                     ];
                 }
 

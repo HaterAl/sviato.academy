@@ -1,7 +1,7 @@
 @extends('main.layouts.base')
 
 @section('content')
-    <section class="p-4">
+    <section class="p-4" style="text-transform: none;">
         <div class="container mx-auto">
             <section class="py-12">
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
