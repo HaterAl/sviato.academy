@@ -244,8 +244,10 @@
             }
         }
 
-        // Load trainers data
-        async function loadTrainers() {
+        // Load trainers data with retry
+        async function loadTrainers(retryCount = 0) {
+            const maxRetries = 3;
+
             try {
                 const response = await fetch('{{ route('map.index') }}', {
                     headers: {
@@ -419,10 +421,24 @@
                 document.getElementById('loader').style.display = 'none';
             } catch (error) {
                 console.error('Error loading trainers:', error);
-                document.getElementById('loader').innerHTML = `
-                    <div class="loader-spinner"></div>
-                    <div>Failed to load trainers. Please refresh the page.</div>
-                `;
+
+                if (retryCount < maxRetries) {
+                    // Retry after a delay
+                    const delay = (retryCount + 1) * 1000; // 1s, 2s, 3s
+                    document.getElementById('loader').innerHTML = `
+                        <div class="loader-spinner"></div>
+                        <div>Loading trainers... Retry ${retryCount + 1}/${maxRetries}</div>
+                    `;
+
+                    setTimeout(() => {
+                        loadTrainers(retryCount + 1);
+                    }, delay);
+                } else {
+                    document.getElementById('loader').innerHTML = `
+                        <div class="loader-spinner"></div>
+                        <div>Failed to load trainers. Please refresh the page.</div>
+                    `;
+                }
             }
         }
 
