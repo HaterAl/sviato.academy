@@ -427,7 +427,7 @@
                     const delay = (retryCount + 1) * 1000; // 1s, 2s, 3s
                     document.getElementById('loader').innerHTML = `
                         <div class="loader-spinner"></div>
-                        <div>Loading trainers... Retry ${retryCount + 1}/${maxRetries}</div>
+                        <div>Loading trainers map...</div>
                     `;
 
                     setTimeout(() => {
