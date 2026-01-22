@@ -228,6 +228,22 @@
             popupAnchor: [0, -28]
         });
 
+        // Store markers globally
+        const markers = {};
+
+        // Helper functions to encode/decode member ID
+        function encodeMemberId(id) {
+            return btoa(String(id)).replace(/=/g, '');
+        }
+
+        function decodeMemberId(encoded) {
+            try {
+                return parseInt(atob(encoded));
+            } catch(e) {
+                return null;
+            }
+        }
+
         // Load trainers data
         async function loadTrainers() {
             try {
@@ -344,8 +360,23 @@
                             className: 'custom-popup'
                         });
 
+                        // Remove member parameter from URL when popup is closed
+                        marker.on('popupclose', function() {
+                            const url = new URL(window.location);
+                            url.searchParams.delete('m');
+                            window.history.replaceState({}, '', url);
+                        });
+
+                        // Store marker reference
+                        markers[member.id] = marker;
+
                         // Center map on marker when clicked (horizontally centered, vertically at bottom)
                         marker.on('click', function() {
+                            // Update URL with encoded member ID (use replaceState to not create history entry)
+                            const url = new URL(window.location);
+                            url.searchParams.set('m', encodeMemberId(member.id));
+                            window.history.replaceState({}, '', url);
+
                             // Calculate target position: marker at bottom 30% of screen
                             const point = map.project([lat, lng], map.getZoom());
                             const mapHeight = map.getSize().y;
@@ -368,6 +399,20 @@
 
                     // Don't auto-zoom to fit markers
                     // Keep the initial view centered on Europe
+
+                    // Check if URL has member parameter
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const encodedId = urlParams.get('m');
+
+                    if (encodedId) {
+                        const memberId = decodeMemberId(encodedId);
+                        if (memberId && markers[memberId]) {
+                            // Open the specific member's popup and center on it
+                            setTimeout(() => {
+                                markers[memberId].fire('click');
+                            }, 500);
+                        }
+                    }
                 }
 
                 // Hide loader
@@ -383,5 +428,22 @@
 
         // Load trainers when page is ready
         loadTrainers();
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const encodedId = urlParams.get('m');
+
+            // Close all popups first
+            map.closePopup();
+
+            // If there's a member ID, open that popup and center
+            if (encodedId) {
+                const memberId = decodeMemberId(encodedId);
+                if (memberId && markers[memberId]) {
+                    markers[memberId].fire('click');
+                }
+            }
+        });
     </script>
 @endsection

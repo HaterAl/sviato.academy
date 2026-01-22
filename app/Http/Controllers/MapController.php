@@ -41,7 +41,11 @@ class MapController extends Controller
                     return response()->json([
                         'success' => false,
                         'members' => []
-                    ]);
+                    ])
+                        ->header('Vary', 'X-Requested-With')
+                        ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0')
+                        ->header('Pragma', 'no-cache')
+                        ->header('Expires', 'Sat, 01 Jan 2000 00:00:00 GMT');
                 }
 
                 $initialData = $initialResponse->json();
@@ -73,7 +77,11 @@ class MapController extends Controller
                     return response()->json([
                         'success' => true,
                         'members' => array_values($membersWithCoordinates)
-                    ]);
+                    ])
+                        ->header('Vary', 'X-Requested-With')
+                        ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0')
+                        ->header('Pragma', 'no-cache')
+                        ->header('Expires', 'Sat, 01 Jan 2000 00:00:00 GMT');
                 } else {
                     Log::error('Map API request failed', [
                         'status' => $response->status()
@@ -81,7 +89,11 @@ class MapController extends Controller
                     return response()->json([
                         'success' => false,
                         'members' => []
-                    ]);
+                    ])
+                        ->header('Vary', 'X-Requested-With')
+                        ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0')
+                        ->header('Pragma', 'no-cache')
+                        ->header('Expires', 'Sat, 01 Jan 2000 00:00:00 GMT');
                 }
             } catch (\Exception $e) {
                 Log::error('Map API exception', [
@@ -90,7 +102,11 @@ class MapController extends Controller
                 return response()->json([
                     'success' => false,
                     'members' => []
-                ]);
+                ])
+                    ->header('Vary', 'X-Requested-With')
+                    ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0')
+                    ->header('Pragma', 'no-cache')
+                    ->header('Expires', 'Sat, 01 Jan 2000 00:00:00 GMT');
             }
         }
 
