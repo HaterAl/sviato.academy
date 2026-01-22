@@ -429,6 +429,14 @@
         // Load trainers when page is ready
         loadTrainers();
 
+        // Handle page restoration from cache (bfcache)
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                // Page was restored from bfcache, reload data
+                loadTrainers();
+            }
+        });
+
         // Handle browser back/forward buttons
         window.addEventListener('popstate', function() {
             const urlParams = new URLSearchParams(window.location.search);
