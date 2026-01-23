@@ -271,16 +271,16 @@ class ProductsController extends Controller
     {
         // Main category mapping (level 2, excluding Sviato Collection)
         $categoryMapping = [
-            35 => 'Kits',
-            23 => 'Training',
-            22 => 'Treatment Tools',
-            20 => 'Aftercare Products',
-            19 => 'Microblading Blades & Tools',
-            11 => 'Pigments',
-            8 => 'PMU Cartridges',
-            21 => 'Removal products',
-            25 => 'Machines',
-            50 => 'SALE!',
+            35 => 'kits',
+            23 => 'training',
+            22 => 'treatment tools',
+            20 => 'aftercare products',
+            19 => 'microblading blades & tools',
+            11 => 'pigments',
+            8 => 'pmu cartridges',
+            21 => 'removal products',
+            25 => 'machines',
+            50 => 'sale',
         ];
 
         // Subcategory to main category mapping (level 3 -> level 2)

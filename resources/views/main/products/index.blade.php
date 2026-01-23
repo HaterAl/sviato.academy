@@ -15,16 +15,16 @@
                         <div class="md:w-[600px]">
                             <select id="category-filter" onchange="handleCategoryChange()" class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-yellow-500 transition-colors duration-300 bg-white text-gray-900 font-semibold cursor-pointer">
                                 <option value="all">All Categories</option>
-                                <option value="Aftercare Products">Aftercare Products</option>
-                                <option value="Kits">Kits</option>
-                                <option value="Machines">Machines</option>
-                                <option value="Microblading Blades & Tools">Microblading Blades & Tools</option>
-                                <option value="PMU Cartridges">PMU Cartridges</option>
-                                <option value="Pigments">Pigments</option>
-                                <option value="Removal products">Removal products</option>
-                                <option value="SALE!">SALE!</option>
-                                <option value="Training">Training</option>
-                                <option value="Treatment Tools">Treatment Tools</option>
+                                <option value="aftercare products">Aftercare Products</option>
+                                <option value="kits">Kits</option>
+                                <option value="machines">Machines</option>
+                                <option value="microblading blades & tools">Microblading Blades & Tools</option>
+                                <option value="pmu cartridges">PMU Cartridges</option>
+                                <option value="pigments">Pigments</option>
+                                <option value="removal products">Removal products</option>
+                                <option value="sale">SALE!</option>
+                                <option value="training">Training</option>
+                                <option value="treatment tools">Treatment Tools</option>
                             </select>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                         @if(count($products) > 0)
                             <div class="grid gap-6 items-stretch" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));" id="products-grid">
                                 @foreach($products as $product)
-                                    <div class="bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl flex flex-col h-full transform hover:scale-[1.03]">
+                                    <a href="{{ $product['link'] }}" target="_blank" class="bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl flex flex-col h-full transform hover:scale-[1.03] group">
                                         <div class="flex flex-col flex-1 p-6" style="background-color: #F5F6FA;">
                                             <!-- Product image -->
                                             <div class="flex justify-center mb-4">
@@ -67,13 +67,11 @@
                                         </div>
 
                                         <!-- Buy button -->
-                                        <a href="{{ $product['link'] }}"
-                                           target="_blank"
-                                           style="background: linear-gradient(to right, #ffda55, #ca9d00); color: rgb(12, 12, 13);"
-                                           class="block w-full text-center py-4 font-bold text-sm shadow-lg hover:shadow-xl transition-all duration-300">
+                                        <div style="background: linear-gradient(to right, #ffda55, #ca9d00); color: rgb(12, 12, 13);"
+                                             class="md:opacity-0 md:group-hover:opacity-100 block w-full text-center py-4 font-bold text-sm shadow-lg transition-all duration-300">
                                             Buy Now
-                                        </a>
-                                    </div>
+                                        </div>
+                                    </a>
                                 @endforeach
                             </div>
 
