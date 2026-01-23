@@ -13,15 +13,15 @@
         </div>
         @includeWhen($hasNavigation, 'main.layouts.parts.nav')
         <div class="ml-auto -mr-3 flex items-center lg:-mr-4 lg:px-0 lg:w-2/12 lg:justify-end">
-            <a href="https://www.instagram.com/sviatoslavotchenash" rel="nofollow noopener" target="_blank" class="py-3 px-3 text-xl lg:px-4">
+            <a href="https://www.instagram.com/sviato_academy" rel="nofollow noopener" target="_blank" class="py-3 px-3 text-xl lg:px-4">
                 <span class="sr-only">Instagram</span>
                 @svg('instagram-gold')
             </a>
-            <a href="https://www.facebook.com/sviatoslav.otchenash" rel="nofollow noopener" target="_blank" class="py-3 px-3 text-xl lg:px-4">
+            <!--<a href="https://www.facebook.com/sviatoslav.otchenash" rel="nofollow noopener" target="_blank" class="py-3 px-3 text-xl lg:px-4">
                 <span class="sr-only">Facebook</span>
                 @svg('facebook-gold')
-            </a>
-            <a href="https://www.tiktok.com/@sviatoslavotchenash" rel="nofollow noopener" target="_blank" class="py-3 px-3 text-xl lg:px-4">
+            </a>-->
+            <a href="https://www.tiktok.com/@sviatoacademy" rel="nofollow noopener" target="_blank" class="py-3 px-3 text-xl lg:px-4">
                 <span class="sr-only">Tiktok</span>
                 @svg('tiktok-gold')
             </a>

@@ -10,14 +10,24 @@
                         <p class="u-text--primary text-center leading-6 mt-4">Discover our premium selection of professional PMU products and supplies.</p>
                     </div>
 
-                    {{-- Category filter temporarily disabled --}}
-                    {{-- <div class="mb-6 overflow-hidden">
-                        <div class="float-none md:float-right w-[280px] md:w-[600px]">
-                            <select id="category-filter" onchange="handleCategoryChange()" class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-yellow-500 transition-colors duration-300 bg-white text-gray-900 font-semibold">
-                                <option value="">All Categories</option>
+                    {{-- Category filter --}}
+                    <div class="mb-8 md:flex md:justify-end">
+                        <div class="md:w-[600px]">
+                            <select id="category-filter" onchange="handleCategoryChange()" class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-yellow-500 transition-colors duration-300 bg-white text-gray-900 font-semibold cursor-pointer">
+                                <option value="all">All Categories</option>
+                                <option value="Aftercare Products">Aftercare Products</option>
+                                <option value="Kits">Kits</option>
+                                <option value="Machines">Machines</option>
+                                <option value="Microblading Blades & Tools">Microblading Blades & Tools</option>
+                                <option value="PMU Cartridges">PMU Cartridges</option>
+                                <option value="Pigments">Pigments</option>
+                                <option value="Removal products">Removal products</option>
+                                <option value="SALE!">SALE!</option>
+                                <option value="Training">Training</option>
+                                <option value="Treatment Tools">Treatment Tools</option>
                             </select>
                         </div>
-                    </div> --}}
+                    </div>
 
                     <div id="products-container">
                         @if(count($products) > 0)
@@ -27,7 +37,7 @@
                                         <div class="flex flex-col flex-1 p-6" style="background-color: #F5F6FA;">
                                             <!-- Product image -->
                                             <div class="flex justify-center mb-4">
-                                                <div class="w-40 h-40 overflow-hidden">
+                                                <div class="w-40 h-44 overflow-hidden">
                                                     <img src="{{ $product['image'] }}"
                                                          alt="{{ $product['title'] }}"
                                                          class="w-full h-full object-cover"
@@ -70,7 +80,7 @@
                             @if(!empty($pagination) && $pagination['total_pages'] > 1)
                                 <div class="mt-12 flex justify-center items-center gap-4">
                                     @if($pagination['page'] > 1)
-                                        <button onclick="loadProducts({{ $pagination['page'] - 1 }})"
+                                        <button onclick="loadProducts({{ $pagination['page'] - 1 }}, document.getElementById('category-filter').value)"
                                                 class="py-2.5 px-5 bg-gray-600 shadow-sm rounded-2xl transition-all duration-500 text-base text-white font-semibold text-center hover:bg-gray-700">
                                             Previous
                                         </button>
@@ -81,7 +91,7 @@
                                     </span>
 
                                     @if($pagination['page'] < $pagination['total_pages'])
-                                        <button onclick="loadProducts({{ $pagination['page'] + 1 }})"
+                                        <button onclick="loadProducts({{ $pagination['page'] + 1 }}, document.getElementById('category-filter').value)"
                                                 class="py-2.5 px-5 bg-gray-600 shadow-sm rounded-2xl transition-all duration-500 text-base text-white font-semibold text-center hover:bg-gray-700">
                                             Next
                                         </button>
@@ -129,12 +139,9 @@
 
     <script>
         let isFirstLoad = true;
-        // let categories = []; // Disabled
 
         // Load products via AJAX
-        async function loadProducts(page = 1) {
-            // category parameter disabled
-            // async function loadProducts(page = 1, category = '') {
+        async function loadProducts(page = 1, category = 'all') {
             const container = document.getElementById('products-container');
 
             // Scroll to container with offset only during pagination (not on first load)
@@ -148,7 +155,6 @@
                     behavior: 'smooth'
                 });
 
-                // Add blur effect
                 container.style.filter = 'blur(3px)';
                 container.style.pointerEvents = 'none';
                 container.style.opacity = '0.6';
@@ -159,7 +165,7 @@
 
             const params = new URLSearchParams();
             if (page > 1) params.append('page', page);
-            // if (category) params.append('category', category); // Disabled
+            if (category && category !== 'all') params.append('category', category);
 
             const newUrl = params.toString() ? `{{ route('products.index') }}?${params.toString()}` : '{{ route('products.index') }}';
             window.history.pushState({}, '', newUrl);
@@ -176,53 +182,29 @@
 
                 const data = await response.json();
 
-                // Update categories dropdown if received - DISABLED
-                // if (data.categories && data.categories.length > 0) {
-                //     categories = data.categories;
-                //     updateCategoriesDropdown();
-                // }
-
                 renderProducts(data.products, data.pagination);
             } catch (error) {
                 console.error('Error loading products:', error);
                 container.innerHTML = '<div class="text-center py-12"><p class="u-text--primary text-xl">Failed to load products. Please try again.</p></div>';
             } finally {
-                // Remove blur effect
                 container.style.filter = '';
                 container.style.pointerEvents = '';
                 container.style.opacity = '';
             }
         }
 
-        // Update categories dropdown - DISABLED
-        // function updateCategoriesDropdown() {
-        //     const select = document.getElementById('category-filter');
-        //     if (!select || categories.length === 0) return;
-        //     const currentValue = select.value;
-        //     select.innerHTML = '<option value="">All Categories</option>';
-        //     categories.forEach(category => {
-        //         const option = document.createElement('option');
-        //         option.value = category;
-        //         option.textContent = category;
-        //         select.appendChild(option);
-        //     });
-        //     if (currentValue) {
-        //         select.value = currentValue;
-        //     }
-        // }
-
-        // Handle category filter change - DISABLED
-        // function handleCategoryChange() {
-        //     const select = document.getElementById('category-filter');
-        //     const category = select.value;
-        //     loadProducts(1, category);
-        // }
+        // Handle category filter change
+        function handleCategoryChange() {
+            const select = document.getElementById('category-filter');
+            const category = select.value;
+            loadProducts(1, category);
+        }
 
         // Render products HTML
         function renderProducts(products, pagination) {
             const container = document.getElementById('products-container');
-            // const categoryFilter = document.getElementById('category-filter'); // Disabled
-            // const currentCategory = categoryFilter ? categoryFilter.value : ''; // Disabled
+            const categoryFilter = document.getElementById('category-filter');
+            const currentCategory = categoryFilter ? categoryFilter.value : 'all';
 
             if (!products || products.length === 0) {
                 container.innerHTML = '<div class="text-center py-12"><p class="u-text--primary text-xl">No products available at the moment.</p></div>';
@@ -248,7 +230,7 @@
                     <div class="bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl flex flex-col h-full transform hover:scale-[1.03]">
                         <div class="flex flex-col flex-1 p-6" style="background-color: #F5F6FA;">
                             <div class="flex justify-center mb-4">
-                                <div class="w-40 h-40 overflow-hidden">
+                                <div class="w-40 h-44 overflow-hidden">
                                     <img src="${image}" alt="${title}" class="w-full h-full object-cover" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(title)}&size=300&background=f3f4f6&color=6b7280'">
                                 </div>
                             </div>
@@ -284,13 +266,13 @@
                 html += '<div class="mt-12 flex justify-center items-center gap-4">';
 
                 if (pagination.page > 1) {
-                    html += `<button onclick="loadProducts(${pagination.page - 1})" class="py-2.5 px-5 bg-gray-600 shadow-sm rounded-2xl transition-all duration-500 text-base text-white font-semibold text-center hover:bg-gray-700">Previous</button>`;
+                    html += `<button onclick="loadProducts(${pagination.page - 1}, '${currentCategory}')" class="py-2.5 px-5 bg-gray-600 shadow-sm rounded-2xl transition-all duration-500 text-base text-white font-semibold text-center hover:bg-gray-700">Previous</button>`;
                 }
 
                 html += `<span class="text-gray-700 font-semibold">Page ${pagination.page} of ${pagination.total_pages}</span>`;
 
                 if (pagination.page < pagination.total_pages) {
-                    html += `<button onclick="loadProducts(${pagination.page + 1})" class="py-2.5 px-5 bg-gray-600 shadow-sm rounded-2xl transition-all duration-500 text-base text-white font-semibold text-center hover:bg-gray-700">Next</button>`;
+                    html += `<button onclick="loadProducts(${pagination.page + 1}, '${currentCategory}')" class="py-2.5 px-5 bg-gray-600 shadow-sm rounded-2xl transition-all duration-500 text-base text-white font-semibold text-center hover:bg-gray-700">Next</button>`;
                 }
 
                 html += '</div>';
@@ -303,15 +285,15 @@
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const page = urlParams.get('page') || 1;
-            // const category = urlParams.get('category') || ''; // Disabled
+            const category = urlParams.get('category') || 'all';
 
-            // Set category filter if exists in URL - DISABLED
-            // const categoryFilter = document.getElementById('category-filter');
-            // if (categoryFilter && category) {
-            //     categoryFilter.value = category;
-            // }
+            // Set category filter if exists in URL
+            const categoryFilter = document.getElementById('category-filter');
+            if (categoryFilter && category) {
+                categoryFilter.value = category;
+            }
 
-            loadProducts(page);
+            loadProducts(page, category);
         });
     </script>
 @endsection

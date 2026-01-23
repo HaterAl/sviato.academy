@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 use Carbon\Carbon;
 
@@ -24,73 +25,88 @@ class EventController extends Controller
         // Return JSON if requested via AJAX
         if ($request->ajax()) {
             $page = $request->query('page', 1);
+            $location = $request->input('location', '');
+            $month = $request->input('month', '');
+            $technique = $request->input('technique', '');
+            $today = Carbon::today()->format('Y-m-d');
 
-            try {
-                $apiKey = config('services.master_event.key');
-                $today = Carbon::today()->format('Y-m-d');
+            // Create unique cache key based on request parameters
+            $cacheKey = 'events_' . md5($page . '_' . $location . '_' . $month . '_' . $technique . '_' . $today);
 
-                $params = [
-                    'page' => $page,
-                    'per_page' => 8,
-                    'date_from' =>  $today, 
-                    'sort_by' => 'date',
-                    'sort_order' => 'ASC',
-                ];
+            // Cache for 10 minutes
+            $result = Cache::remember($cacheKey, 60 * 10, function () use ($page, $location, $month, $technique, $today) {
+                try {
+                    $apiKey = config('services.master_event.key');
 
-                // Apply location filter
-                if ($request->has('location') && !empty($request->location)) {
-                    $params['location'] = $request->location;
-                }
+                    $params = [
+                        'page' => $page,
+                        'per_page' => 8,
+                        'date_from' => $today,
+                        'sort_by' => 'date',
+                        'sort_order' => 'ASC',
+                    ];
 
-                // Apply month filter
-                if ($request->has('month') && !empty($request->month)) {
-                    $monthDate = Carbon::createFromFormat('Y-m', $request->month);
-                    $monthStart = $monthDate->startOfMonth()->format('Y-m-d');
-                    $monthEnd = $monthDate->endOfMonth()->format('Y-m-d');
-
-                    // Only apply month filter if the month is in the future or current
-                    if ($monthEnd >= $today) {
-                        // If month start is in the past, use today as start date
-                        $params['date_from'] = max($monthStart, $today);
-                        $params['date_to'] = $monthEnd;
+                    // Apply location filter
+                    if (!empty($location)) {
+                        $params['location'] = $location;
                     }
-                }
 
-                // Apply technique filter
-                if ($request->has('technique') && !empty($request->technique)) {
-                    $params['technique'] = $request->technique;
-                }
+                    // Apply month filter
+                    if (!empty($month)) {
+                        $monthDate = Carbon::createFromFormat('Y-m', $month);
+                        $monthStart = $monthDate->startOfMonth()->format('Y-m-d');
+                        $monthEnd = $monthDate->endOfMonth()->format('Y-m-d');
 
-                $apiUrl = config('services.master_event.api_url');
+                        // Only apply month filter if the month is in the future or current
+                        if ($monthEnd >= $today) {
+                            // If month start is in the past, use today as start date
+                            $params['date_from'] = max($monthStart, $today);
+                            $params['date_to'] = $monthEnd;
+                        }
+                    }
 
-                $response = Http::withOptions([
-                    'verify' => false // Disable SSL verification for local development
-                ])->withHeaders([
-                    'X-MasterEvent-Key' => $apiKey
-                ])->get("{$apiUrl}/feed", $params);
+                    // Apply technique filter
+                    if (!empty($technique)) {
+                        $params['technique'] = $technique;
+                    }
 
-                if ($response->successful()) {
-                    $data = $response->json();
-                    $events = $data['data'] ?? [];
-                    $pagination = $data['pagination'] ?? [];
-                } else {
-                    Log::error('Events API request failed', [
-                        'status' => $response->status()
+                    $apiUrl = config('services.master_event.api_url');
+
+                    $response = Http::withOptions([
+                        'verify' => false // Disable SSL verification for local development
+                    ])->withHeaders([
+                        'X-MasterEvent-Key' => $apiKey
+                    ])->get("{$apiUrl}/feed", $params);
+
+                    if ($response->successful()) {
+                        $data = $response->json();
+                        return [
+                            'events' => $data['data'] ?? [],
+                            'pagination' => $data['pagination'] ?? [],
+                        ];
+                    } else {
+                        Log::error('Events API request failed', [
+                            'status' => $response->status()
+                        ]);
+                        return [
+                            'events' => [],
+                            'pagination' => [],
+                        ];
+                    }
+                } catch (\Exception $e) {
+                    Log::error('Events API exception', [
+                        'message' => $e->getMessage()
                     ]);
-                    $events = [];
-                    $pagination = [];
+                    return [
+                        'events' => [],
+                        'pagination' => [],
+                    ];
                 }
-            } catch (\Exception $e) {
-                Log::error('Events API exception', [
-                    'message' => $e->getMessage()
-                ]);
-                $events = [];
-                $pagination = [];
-            }
+            });
 
             return response()->json([
-                'events' => $events,
-                'pagination' => $pagination
+                'events' => $result['events'],
+                'pagination' => $result['pagination']
             ]);
         }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 
 class CommunityController extends Controller
 {
@@ -20,65 +21,72 @@ class CommunityController extends Controller
         // Return JSON if requested via AJAX
         if ($request->ajax()) {
             $page = $request->query('page', 1);
+            $memberType = $request->input('member_type', '');
+            $location = $request->input('location', '');
 
-            try {
-                $apiKey = config('services.master_event.key');
+            // Create unique cache key based on request parameters
+            $cacheKey = 'community_' . md5($page . '_' . $memberType . '_' . $location);
 
-                $params = [
-                    'page' => $page,
-                    'per_page' => 16,
-                    'post_type' => 'member',
-                ];
+            // Cache for 10 minutes
+            $result = Cache::remember($cacheKey, 60 * 10, function () use ($request, $page, $memberType, $location) {
+                try {
+                    $apiKey = config('services.master_event.key');
 
-                // Apply member_type filter only if specified
-                if ($request->has('member_type') && !empty($request->member_type)) {
-                    $params['member_type'] = $request->member_type;
-                }
+                    $params = [
+                        'page' => $page,
+                        'per_page' => 16,
+                        'post_type' => 'member',
+                    ];
 
-                // Apply location filter
-                if ($request->has('location') && !empty($request->location)) {
-                    $params['location'] = $request->location;
-                }
+                    // Apply member_type filter only if specified
+                    if (!empty($memberType)) {
+                        $params['member_type'] = $memberType;
+                    }
 
-                $apiUrl = config('services.master_event.api_url');
+                    // Apply location filter
+                    if (!empty($location)) {
+                        $params['location'] = $location;
+                    }
 
-                $response = Http::withOptions([
-                    'verify' => false // Disable SSL verification for local development
-                ])->withHeaders([
-                            'X-MasterEvent-Key' => $apiKey
-                        ])->get("{$apiUrl}/feed", $params);
+                    $apiUrl = config('services.master_event.api_url');
 
-                if ($response->successful()) {
-                    $data = $response->json();
-                    $members = $data['data'] ?? [];
-                    $pagination = $data['pagination'] ?? [];
-                } else {
-                    Log::error('Community API request failed', [
-                        'status' => $response->status()
+                    $response = Http::withOptions([
+                        'verify' => false // Disable SSL verification for local development
+                    ])->withHeaders([
+                        'X-MasterEvent-Key' => $apiKey
+                    ])->get("{$apiUrl}/feed", $params);
+
+                    if ($response->successful()) {
+                        $data = $response->json();
+                        return [
+                            'members' => $data['data'] ?? [],
+                            'pagination' => $data['pagination'] ?? [],
+                        ];
+                    } else {
+                        Log::error('Community API request failed', [
+                            'status' => $response->status()
+                        ]);
+                        return [
+                            'members' => [],
+                            'pagination' => [],
+                        ];
+                    }
+                } catch (\Exception $e) {
+                    Log::error('Community API exception', [
+                        'message' => $e->getMessage()
                     ]);
-                    $members = [];
-                    $pagination = [];
+                    return [
+                        'members' => [],
+                        'pagination' => [],
+                    ];
                 }
-            } catch (\Exception $e) {
-                Log::error('Community API exception', [
-                    'message' => $e->getMessage()
-                ]);
-                $members = [];
-                $pagination = [];
-            }
-
-            // Get current member_type for display
-            $currentMemberType = $request->input('member_type', '');
+            });
 
             return response()->json([
-                'members' => $members,
-                'pagination' => $pagination,
-                'member_type' => $currentMemberType
-            ])
-                ->header('Vary', 'X-Requested-With')
-                ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0')
-                ->header('Pragma', 'no-cache')
-                ->header('Expires', 'Sat, 01 Jan 2000 00:00:00 GMT');
+                'members' => $result['members'],
+                'pagination' => $result['pagination'],
+                'member_type' => $memberType
+            ]);
         }
 
         // Return empty view for initial page load - data will be loaded via AJAX

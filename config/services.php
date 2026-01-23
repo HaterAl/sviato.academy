@@ -40,4 +40,9 @@ return [
         'api_url' => env('PRODUCTS_API_URL', 'https://sviato.shop/media/googlefeed/products.xml'),
     ],
 
+    'magento' => [
+        'api_url' => env('MAGENTO_API_URL', 'https://sviato.shop/rest/V1/'),
+        'access_token' => env('MAGENTO_ACCESS_TOKEN'),
+    ],
+
 ];

@@ -267,7 +267,6 @@
                     behavior: 'smooth'
                 });
 
-                // Add blur effect
                 container.style.filter = 'blur(3px)';
                 container.style.pointerEvents = 'none';
                 container.style.opacity = '0.6';
@@ -311,7 +310,6 @@
                 console.error('Error loading members:', error);
                 container.innerHTML = '<div class="text-center py-12"><p class="u-text--primary text-xl">Failed to load community members. Please try again.</p></div>';
             } finally {
-                // Remove blur effect
                 container.style.filter = '';
                 container.style.pointerEvents = '';
                 container.style.opacity = '';
