@@ -72,9 +72,6 @@
 
                 <!-- Menu Items -->
                 <nav class="flex-1 px-4 py-2">
-                    <a href="{{ route('about.index') }}" class="block py-3 px-4 hover:bg-gray-100 rounded-lg transition-colors">
-                        {{ __('About') }}
-                    </a>
                     <a href="{{ route('community.index') }}" class="block py-3 px-4 hover:bg-gray-100 rounded-lg transition-colors">
                         {{ __('Sviato Community') }}
                     </a>
@@ -83,6 +80,9 @@
                     </a>
                     <a href="{{ route('products.index') }}" class="block py-3 px-4 hover:bg-gray-100 rounded-lg transition-colors">
                         {{ __('Products') }}
+                    </a>
+                    <a href="{{ route('about.index') }}" class="block py-3 px-4 hover:bg-gray-100 rounded-lg transition-colors">
+                        {{ __('About Us') }}
                     </a>
                     <a href="{{ route('contact-us.index') }}" class="block py-3 px-4 hover:bg-gray-100 rounded-lg transition-colors">
                         {{ __('Contact us') }}
