@@ -7,7 +7,7 @@
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div class="mb-12">
                         <h2 class="font-manrope text-center font-bold text-gray-900 u-text--primary italic">Our Products</h2>
-                        <p class="u-text--primary text-center leading-6 mt-4">Discover our premium selection of professional PMU products and supplies.</p>
+                        <p class="text-center leading-6 mt-4">Discover our <span class="u-text--primary">premium selection</span> of <span class="u-text--primary">professional PMU products and supplies</span></p>
                     </div>
 
                     {{-- Category filter --}}

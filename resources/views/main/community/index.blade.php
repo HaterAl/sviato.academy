@@ -8,9 +8,9 @@
                     <div class="mb-12">
                         <h2 class="font-manrope text-center font-bold text-gray-900 mb-4 u-text--primary italic">Sviato
                             Community</h2>
-                        <p class="u-text--primary text-center leading-6 mb-9">Meet our talented masters from around the
+                        <p class="text-center leading-6 mb-9">Meet our <span class="u-text--primary">talented masters</span> from around the
                             world.</br>
-                            Join our community of professional PMU artists.</p>
+                            <span class="u-text--primary">Join our community</span> of professional PMU artists.</p>
                     </div>
 
                     <!-- Search Form -->

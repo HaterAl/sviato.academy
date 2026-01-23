@@ -7,8 +7,7 @@
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div class="mb-12">
                         <h2 class="font-manrope text-center font-bold text-gray-900 mb-4 u-text--primary italic">Upcoming Events</h2>
-                        <p class="u-text--primary text-center leading-6 mb-9">Browse upcoming events and training courses from Sviato Academy.</br>
-                            Join our world-class trainers and expand your professional skills.</p>
+                        <p class="text-center leading-6 mb-9"><span class="u-text--primary">Browse</span> our upcoming <span class="u-text--primary">training events</span> and <span class="u-text--primary">WorldS PMU championships</span></br></p>
                     </div>
 
                     <!-- Search Form -->
