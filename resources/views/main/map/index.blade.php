@@ -249,9 +249,8 @@
             const maxRetries = 3;
 
             try {
-                const response = await fetch('{{ route('map.index') }}', {
+                const response = await fetch('{{ route('api.map.index') }}', {
                     headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
                         'Accept': 'application/json'
                     }
                 });

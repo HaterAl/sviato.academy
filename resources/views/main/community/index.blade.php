@@ -235,22 +235,17 @@
             if (memberTypeSelect.value) params.append('member_type', memberTypeSelect.value);
 
             // Update URL in browser address bar (clean URL)
-            const newUrl = params.toString() ? `{{ route('community.index') }}?${params.toString()}` : '{{ route('community.index') }}';
-            window.history.pushState({}, '', newUrl);
+            const pageUrl = params.toString() ? `{{ route('community.index') }}?${params.toString()}` : '{{ route('community.index') }}';
+            const apiUrl = params.toString() ? `{{ route('api.community.index') }}?${params.toString()}` : '{{ route('api.community.index') }}';
 
-            // Build URL for fetching data (with is_ajax parameter)
-            // We clone the params to avoid modifying the ones used for pushState if we were reusing the object
-            const fetchParams = new URLSearchParams(params);
-            fetchParams.append('is_ajax', '1');
-            const fetchUrl = `{{ route('community.index') }}?${fetchParams.toString()}`;
+            window.history.pushState({}, '', pageUrl);
 
             // Show/hide clear button
             clearBtn.classList.toggle('hidden', !locationInput.value.trim());
 
             try {
-                const response = await fetch(fetchUrl, {
+                const response = await fetch(apiUrl, {
                     headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
                         'Accept': 'application/json'
                     }
                 });

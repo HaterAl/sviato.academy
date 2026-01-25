@@ -11,7 +11,9 @@ use Illuminate\Http\Request;
 class ProductsController extends Controller
 {
     /**
-     * @return \Illuminate\View\View|\Illuminate\Http\JsonResponse
+     * Display products page
+     *
+     * @return \Illuminate\View\View
      */
     public function index(Request $request)
     {
@@ -24,22 +26,40 @@ class ProductsController extends Controller
 
         // Create unique cache key for this page and category combination
         $cacheKey = 'products_page_' . $page . '_cat_' . $category;
+        $cacheTtl = config('cache.ttl', 10);
 
-        // Cache each page separately for 24 hours
-        $result = Cache::remember($cacheKey, 60 * 24, function () use ($page, $category) {
+        // Cache for configured TTL (default 10 minutes)
+        $result = Cache::remember($cacheKey, 60 * $cacheTtl, function () use ($page, $category) {
             return $this->getProducts($page, $category);
         });
-
-        // Return JSON if requested via AJAX
-        if ($request->ajax()) {
-            return response()->json($result);
-        }
 
         // Return view with data for initial page load
         return view('main.products.index', [
             'products' => $result['products'],
             'pagination' => $result['pagination']
         ]);
+    }
+
+    /**
+     * API endpoint for products data
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiIndex(Request $request)
+    {
+        $page = (int)$request->get('page', 1);
+        $category = $request->get('category', 'all');
+
+        // Create unique cache key for this page and category combination
+        $cacheKey = 'products_page_' . $page . '_cat_' . $category;
+        $cacheTtl = config('cache.ttl', 10);
+
+        // Cache for configured TTL (default 10 minutes)
+        $result = Cache::remember($cacheKey, 60 * $cacheTtl, function () use ($page, $category) {
+            return $this->getProducts($page, $category);
+        });
+
+        return response()->json($result);
     }
 
     /**

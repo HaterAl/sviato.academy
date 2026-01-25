@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 
 class MapController extends Controller
 {
@@ -17,8 +18,23 @@ class MapController extends Controller
         app('seo')->setTitle('Sviato Map | Sviato Academy')
             ->setDescription('Find Sviato Academy trainers and masters around the world on our interactive map.');
 
-        // Return JSON if requested via AJAX
-        if ($request->ajax()) {
+        // Return view for initial page load
+        return view('main.map.index');
+    }
+
+    /**
+     * API endpoint for map members data
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiIndex(Request $request)
+    {
+        // Create cache key for map members
+        $cacheKey = 'map_members';
+        $cacheTtl = config('cache.ttl', 10);
+
+        // Cache for configured TTL (default 10 minutes)
+        $result = Cache::remember($cacheKey, 60 * $cacheTtl, function () {
             try {
                 $apiKey = config('services.master_event.key');
                 $apiUrl = config('services.master_event.api_url');
@@ -38,14 +54,10 @@ class MapController extends Controller
                     Log::error('Map API initial request failed', [
                         'status' => $initialResponse->status()
                     ]);
-                    return response()->json([
+                    return [
                         'success' => false,
                         'members' => []
-                    ])
-                        ->header('Vary', 'X-Requested-With')
-                        ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0')
-                        ->header('Pragma', 'no-cache')
-                        ->header('Expires', 'Sat, 01 Jan 2000 00:00:00 GMT');
+                    ];
                 }
 
                 $initialData = $initialResponse->json();
@@ -74,43 +86,30 @@ class MapController extends Controller
                             && !empty($member['acf_fields']['location']['lng']);
                     });
 
-                    return response()->json([
+                    return [
                         'success' => true,
                         'members' => array_values($membersWithCoordinates)
-                    ])
-                        ->header('Vary', 'X-Requested-With')
-                        ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0')
-                        ->header('Pragma', 'no-cache')
-                        ->header('Expires', 'Sat, 01 Jan 2000 00:00:00 GMT');
+                    ];
                 } else {
                     Log::error('Map API request failed', [
                         'status' => $response->status()
                     ]);
-                    return response()->json([
+                    return [
                         'success' => false,
                         'members' => []
-                    ])
-                        ->header('Vary', 'X-Requested-With')
-                        ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0')
-                        ->header('Pragma', 'no-cache')
-                        ->header('Expires', 'Sat, 01 Jan 2000 00:00:00 GMT');
+                    ];
                 }
             } catch (\Exception $e) {
                 Log::error('Map API exception', [
                     'message' => $e->getMessage()
                 ]);
-                return response()->json([
+                return [
                     'success' => false,
                     'members' => []
-                ])
-                    ->header('Vary', 'X-Requested-With')
-                    ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0')
-                    ->header('Pragma', 'no-cache')
-                    ->header('Expires', 'Sat, 01 Jan 2000 00:00:00 GMT');
+                ];
             }
-        }
+        });
 
-        // Return view for initial page load
-        return view('main.map.index');
+        return response()->json($result);
     }
 }

@@ -136,13 +136,14 @@
             if (page > 1) params.append('page', page);
             if (category && category !== 'all') params.append('category', category);
 
-            const newUrl = params.toString() ? `{{ route('products.index') }}?${params.toString()}` : '{{ route('products.index') }}';
-            window.history.pushState({}, '', newUrl);
+            const pageUrl = params.toString() ? `{{ route('products.index') }}?${params.toString()}` : '{{ route('products.index') }}';
+            const apiUrl = params.toString() ? `{{ route('api.products.index') }}?${params.toString()}` : '{{ route('api.products.index') }}';
+
+            window.history.pushState({}, '', pageUrl);
 
             try {
-                const response = await fetch(newUrl, {
+                const response = await fetch(apiUrl, {
                     headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
                         'Accept': 'application/json'
                     }
                 });

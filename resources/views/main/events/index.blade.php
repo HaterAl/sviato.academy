@@ -233,16 +233,17 @@
             if (techniqueSelect.value) params.append('technique', techniqueSelect.value);
 
             // Update URL without reload
-            const newUrl = params.toString() ? `{{ route('events.index') }}?${params.toString()}` : '{{ route('events.index') }}';
-            window.history.pushState({}, '', newUrl);
+            const pageUrl = params.toString() ? `{{ route('events.index') }}?${params.toString()}` : '{{ route('events.index') }}';
+            const apiUrl = params.toString() ? `{{ route('api.events.index') }}?${params.toString()}` : '{{ route('api.events.index') }}';
+
+            window.history.pushState({}, '', pageUrl);
 
             // Show/hide clear button
             clearBtn.classList.toggle('hidden', !locationInput.value.trim());
 
             try {
-                const response = await fetch(newUrl, {
+                const response = await fetch(apiUrl, {
                     headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
                         'Accept': 'application/json'
                     }
                 });
