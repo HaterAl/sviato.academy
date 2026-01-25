@@ -60,6 +60,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Cache Clear API Key
+    |--------------------------------------------------------------------------
+    |
+    | This key is used to authenticate requests to clear the application cache.
+    | Keep this key secret and secure.
+    |
+    */
+
+    'cache_clear_key' => env('CACHE_CLEAR_KEY'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
     |
