@@ -8,7 +8,9 @@
       "Bash(mkdir:*)",
       "Bash(curl:*)",
       "Bash(time curl -s -H \"X-Requested-With: XMLHttpRequest\" \"http://localhost:8000/products?page=1\")",
-      "Bash(time curl:*)"
+      "Bash(time curl:*)",
+      "Bash(php artisan:*)",
+      "Bash(npm run build:*)"
     ]
   }
 }

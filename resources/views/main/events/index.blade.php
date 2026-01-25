@@ -70,7 +70,6 @@
                     </div>
 
             <div id="events-container">
-                @if(count($events) > 0)
                 <div class="grid gap-6 items-stretch" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));" id="events-grid">
                     @foreach($events as $event)
                         <div class="bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl flex flex-col h-full transform hover:scale-[1.03] hover:z-10 relative">
@@ -185,55 +184,6 @@
                         @endif
                     </div>
                 @endif
-            @else
-                <!-- Skeleton Loader -->
-                <div id="events-skeleton" class="grid gap-6 items-stretch" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
-                    @for ($i = 0; $i < 8; $i++)
-                        <div class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col h-full">
-                            <div class="p-6 flex flex-col flex-1">
-                                <!-- Badges skeleton -->
-                                <div class="flex flex-wrap gap-1 md:gap-2 mb-4 justify-center min-h-[24px]">
-                                    <div class="h-5 w-20 bg-gray-100 rounded"></div>
-                                    <div class="h-5 w-24 bg-gray-100 rounded"></div>
-                                </div>
-
-                                <!-- Avatar skeleton -->
-                                <div class="flex justify-center mb-3">
-                                    <div class="w-32 h-32 bg-gray-100 rounded-full"></div>
-                                </div>
-
-                                <!-- Name skeleton -->
-                                <div class="text-center mb-3">
-                                    <div class="h-6 bg-gray-100 rounded w-3/4 mx-auto mb-2"></div>
-                                    <div class="h-4 bg-gray-100 rounded w-1/2 mx-auto"></div>
-                                </div>
-
-                                <!-- Separator -->
-                                <div class="border-t border-gray-200 my-3"></div>
-
-                                <!-- Techniques skeleton -->
-                                <div class="text-center flex-1 min-h-[48px] flex items-center justify-center">
-                                    <div class="h-5 bg-gray-100 rounded w-2/3"></div>
-                                </div>
-
-                                <!-- Separator -->
-                                <div class="border-t border-gray-200 my-3"></div>
-
-                                <!-- Location & Date skeleton -->
-                                <div class="text-center">
-                                    <div class="h-4 bg-gray-100 rounded w-3/4 mx-auto mb-2"></div>
-                                    <div class="h-5 bg-gray-100 rounded w-1/2 mx-auto"></div>
-                                </div>
-                            </div>
-
-                            <!-- Button skeleton -->
-                            <div class="p-4 border-t border-gray-200">
-                                <div class="h-10 bg-gray-100 rounded-xl"></div>
-                            </div>
-                        </div>
-                    @endfor
-                </div>
-            @endif
             </div>
                 </div>
             </section>
@@ -254,8 +204,6 @@
             'linear-gradient(to top right, #fb7185, #c026d3, #9333ea)',
         ];
 
-        let isFirstLoad = true;
-
         // Load events via AJAX
         async function loadEvents(page = 1) {
             const locationInput = document.getElementById('location');
@@ -263,24 +211,20 @@
             const clearBtn = document.getElementById('clear-location');
             const container = document.getElementById('events-container');
 
-            // Scroll to container with offset only during pagination (not on first load)
-            if (!isFirstLoad) {
-                const containerRect = container.getBoundingClientRect();
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                const targetPosition = containerRect.top + scrollTop - 100; // 100px above the container
+            // Scroll to container with offset
+            const containerRect = container.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const targetPosition = containerRect.top + scrollTop - 100; // 100px above the container
 
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
 
-                container.style.filter = 'blur(3px)';
-                container.style.pointerEvents = 'none';
-                container.style.opacity = '0.6';
-                container.style.transition = 'filter 0.2s ease, opacity 0.2s ease';
-            }
-
-            isFirstLoad = false;
+            container.style.filter = 'blur(3px)';
+            container.style.pointerEvents = 'none';
+            container.style.opacity = '0.6';
+            container.style.transition = 'filter 0.2s ease, opacity 0.2s ease';
 
             // Build query parameters
             const params = new URLSearchParams();
@@ -510,16 +454,6 @@
             if (!locationInput.contains(event.target) && !suggestionsDiv.contains(event.target)) {
                 suggestionsDiv.classList.add('hidden');
             }
-        });
-
-        // Auto-load events on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const page = urlParams.get('page') || 1;
-
-            // Load events
-            loadEvents(page);
         });
     </script>
 @endsection

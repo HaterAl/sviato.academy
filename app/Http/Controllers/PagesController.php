@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 use Carbon\Carbon;
 
 class PagesController extends Controller
@@ -161,35 +162,40 @@ class PagesController extends Controller
      */
     private function getUpcomingEvents(int $limit = 30): array
     {
-        try {
-            $apiKey = config('services.master_event.key');
-            $apiUrl = config('services.master_event.api_url');
-            $today = Carbon::today()->format('Y-m-d');
+        $today = Carbon::today()->format('Y-m-d');
+        $cacheKey = 'home_events_' . $today . '_' . $limit;
+        $cacheTtl = config('cache.ttl', 10);
 
-            $response = Http::withOptions([
-                'verify' => false
-            ])->withHeaders([
-                'X-MasterEvent-Key' => $apiKey
-            ])->get("{$apiUrl}/feed", [
-                'page' => 1,
-                'per_page' => $limit,
-                'date_from' => $today,
-                'sort_by' => 'date',
-                'sort_order' => 'ASC',
-            ]);
+        return Cache::remember($cacheKey, 60 * $cacheTtl, function () use ($limit, $today) {
+            try {
+                $apiKey = config('services.master_event.key');
+                $apiUrl = config('services.master_event.api_url');
 
-            if ($response->successful()) {
-                $data = $response->json();
-                $events = $data['data'] ?? [];
+                $response = Http::withOptions([
+                    'verify' => false
+                ])->withHeaders([
+                    'X-MasterEvent-Key' => $apiKey
+                ])->get("{$apiUrl}/feed", [
+                    'page' => 1,
+                    'per_page' => $limit,
+                    'date_from' => $today,
+                    'sort_by' => 'date',
+                    'sort_order' => 'ASC',
+                ]);
 
-                return array_slice($events, 0, $limit);
+                if ($response->successful()) {
+                    $data = $response->json();
+                    $events = $data['data'] ?? [];
+
+                    return array_slice($events, 0, $limit);
+                }
+            } catch (\Exception $e) {
+                Log::error('Failed to fetch events for home page', [
+                    'message' => $e->getMessage()
+                ]);
             }
-        } catch (\Exception $e) {
-            Log::error('Failed to fetch events for home page', [
-                'message' => $e->getMessage()
-            ]);
-        }
 
-        return [];
+            return [];
+        });
     }
 }

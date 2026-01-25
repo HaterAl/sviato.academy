@@ -13,7 +13,7 @@
 
                 <!-- Success Message -->
                 @if(session('success'))
-                    <div class="mx-auto max-w-2xl mb-8">
+                    <div class="mx-auto mb-8">
                         <div class="rounded-2xl bg-green-50 p-6 border-2 border-green-500">
                             <div class="flex items-start">
                                 <div class="flex-shrink-0 mt-0.5">

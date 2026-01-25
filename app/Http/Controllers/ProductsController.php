@@ -19,238 +19,228 @@ class ProductsController extends Controller
         app('seo')->setTitle('Our Products | Sviato Academy')
             ->setDescription('Discover our premium selection of professional PMU products and supplies.');
 
+        $page = (int)$request->get('page', 1);
+        $category = $request->get('category', 'all');
+
+        // Create unique cache key for this page and category combination
+        $cacheKey = 'products_page_' . $page . '_cat_' . $category;
+
+        // Cache each page separately for 24 hours
+        $result = Cache::remember($cacheKey, 60 * 24, function () use ($page, $category) {
+            return $this->getProducts($page, $category);
+        });
+
         // Return JSON if requested via AJAX
         if ($request->ajax()) {
-            // Cache products for 24 hours (1440 minutes)
-            $products = Cache::remember('magento_products', 60 * 24, function () {
-                return $this->getProducts();
-            });
-
-            // Category filtering
-            $category = $request->get('category');
-            if ($category && $category !== 'all') {
-                $products = array_filter($products, function($product) use ($category) {
-                    return $product['category'] === $category;
-                });
-                $products = array_values($products);
-            }
-
-            $perPage = 20;
-            $page = $request->get('page', 1);
-
-            // Calculate pagination
-            $total = count($products);
-            $totalPages = ceil($total / $perPage);
-            $offset = ($page - 1) * $perPage;
-
-            // Get products for current page
-            $productsForPage = array_slice($products, $offset, $perPage);
-
-            $pagination = [
-                'page' => (int)$page,
-                'per_page' => $perPage,
-                'total' => $total,
-                'total_pages' => $totalPages
-            ];
-
-            return response()->json([
-                'products' => $productsForPage,
-                'pagination' => $pagination
-            ]);
+            return response()->json($result);
         }
 
-        // Return empty view for initial page load - data will be loaded via AJAX
+        // Return view with data for initial page load
         return view('main.products.index', [
-            'products' => [],
-            'pagination' => []
+            'products' => $result['products'],
+            'pagination' => $result['pagination']
         ]);
     }
 
     /**
-     * Get products from Magento 2 REST API with pagination
+     * Get products from Magento 2 REST API with pagination and category filter
      *
+     * @param int $page
+     * @param string $category
      * @return array
      */
-    private function getProducts(): array
+    private function getProducts(int $page = 1, string $category = 'all'): array
     {
         try {
             $apiUrl = config('services.magento.api_url');
             $accessToken = config('services.magento.access_token');
+            $perPage = 20;
 
-            // Allowed category IDs (excluding Sviato Collection)
-            $allowedCategoryIds = [
-                35, // Kits
-                23, // Training
-                22, // Treatment Tools
-                20, // Aftercare Products
-                19, // Microblading Blades & Tools
-                11, // Pigments
-                8,  // PMU Cartridges
-                21, // Removal products
-                25, // Machines
-                50, // SALE!
+            // Category mapping
+            $categoryMapping = [
+                'kits' => 35,
+                'training' => 23,
+                'treatment tools' => 22,
+                'aftercare products' => 20,
+                'microblading blades & tools' => 19,
+                'pigments' => 11,
+                'pmu cartridges' => 8,
+                'removal products' => 21,
+                'machines' => 25,
+                'sale' => 50,
             ];
 
-            $allProducts = [];
-            $pageSize = 100; // Request 100 products per page
-            $currentPage = 1;
-            $totalPages = 1;
+            // All allowed category IDs
+            $allowedCategoryIds = [35, 23, 22, 20, 19, 11, 8, 21, 25, 50];
 
-            // Fetch products page by page
-            do {
-                // Build filter params
-                $params = [
-                    'searchCriteria[pageSize]' => $pageSize,
-                    'searchCriteria[currentPage]' => $currentPage,
-                    // Filter Group 0: Only enabled products
-                    'searchCriteria[filterGroups][0][filters][0][field]' => 'status',
-                    'searchCriteria[filterGroups][0][filters][0][value]' => '1',
-                    'searchCriteria[filterGroups][0][filters][0][conditionType]' => 'eq',
-                    // Filter Group 1: Only simple products
-                    'searchCriteria[filterGroups][1][filters][0][field]' => 'type_id',
-                    'searchCriteria[filterGroups][1][filters][0][value]' => 'simple',
-                    'searchCriteria[filterGroups][1][filters][0][conditionType]' => 'eq',
-                    // Filter Group 2: Category IDs (using 'in' condition)
-                    'searchCriteria[filterGroups][2][filters][0][field]' => 'category_id',
-                    'searchCriteria[filterGroups][2][filters][0][value]' => implode(',', $allowedCategoryIds),
-                    'searchCriteria[filterGroups][2][filters][0][conditionType]' => 'in',
-                    // Filter Group 3: Visibility - only catalog visible (2 = Catalog, 4 = Catalog + Search)
-                    'searchCriteria[filterGroups][3][filters][0][field]' => 'visibility',
-                    'searchCriteria[filterGroups][3][filters][0][value]' => '2,4',
-                    'searchCriteria[filterGroups][3][filters][0][conditionType]' => 'in',
-                ];
+            // Build filter params
+            $params = [
+                'searchCriteria[pageSize]' => $perPage,
+                'searchCriteria[currentPage]' => $page,
+                // Filter Group 0: Only enabled products
+                'searchCriteria[filterGroups][0][filters][0][field]' => 'status',
+                'searchCriteria[filterGroups][0][filters][0][value]' => '1',
+                'searchCriteria[filterGroups][0][filters][0][conditionType]' => 'eq',
+                // Filter Group 1: Only simple products
+                'searchCriteria[filterGroups][1][filters][0][field]' => 'type_id',
+                'searchCriteria[filterGroups][1][filters][0][value]' => 'simple',
+                'searchCriteria[filterGroups][1][filters][0][conditionType]' => 'eq',
+                // Filter Group 3: Visibility - only catalog visible (2 = Catalog, 4 = Catalog + Search)
+                'searchCriteria[filterGroups][3][filters][0][field]' => 'visibility',
+                'searchCriteria[filterGroups][3][filters][0][value]' => '2,4',
+                'searchCriteria[filterGroups][3][filters][0][conditionType]' => 'in',
+            ];
 
-                $response = Http::withOptions([
-                    'verify' => false
-                ])
-                ->withHeaders([
-                    'Authorization' => 'Bearer ' . $accessToken,
-                    'Content-Type' => 'application/json',
-                ])
-                ->get($apiUrl . 'products', $params);
+            // Filter Group 2: Category IDs
+            if ($category !== 'all' && isset($categoryMapping[$category])) {
+                // Filter by specific category
+                $params['searchCriteria[filterGroups][2][filters][0][field]'] = 'category_id';
+                $params['searchCriteria[filterGroups][2][filters][0][value]'] = $categoryMapping[$category];
+                $params['searchCriteria[filterGroups][2][filters][0][conditionType]'] = 'eq';
+            } else {
+                // Filter by all allowed categories
+                $params['searchCriteria[filterGroups][2][filters][0][field]'] = 'category_id';
+                $params['searchCriteria[filterGroups][2][filters][0][value]'] = implode(',', $allowedCategoryIds);
+                $params['searchCriteria[filterGroups][2][filters][0][conditionType]'] = 'in';
+            }
 
-                if ($response->successful()) {
-                    // Remove UTF-8 BOM if present
-                    $body = $response->body();
-                    $body = preg_replace('/^\xEF\xBB\xBF/', '', $body);
-                    $data = json_decode($body, true);
+            $response = Http::withOptions([
+                'verify' => false
+            ])
+            ->withHeaders([
+                'Authorization' => 'Bearer ' . $accessToken,
+                'Content-Type' => 'application/json',
+            ])
+            ->get($apiUrl . 'products', $params);
 
-                    if (!isset($data['items'])) {
-                        Log::error('Invalid Magento API response structure', [
-                            'page' => $currentPage
-                        ]);
-                        break;
-                    }
+            if ($response->successful()) {
+                // Remove UTF-8 BOM if present
+                $body = $response->body();
+                $body = preg_replace('/^\xEF\xBB\xBF/', '', $body);
+                $data = json_decode($body, true);
 
-                    // Calculate total pages on first request
-                    if ($currentPage === 1 && isset($data['total_count'])) {
-                        $totalPages = ceil($data['total_count'] / $pageSize);
-                        Log::info('Fetching products from Magento', [
-                            'total_count' => $data['total_count'],
-                            'total_pages' => $totalPages,
-                            'page_size' => $pageSize
-                        ]);
-                    }
-
-                    // Process products from this page
-                    $baseUrl = rtrim(config('services.magento.api_url'), '/rest/V1/');
-
-                    foreach ($data['items'] as $item) {
-                        // Skip products without name or sku
-                        if (empty($item['name']) || empty($item['sku'])) {
-                            continue;
-                        }
-
-                        // Get custom attributes helper function
-                        $getCustomAttribute = function($attributes, $code, $default = '') {
-                            foreach ($attributes as $attr) {
-                                if ($attr['attribute_code'] === $code) {
-                                    return $attr['value'] ?? $default;
-                                }
-                            }
-                            return $default;
-                        };
-
-                        $customAttributes = $item['custom_attributes'] ?? [];
-
-                        // Get category names from category_ids
-                        $category = $this->getCategoryName($item);
-
-                        // Get main image
-                        $image = '';
-                        if (!empty($item['media_gallery_entries'])) {
-                            foreach ($item['media_gallery_entries'] as $media) {
-                                if (isset($media['types']) && in_array('image', $media['types'])) {
-                                    $image = $baseUrl . '/media/catalog/product' . $media['file'];
-                                    break;
-                                }
-                            }
-                        }
-
-                        // Get description
-                        $description = $getCustomAttribute($customAttributes, 'description');
-                        if (empty($description)) {
-                            $description = $getCustomAttribute($customAttributes, 'short_description');
-                        }
-
-                        // Build product URL (without .html)
-                        $urlKey = $getCustomAttribute($customAttributes, 'url_key');
-                        $link = !empty($urlKey) ? $baseUrl . '/' . $urlKey : $baseUrl . '/catalog/product/view/id/' . $item['id'];
-
-                        // Get special price if available
-                        $specialPrice = $getCustomAttribute($customAttributes, 'special_price');
-                        $salePrice = !empty($specialPrice) ? number_format((float)$specialPrice, 2) . ' €' : '';
-
-                        // Format regular price
-                        $price = isset($item['price']) ? number_format((float)$item['price'], 2) . ' €' : '';
-
-                        // Determine availability
-                        $availability = 'in stock';
-                        if (isset($item['extension_attributes']['stock_item'])) {
-                            $stockItem = $item['extension_attributes']['stock_item'];
-                            if (!$stockItem['is_in_stock'] || $stockItem['qty'] <= 0) {
-                                $availability = 'out of stock';
-                            }
-                        }
-
-                        // Get brand
-                        $brand = $getCustomAttribute($customAttributes, 'manufacturer');
-                        if (empty($brand)) {
-                            $brand = $getCustomAttribute($customAttributes, 'brand', 'Sviato');
-                        }
-
-                        $allProducts[] = [
-                            'id' => (string)$item['id'],
-                            'title' => $item['name'],
-                            'description' => strip_tags($description),
-                            'link' => $link,
-                            'image' => $image,
-                            'price' => $price,
-                            'sale_price' => $salePrice,
-                            'availability' => $availability,
-                            'brand' => $brand,
-                            'category' => $category,
-                        ];
-                    }
-
-                    // Move to next page
-                    $currentPage++;
-                } else {
-                    Log::error('Failed to fetch products from Magento API', [
-                        'page' => $currentPage,
-                        'status' => $response->status(),
-                        'body' => $response->body()
-                    ]);
-                    break;
+                if (!isset($data['items'])) {
+                    Log::error('Invalid Magento API response structure');
+                    return [
+                        'products' => [],
+                        'pagination' => [
+                            'page' => $page,
+                            'per_page' => $perPage,
+                            'total' => 0,
+                            'total_pages' => 0
+                        ]
+                    ];
                 }
-            } while ($currentPage <= $totalPages);
 
-            Log::info('Successfully fetched products from Magento', [
-                'total_products' => count($allProducts),
-                'pages_fetched' => $currentPage - 1
-            ]);
+                $baseUrl = rtrim(config('services.magento.api_url'), '/rest/V1/');
+                $products = [];
 
-            return $allProducts;
+                foreach ($data['items'] as $item) {
+                    // Skip products without name or sku
+                    if (empty($item['name']) || empty($item['sku'])) {
+                        continue;
+                    }
+
+                    // Get custom attributes helper function
+                    $getCustomAttribute = function($attributes, $code, $default = '') {
+                        foreach ($attributes as $attr) {
+                            if ($attr['attribute_code'] === $code) {
+                                return $attr['value'] ?? $default;
+                            }
+                        }
+                        return $default;
+                    };
+
+                    $customAttributes = $item['custom_attributes'] ?? [];
+
+                    // Get category names from category_ids
+                    $productCategory = $this->getCategoryName($item);
+
+                    // Get main image
+                    $image = '';
+                    if (!empty($item['media_gallery_entries'])) {
+                        foreach ($item['media_gallery_entries'] as $media) {
+                            if (isset($media['types']) && in_array('image', $media['types'])) {
+                                $image = $baseUrl . '/media/catalog/product' . $media['file'];
+                                break;
+                            }
+                        }
+                    }
+
+                    // Get description
+                    $description = $getCustomAttribute($customAttributes, 'description');
+                    if (empty($description)) {
+                        $description = $getCustomAttribute($customAttributes, 'short_description');
+                    }
+
+                    // Build product URL
+                    $urlKey = $getCustomAttribute($customAttributes, 'url_key');
+                    $link = !empty($urlKey) ? $baseUrl . '/' . $urlKey : $baseUrl . '/catalog/product/view/id/' . $item['id'];
+
+                    // Get special price if available
+                    $specialPrice = $getCustomAttribute($customAttributes, 'special_price');
+                    $salePrice = !empty($specialPrice) ? number_format((float)$specialPrice, 2) . ' €' : '';
+
+                    // Format regular price
+                    $price = isset($item['price']) ? number_format((float)$item['price'], 2) . ' €' : '';
+
+                    // Determine availability
+                    $availability = 'in stock';
+                    if (isset($item['extension_attributes']['stock_item'])) {
+                        $stockItem = $item['extension_attributes']['stock_item'];
+                        if (!$stockItem['is_in_stock'] || $stockItem['qty'] <= 0) {
+                            $availability = 'out of stock';
+                        }
+                    }
+
+                    // Get brand
+                    $brand = $getCustomAttribute($customAttributes, 'manufacturer');
+                    if (empty($brand)) {
+                        $brand = $getCustomAttribute($customAttributes, 'brand', 'Sviato');
+                    }
+
+                    $products[] = [
+                        'id' => (string)$item['id'],
+                        'title' => $item['name'],
+                        'description' => strip_tags($description),
+                        'link' => $link,
+                        'image' => $image,
+                        'price' => $price,
+                        'sale_price' => $salePrice,
+                        'availability' => $availability,
+                        'brand' => $brand,
+                        'category' => $productCategory,
+                    ];
+                }
+
+                // Calculate pagination
+                $totalCount = $data['total_count'] ?? 0;
+                $totalPages = ceil($totalCount / $perPage);
+
+                Log::info('Fetched products from Magento', [
+                    'page' => $page,
+                    'category' => $category,
+                    'products_count' => count($products),
+                    'total_count' => $totalCount
+                ]);
+
+                return [
+                    'products' => $products,
+                    'pagination' => [
+                        'page' => $page,
+                        'per_page' => $perPage,
+                        'total' => $totalCount,
+                        'total_pages' => $totalPages
+                    ]
+                ];
+            } else {
+                Log::error('Failed to fetch products from Magento API', [
+                    'page' => $page,
+                    'category' => $category,
+                    'status' => $response->status(),
+                    'body' => $response->body()
+                ]);
+            }
         } catch (\Exception $e) {
             Log::error('Failed to fetch products from Magento API', [
                 'message' => $e->getMessage(),
@@ -258,7 +248,15 @@ class ProductsController extends Controller
             ]);
         }
 
-        return [];
+        return [
+            'products' => [],
+            'pagination' => [
+                'page' => $page,
+                'per_page' => 20,
+                'total' => 0,
+                'total_pages' => 0
+            ]
+        ];
     }
 
     /**
