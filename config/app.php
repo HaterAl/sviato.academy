@@ -60,15 +60,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Cache Clear API Key
+    | Master Event API Key
     |--------------------------------------------------------------------------
     |
-    | This key is used to authenticate requests to clear the application cache.
-    | Keep this key secret and secure.
+    | This key is used to authenticate requests to external APIs and
+    | administrative operations like cache clearing.
     |
     */
 
-    'cache_clear_key' => env('CACHE_CLEAR_KEY'),
+    'MASTER_EVENT_KEY' => env('MASTER_EVENT_KEY'),
 
     /*
     |--------------------------------------------------------------------------
