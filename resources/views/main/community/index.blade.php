@@ -245,6 +245,7 @@
 
             try {
                 const response = await fetch(apiUrl, {
+                    cache: 'no-store',
                     headers: {
                         'Accept': 'application/json'
                     }

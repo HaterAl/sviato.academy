@@ -14,17 +14,17 @@
                     <div class="mb-8 md:flex md:justify-end">
                         <div class="md:w-[500px]">
                             <select id="category-filter" onchange="handleCategoryChange()" class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-yellow-500 transition-colors duration-300 bg-white text-gray-900 font-semibold cursor-pointer">
-                                <option value="all">All Categories</option>
-                                <option value="aftercare products">Aftercare Products</option>
-                                <option value="kits">Kits</option>
-                                <option value="machines">Machines</option>
-                                <option value="microblading blades & tools">Microblading Blades & Tools</option>
-                                <option value="pmu cartridges">PMU Cartridges</option>
-                                <option value="pigments">Pigments</option>
-                                <option value="removal products">Removal products</option>
-                                <option value="sale">SALE!</option>
-                                <option value="training">Training</option>
-                                <option value="treatment tools">Treatment Tools</option>
+                                <option value="all" {{ ($selectedCategory ?? 'all') === 'all' ? 'selected' : '' }}>All Categories</option>
+                                <option value="aftercare products" {{ ($selectedCategory ?? 'all') === 'aftercare products' ? 'selected' : '' }}>Aftercare Products</option>
+                                <option value="kits" {{ ($selectedCategory ?? 'all') === 'kits' ? 'selected' : '' }}>Kits</option>
+                                <option value="machines" {{ ($selectedCategory ?? 'all') === 'machines' ? 'selected' : '' }}>Machines</option>
+                                <option value="microblading blades & tools" {{ ($selectedCategory ?? 'all') === 'microblading blades & tools' ? 'selected' : '' }}>Microblading Blades & Tools</option>
+                                <option value="pmu cartridges" {{ ($selectedCategory ?? 'all') === 'pmu cartridges' ? 'selected' : '' }}>PMU Cartridges</option>
+                                <option value="pigments" {{ ($selectedCategory ?? 'all') === 'pigments' ? 'selected' : '' }}>Pigments</option>
+                                <option value="removal products" {{ ($selectedCategory ?? 'all') === 'removal products' ? 'selected' : '' }}>Removal products</option>
+                                <option value="sale" {{ ($selectedCategory ?? 'all') === 'sale' ? 'selected' : '' }}>SALE!</option>
+                                <option value="training" {{ ($selectedCategory ?? 'all') === 'training' ? 'selected' : '' }}>Training</option>
+                                <option value="treatment tools" {{ ($selectedCategory ?? 'all') === 'treatment tools' ? 'selected' : '' }}>Treatment Tools</option>
                             </select>
                         </div>
                     </div>
@@ -143,8 +143,10 @@
 
             try {
                 const response = await fetch(apiUrl, {
+                    cache: 'no-store',
                     headers: {
-                        'Accept': 'application/json'
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
                     }
                 });
 
@@ -269,17 +271,5 @@
 
             container.innerHTML = html;
         }
-
-        // Set category filter from URL on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const category = urlParams.get('category') || 'all';
-
-            // Set category filter if exists in URL
-            const categoryFilter = document.getElementById('category-filter');
-            if (categoryFilter && category) {
-                categoryFilter.value = category;
-            }
-        });
     </script>
 @endsection

@@ -250,6 +250,7 @@
 
             try {
                 const response = await fetch('{{ route('api.map.index') }}', {
+                    cache: 'no-store',
                     headers: {
                         'Accept': 'application/json'
                     }

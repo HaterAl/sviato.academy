@@ -22,7 +22,7 @@ class ProductsController extends Controller
             ->setDescription('Discover our premium selection of professional PMU products and supplies.');
 
         $page = (int)$request->get('page', 1);
-        $category = $request->get('category', 'all');
+        $category = strtolower($request->get('category', 'all'));
 
         // Create unique cache key for this page and category combination
         $cacheKey = 'products_page_' . $page . '_cat_' . $category;
@@ -36,7 +36,8 @@ class ProductsController extends Controller
         // Return view with data for initial page load
         return view('main.products.index', [
             'products' => $result['products'],
-            'pagination' => $result['pagination']
+            'pagination' => $result['pagination'],
+            'selectedCategory' => $category
         ]);
     }
 
@@ -48,7 +49,7 @@ class ProductsController extends Controller
     public function apiIndex(Request $request)
     {
         $page = (int)$request->get('page', 1);
-        $category = $request->get('category', 'all');
+        $category = strtolower($request->get('category', 'all'));
 
         // Create unique cache key for this page and category combination
         $cacheKey = 'products_page_' . $page . '_cat_' . $category;
