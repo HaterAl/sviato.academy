@@ -60,7 +60,7 @@
                                                value="{{ request('location') }}"
                                                placeholder="Enter city or country..."
                                                autocomplete="off"
-                                               class="w-full px-4 py-2.5 pr-10 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                                               class="w-full px-4 py-2.5 pr-10 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent">
                                         <button type="button"
                                                 id="clear-location"
                                                 onclick="clearLocation()"
@@ -79,7 +79,7 @@
                                     <select id="technique"
                                             name="technique"
                                             onchange="loadEvents()"
-                                            class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white">
+                                            class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent bg-white">
                                         <option value="">All Techniques</option>
                                         <optgroup label="S-Brows">
                                             <option value="Magic Shading Technique" {{ request('technique') == 'Magic Shading Technique' ? 'selected' : '' }}>Magic Shading Technique</option>
@@ -152,7 +152,7 @@
                                 <div class="flex flex-wrap gap-1 md:gap-2 mb-3">
                                     @if(!empty($event['acf_fields']['treatments']))
                                         @foreach($event['acf_fields']['treatments'] as $treatment)
-                                            <span class="inline-block px-2 py-0.5 rounded text-xs font-semibold border border-purple-500 text-purple-700 bg-purple-50">
+                                            <span class="inline-block px-2 py-0.5 rounded text-xs font-semibold border border-yellow-500 text-yellow-700 bg-yellow-50">
                                                 #{{ str_replace(' ', '_', $treatment['title']) }}
                                             </span>
                                         @endforeach
@@ -170,7 +170,7 @@
                                 @if(!empty($event['acf_fields']['technique']))
                                     <div class="flex flex-wrap gap-1.5 mb-3">
                                         @foreach($event['acf_fields']['technique'] as $technique)
-                                            <span onclick="filterByTechnique('{{ $technique }}')" class="px-2 py-0.5 text-xs font-medium text-gray-600 bg-gray-100 rounded-md cursor-pointer hover:bg-purple-100 hover:text-purple-700 transition-colors">{{ $technique }}</span>
+                                            <span onclick="filterByTechnique('{{ $technique }}')" class="px-2 py-0.5 text-xs font-medium text-gray-600 bg-gray-100 rounded-md cursor-pointer hover:bg-yellow-100 hover:text-yellow-700 transition-colors">{{ $technique }}</span>
                                         @endforeach
                                     </div>
                                 @endif
@@ -185,7 +185,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                                     </svg>
                                     <span onclick="filterByLocation('{{ $event['acf_fields']['location']['address'] ?? '' }}')"
-                                          class="cursor-pointer hover:text-purple-600 transition-colors truncate">
+                                          class="cursor-pointer hover:text-yellow-600 transition-colors truncate">
                                         {{ $event['acf_fields']['location']['address'] ?? 'N/A' }}
                                     </span>
                                 </div>
@@ -408,7 +408,7 @@
 
                 treatments.forEach(treatment => {
                     const hashtag = '#' + treatment.title.replace(/ /g, '_');
-                    html += `<span class="inline-block px-2 py-0.5 rounded text-xs font-semibold border border-purple-500 text-purple-700 bg-purple-50">${hashtag}</span>`;
+                    html += `<span class="inline-block px-2 py-0.5 rounded text-xs font-semibold border border-yellow-500 text-yellow-700 bg-yellow-50">${hashtag}</span>`;
                 });
 
                 courses.forEach(course => {
@@ -422,7 +422,7 @@
                 if (techniques.length > 0) {
                     html += `<div class="flex flex-wrap gap-1.5 mb-3">`;
                     techniques.forEach(tech => {
-                        html += `<span onclick="filterByTechnique('${tech.replace(/'/g, "\\'")}')" class="px-2 py-0.5 text-xs font-medium text-gray-600 bg-gray-100 rounded-md cursor-pointer hover:bg-purple-100 hover:text-purple-700 transition-colors">${tech}</span>`;
+                        html += `<span onclick="filterByTechnique('${tech.replace(/'/g, "\\'")}')" class="px-2 py-0.5 text-xs font-medium text-gray-600 bg-gray-100 rounded-md cursor-pointer hover:bg-yellow-100 hover:text-yellow-700 transition-colors">${tech}</span>`;
                     });
                     html += `</div>`;
                 }
@@ -438,7 +438,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                                 </svg>
                                 <span onclick="filterByLocation('${location.replace(/'/g, "\\'")}')"
-                                      class="cursor-pointer hover:text-purple-600 transition-colors truncate">
+                                      class="cursor-pointer hover:text-yellow-600 transition-colors truncate">
                                     ${location}
                                 </span>
                             </div>

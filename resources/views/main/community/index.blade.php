@@ -64,7 +64,7 @@
                                     <div class="relative">
                                         <input type="text" id="search_name" name="search" value="{{ request('search') }}"
                                             placeholder="Search by name..." autocomplete="off"
-                                            class="w-full px-4 py-2.5 pr-10 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                                            class="w-full px-4 py-2.5 pr-10 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent">
                                         <button type="button" id="clear-search" onclick="clearSearch()"
                                             class="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors {{ request('search') ? '' : 'hidden' }}">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -82,7 +82,7 @@
                                     <div class="relative">
                                         <input type="text" id="location" name="location" value="{{ request('location') }}"
                                             placeholder="Enter city or country..." autocomplete="off"
-                                            class="w-full px-4 py-2.5 pr-10 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                                            class="w-full px-4 py-2.5 pr-10 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent">
                                         <button type="button" id="clear-location" onclick="clearLocation()"
                                             class="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors {{ request('location') ? '' : 'hidden' }}">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -101,7 +101,7 @@
                                     <label for="member_type" class="block text-sm font-semibold text-gray-700 mb-2">Member
                                         Type</label>
                                     <select id="member_type" name="member_type" onchange="loadMembers()"
-                                        class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white">
+                                        class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent bg-white">
                                         <option value="">All Members</option>
                                         <option value="top-trainer" {{ request('member_type') == 'top-trainer' ? 'selected' : '' }}>Top Trainer</option>
                                         <option value="trainer" {{ request('member_type') == 'trainer' ? 'selected' : '' }}>
@@ -116,7 +116,7 @@
                             <div id="sort-mobile-wrapper" class="md:hidden">
                                 <label for="sort_mobile" class="block text-sm font-semibold text-gray-700 mb-2">Sort by</label>
                                 <select id="sort_mobile" onchange="applySortFromSelect(this.value)"
-                                    class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white">
+                                    class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent bg-white">
                                     <option value="date-ASC" {{ ($sortBy ?? 'date') == 'date' ? 'selected' : '' }}>Default</option>
                                     <option value="title-ASC" {{ ($sortBy ?? '') == 'title' && ($sortOrder ?? '') == 'ASC' ? 'selected' : '' }}>A - Z</option>
                                     <option value="title-DESC" {{ ($sortBy ?? '') == 'title' && ($sortOrder ?? '') == 'DESC' ? 'selected' : '' }}>Z - A</option>
@@ -127,7 +127,7 @@
                                 <label class="block text-sm font-semibold text-gray-700 mb-2">Sort by</label>
                                 <button type="button" id="sort-btn" onclick="toggleSortDropdown()"
                                     title="Sort by name"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white">
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent bg-white">
                                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M4 6h7"/><path d="M4 12h5"/><path d="M4 18h3"/><path d="M18 6v14"/><path d="M18 20l-3-3"/><path d="M18 20l3-3"/>
                                     </svg>
@@ -451,10 +451,10 @@
             const isActive = currentSortBy === 'title';
 
             if (isActive) {
-                btn.classList.add('border-purple-500', 'text-purple-600', 'bg-purple-50');
+                btn.classList.add('border-yellow-500', 'text-yellow-600', 'bg-yellow-50');
                 btn.classList.remove('border-gray-300', 'text-gray-500', 'bg-white');
             } else {
-                btn.classList.remove('border-purple-500', 'text-purple-600', 'bg-purple-50');
+                btn.classList.remove('border-yellow-500', 'text-yellow-600', 'bg-yellow-50');
                 btn.classList.add('border-gray-300', 'text-gray-500', 'bg-white');
             }
 
@@ -462,10 +462,10 @@
             document.querySelectorAll('.sort-option').forEach(opt => {
                 const key = opt.getAttribute('data-sort');
                 if (key === `${currentSortBy}-${currentSortOrder}`) {
-                    opt.classList.add('bg-purple-50', 'text-purple-600', 'font-semibold');
+                    opt.classList.add('bg-yellow-50', 'text-yellow-600', 'font-semibold');
                     opt.classList.remove('text-gray-700');
                 } else {
-                    opt.classList.remove('bg-purple-50', 'text-purple-600', 'font-semibold');
+                    opt.classList.remove('bg-yellow-50', 'text-yellow-600', 'font-semibold');
                     opt.classList.add('text-gray-700');
                 }
             });
