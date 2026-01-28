@@ -22,10 +22,11 @@
             border-radius: 16px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
             padding: 0;
+            overflow: visible;
         }
 
         .leaflet-popup-content {
-            margin: 0;
+            margin: 0 !important;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             width: 280px !important;
         }
@@ -35,10 +36,12 @@
         }
 
         .leaflet-container a.leaflet-popup-close-button {
-            color: #6b7280;
+            color: #ffffff;
             font-size: 24px;
-            padding: 12px 12px 0 0;
+            padding: 8px 10px 0 0;
             font-weight: 300;
+            z-index: 10;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
         }
 
         .leaflet-container a.leaflet-popup-close-button:hover {
@@ -46,99 +49,139 @@
         }
 
         .popup-card {
-            padding: 24px;
-            text-align: center;
-        }
-
-        .popup-image-wrapper {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .popup-image-gradient {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            padding: 4px;
-        }
-
-        .popup-image-border {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
+            width: 280px;
+            background: #ffffff;
+            border-radius: 16px;
             overflow: hidden;
-            border: 4px solid white;
         }
 
-        .popup-image {
-            width: 100%;
-            height: 100%;
+        .popup-photo-wrapper {
+            position: relative;
+            width: 280px;
+            height: 280px;
+        }
+
+        .popup-photo {
+            width: 280px;
+            height: 280px;
             object-fit: cover;
-        }
-
-        .popup-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 4px;
-            color: #1f2937;
-        }
-
-        .popup-type {
-            display: inline-block;
-            font-size: 13px;
-            color: #6b7280;
-            margin-bottom: 16px;
-        }
-
-        .popup-separator {
-            border-top: 1px solid #e5e7eb;
-            margin: 16px 0;
-        }
-
-        .popup-treatments {
-            font-size: 13px;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 16px;
-        }
-
-        .popup-location {
-            font-size: 13px;
-            color: #6b7280;
-            margin-bottom: 8px;
-        }
-
-        .popup-email {
-            font-size: 11px;
-            margin-bottom: 16px;
-        }
-
-        .popup-email a {
-            color: #1f2937 !important;
-            text-decoration: none;
-            word-break: break-all;
-            transition: color 0.2s;
-        }
-
-        .popup-email a:hover {
-            color: #DCB04B !important;
+            display: block;
         }
 
         .popup-social {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
             display: flex;
-            gap: 12px;
-            padding-top: 16px;
-            border-top: 1px solid #e5e7eb;
-            justify-content: center;
+            flex-direction: row;
+            gap: 8px;
+            z-index: 5;
         }
 
         .popup-social a {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            border-radius: 50%;
             color: #1f2937 !important;
-            transition: color 0.2s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s;
         }
 
         .popup-social a:hover {
+            background: #facc15 !important;
+            transform: scale(1.1);
+        }
+
+        .popup-social a svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .popup-logo {
+            position: absolute;
+            bottom: -32px;
+            right: 12px;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            pointer-events: none;
+            user-select: none;
+            z-index: 10;
+            background: #ffffff;
+        }
+
+        .popup-content {
+            padding: 16px;
+            padding-top: 40px;
+        }
+
+        .popup-title {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin: 0 0 8px 0;
+            color: #1f2937;
+        }
+
+        .popup-treatments {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 12px;
+        }
+
+        .popup-treatment-tag {
+            padding: 2px 8px;
+            font-size: 11px;
+            font-weight: 500;
+            color: #4b5563;
+            background: #f3f4f6;
+            border-radius: 4px;
+        }
+
+        .popup-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #f3f4f6;
+        }
+
+        .popup-info + .popup-info {
+            margin-top: 6px;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .popup-info svg {
+            flex-shrink: 0;
+            width: 14px;
+            height: 14px;
+            margin-top: 1px;
+        }
+
+        .popup-info span,
+        .popup-info a {
+            word-break: break-word;
+            line-height: 1.3;
+        }
+
+        .popup-info a {
+            color: #6b7280 !important;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .popup-info a:hover {
             color: #DCB04B !important;
         }
 
@@ -273,63 +316,36 @@
 
                         // Create popup content
                         const memberType = member.member_types?.[0]?.name || 'Member';
+                        const memberTypeSlug = member.member_types?.[0]?.slug || 'master';
                         const treatments = member.acf_fields?.member_treatment || [];
-                        const treatmentsText = treatments.map(t => t.title).join(', ');
                         const email = member.acf_fields?.email || '';
                         const instagram = member.acf_fields?.instagram || '';
                         const facebook = member.acf_fields?.facebook || '';
                         const tiktok = member.acf_fields?.tiktok || '';
 
-                        // Random gradient for image border
-                        const gradients = [
-                            'linear-gradient(to top right, #facc15, #ef4444, #9333ea)',
-                            'linear-gradient(to top right, #ec4899, #f43f5e, #f97316)',
-                            'linear-gradient(to top right, #3b82f6, #a855f7, #ec4899)',
-                            'linear-gradient(to top right, #4ade80, #06b6d4, #3b82f6)',
-                            'linear-gradient(to top right, #a855f7, #ec4899, #ef4444)',
-                            'linear-gradient(to top right, #6366f1, #a855f7, #ec4899)',
-                            'linear-gradient(to top right, #fb923c, #ef4444, #db2777)',
-                            'linear-gradient(to top right, #2dd4bf, #10b981, #22c55e)',
-                            'linear-gradient(to top right, #fb7185, #c026d3, #9333ea)',
-                        ];
-                        const gradient = gradients[Math.floor(Math.random() * gradients.length)];
+                        // Logo based on member type
+                        const logoMap = {
+                            'top-trainer': '/images/top_trainer_logo.png',
+                            'trainer': '/images/trainer_logo.png',
+                            'master': '/images/master_logo.png'
+                        };
+                        const memberLogo = logoMap[memberTypeSlug] || '/images/master_logo.png';
 
-                        const masterImage = member.featured_image || `https://ui-avatars.com/api/?name=${encodeURIComponent(member.title)}&size=300&background=random&color=fff&bold=true&font-size=0.35`;
+                        const masterImage = member.featured_image || `https://ui-avatars.com/api/?name=${encodeURIComponent(member.title)}&size=400&background=random&color=fff&bold=true&font-size=0.35`;
+
+                        // Split name if too long
+                        const displayName = (member.title.length > 18 && member.title.includes(' '))
+                            ? member.title.replace(' ', '<br>')
+                            : member.title;
 
                         let popupContent = `<div class="popup-card">`;
 
-                        // Avatar with gradient border
+                        // Photo section with social icons and logo
                         popupContent += `
-                            <div class="popup-image-wrapper">
-                                <div class="popup-image-gradient" style="background: ${gradient}">
-                                    <div class="popup-image-border">
-                                        <img src="${masterImage}" alt="${member.title}" class="popup-image">
-                                    </div>
-                                </div>
-                            </div>
-                        `;
+                            <div class="popup-photo-wrapper">
+                                <img src="${masterImage}" alt="${member.title}" class="popup-photo">`;
 
-                        // Name and type
-                        popupContent += `
-                            <div class="popup-title">${member.title}</div>
-                            <div class="popup-type">${memberType}</div>
-                        `;
-
-                        // Treatments
-                        if (treatmentsText) {
-                            popupContent += `<div class="popup-separator"></div>`;
-                            popupContent += `<div class="popup-treatments">${treatmentsText}</div>`;
-                        }
-
-                        // Location and email
-                        popupContent += `<div class="popup-separator"></div>`;
-                        popupContent += `<div class="popup-location">${member.acf_fields.location.address}</div>`;
-
-                        if (email) {
-                            popupContent += `<div class="popup-email"><a href="mailto:${email}">${email}</a></div>`;
-                        }
-
-                        // Social links
+                        // Social icons on photo
                         if (instagram || facebook || tiktok) {
                             popupContent += `<div class="popup-social">`;
                             if (instagram) {
@@ -348,19 +364,58 @@
                                         </svg>
                                     </a>`;
                             }
-
                             if (tiktok) {
                                 popupContent += `
                                     <a href="${tiktok}" target="_blank" rel="noopener">
-                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M16.656 1.029c1.637-0.025 3.262-0.012 4.886-0.025 0.054 2.031 0.878 3.859 2.189 5.213l-0.002-0.002c1.411 1.271 3.247 2.095 5.271 2.235l0.028 0.002v5.036c-1.912-0.048-3.71-0.489-5.331-1.247l0.082 0.034c-0.784-0.377-1.447-0.764-2.077-1.196l0.052 0.034c-0.012 3.649 0.012 7.298-0.025 10.934-0.103 1.853-0.719 3.543-1.707 4.954l0.020-0.031c-1.652 2.366-4.328 3.919-7.371 4.011l-0.014 0c-0.123 0.006-0.268 0.009-0.414 0.009-1.73 0-3.347-0.482-4.725-1.319l0.040 0.023c-2.508-1.509-4.238-4.091-4.558-7.094l-0.004-0.041c-0.025-0.625-0.037-1.25-0.012-1.862 0.49-4.779 4.494-8.476 9.361-8.476 0.547 0 1.083 0.047 1.604 0.136l-0.056-0.008c0.025 1.849-0.050 3.699-0.050 5.548-0.423-0.153-0.911-0.242-1.42-0.242-1.868 0-3.457 1.194-4.045 2.861l-0.009 0.030c-0.133 0.427-0.21 0.918-0.21 1.426 0 0.206 0.013 0.41 0.037 0.61l-0.002-0.024c0.332 2.046 2.086 3.59 4.201 3.59 0.061 0 0.121-0.001 0.181-0.004l-0.009 0c1.463-0.044 2.733-0.831 3.451-1.994l0.010-0.018c0.267-0.372 0.45-0.822 0.511-1.311l0.001-0.014c0.125-2.237 0.075-4.461 0.087-6.698 0.012-5.036-0.012-10.060 0.025-15.083z"></path>
+                                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 32 32">
+                                            <path d="M16.656 1.029c1.637-0.025 3.262-0.012 4.886-0.025 0.054 2.031 0.878 3.859 2.189 5.213l-0.002-0.002c1.411 1.271 3.247 2.095 5.271 2.235l0.028 0.002v5.036c-1.912-0.048-3.71-0.489-5.331-1.247l0.082 0.034c-0.784-0.377-1.447-0.764-2.077-1.196l0.052 0.034c-0.012 3.649 0.012 7.298-0.025 10.934-0.103 1.853-0.719 3.543-1.707 4.954l0.020-0.031c-1.652 2.366-4.328 3.919-7.371 4.011l-0.014 0c-0.123 0.006-0.268 0.009-0.414 0.009-1.73 0-3.347-0.482-4.725-1.319l0.040 0.023c-2.508-1.509-4.238-4.091-4.558-7.094l-0.004-0.041c-0.025-0.625-0.037-1.25-0.012-1.862 0.49-4.779 4.494-8.476 9.361-8.476 0.547 0 1.083 0.047 1.604 0.136l-0.056-0.008c0.025 1.849-0.050 3.699-0.050 5.548-0.423-0.153-0.911-0.242-1.42-0.242-1.868 0-3.457 1.194-4.045 2.861l-0.009 0.030c-0.133 0.427-0.21 0.918-0.21 1.426 0 0.206 0.013 0.41 0.037 0.61l-0.002-0.024c0.332 2.046 2.086 3.59 4.201 3.59 0.061 0 0.121-0.001 0.181-0.004l-0.009 0c1.463-0.044 2.733-0.831 3.451-1.994l0.010-0.018c0.267-0.372 0.45-0.822 0.511-1.311l0.001-0.014c0.125-2.237 0.075-4.461 0.087-6.698 0.012-5.036-0.012-10.060 0.025-15.083z"/>
                                         </svg>
                                     </a>`;
                             }
                             popupContent += `</div>`;
                         }
 
-                        popupContent += `</div>`;
+                        // Logo badge
+                        popupContent += `
+                                <img src="${memberLogo}" alt="${memberType}" class="popup-logo" draggable="false">
+                            </div>`;
+
+                        // Content section
+                        popupContent += `
+                            <div class="popup-content">
+                                <div class="popup-title">${displayName}</div>`;
+
+                        // Treatments as tags
+                        if (treatments.length > 0) {
+                            popupContent += `<div class="popup-treatments">`;
+                            treatments.forEach(t => {
+                                popupContent += `<span class="popup-treatment-tag">${t.title}</span>`;
+                            });
+                            popupContent += `</div>`;
+                        }
+
+                        // Location
+                        popupContent += `
+                            <div class="popup-info">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                                <span>${member.acf_fields.location.address}</span>
+                            </div>`;
+
+                        // Email
+                        if (email) {
+                            popupContent += `
+                                <div class="popup-info">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                    </svg>
+                                    <a href="mailto:${email}">${email}</a>
+                                </div>`;
+                        }
+
+                        popupContent += `</div></div>`;
 
                         // Create marker
                         const marker = L.marker([lat, lng], {

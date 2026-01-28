@@ -70,12 +70,27 @@
                     </div>
 
             <div id="events-container">
+                @if(count($events) > 0)
                 <div class="grid gap-6 items-stretch" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));" id="events-grid">
                     @foreach($events as $event)
                         <div class="bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl flex flex-col h-full transform hover:scale-[1.03] hover:z-10 relative">
-                            <div class="p-6 flex flex-col flex-1">
+                            <!-- Master image - full width -->
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="{{ !empty($event['acf_fields']['master']['featured_image_url']) ? $event['acf_fields']['master']['featured_image_url'] : 'https://ui-avatars.com/api/?name=' . urlencode($event['acf_fields']['master']['title'] ?? 'N A') . '&size=400&background=random&color=fff&bold=true&font-size=0.35' }}"
+                                     alt="{{ $event['acf_fields']['master']['title'] ?? 'N/A' }}"
+                                     class="w-full h-full object-cover">
+                                <!-- Gradient overlay -->
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                <!-- Master name on image -->
+                                <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
+                                    <h3 class="font-bold text-lg">{{ $event['acf_fields']['master']['title'] ?? 'N/A' }}</h3>
+                                    <p class="text-sm text-white/80">Trainer</p>
+                                </div>
+                            </div>
+
+                            <div class="p-4 flex flex-col flex-1">
                                 <!-- Course/Treatment badges -->
-                                <div class="flex flex-wrap gap-1 md:gap-2 mb-4 justify-center min-h-[24px]">
+                                <div class="flex flex-wrap gap-1 md:gap-2 mb-3 justify-center min-h-[24px]">
                                     @if(!empty($event['acf_fields']['treatments']))
                                         @foreach($event['acf_fields']['treatments'] as $treatment)
                                             <span class="inline-block relative px-2 py-0.5 rounded text-xs font-semibold border border-purple-500 text-purple-700 bg-purple-50 transition-all duration-300">
@@ -92,45 +107,8 @@
                                     @endif
                                 </div>
 
-                                @php
-                                    $gradients = [
-                                        'linear-gradient(to top right, #facc15, #ef4444, #9333ea)',
-                                        'linear-gradient(to top right, #ec4899, #f43f5e, #f97316)',
-                                        'linear-gradient(to top right, #3b82f6, #a855f7, #ec4899)',
-                                        'linear-gradient(to top right, #4ade80, #06b6d4, #3b82f6)',
-                                        'linear-gradient(to top right, #a855f7, #ec4899, #ef4444)',
-                                        'linear-gradient(to top right, #6366f1, #a855f7, #ec4899)',
-                                        'linear-gradient(to top right, #fb923c, #ef4444, #db2777)',
-                                        'linear-gradient(to top right, #2dd4bf, #10b981, #22c55e)',
-                                        'linear-gradient(to top right, #fb7185, #c026d3, #9333ea)',
-                                    ];
-                                    $gradient = $gradients[array_rand($gradients)];
-                                @endphp
-
-                                <!-- Master image with Instagram-style gradient -->
-                                <div class="flex justify-center mb-3">
-                                    <div class="relative">
-                                        <div class="w-32 h-32 rounded-full p-1" style="background: {{ $gradient }}">
-                                            <div class="w-full h-full rounded-full overflow-hidden border-4 border-white">
-                                                <img src="{{ !empty($event['acf_fields']['master']['featured_image_url']) ? $event['acf_fields']['master']['featured_image_url'] : 'https://ui-avatars.com/api/?name=' . urlencode($event['acf_fields']['master']['title'] ?? 'N A') . '&size=300&background=random&color=fff&bold=true&font-size=0.35' }}"
-                                                     alt="{{ $event['acf_fields']['master']['title'] ?? 'N/A' }}"
-                                                     class="w-full h-full object-cover">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Master name -->
-                                <div class="text-center mb-3">
-                                    <h3 class="font-bold text-lg text-gray-900">{{ $event['acf_fields']['master']['title'] ?? 'N/A' }}</h3>
-                                    <p class="text-sm text-gray-600">Trainer</p>
-                                </div>
-
-                                <!-- Separator -->
-                                <div class="border-t border-gray-200 my-3"></div>
-
                                 <!-- Event type/Techniques -->
-                                <div class="text-center flex-1 min-h-[48px] flex items-center justify-center flex-wrap">
+                                <div class="text-center flex-1 min-h-[32px] flex items-center justify-center flex-wrap">
                                     <div>
                                         @if(!empty($event['acf_fields']['technique']))
                                             @foreach($event['acf_fields']['technique'] as $technique)
@@ -139,8 +117,10 @@
                                         @endif
                                     </div>
                                 </div>
+
                                 <!-- Separator -->
                                 <div class="border-t border-gray-200 my-3"></div>
+
                                 <!-- Location, Date and Duration -->
                                 <div class="text-center">
                                     <p onclick="filterByLocation('{{ $event['acf_fields']['location']['address'] ?? '' }}')" class="text-sm text-gray-600 mb-1 cursor-pointer hover:text-purple-600 transition-colors">{{ $event['acf_fields']['location']['address'] ?? 'N/A' }}</p>
@@ -184,6 +164,55 @@
                         @endif
                     </div>
                 @endif
+            @else
+                <!-- Skeleton Loader -->
+                <div id="events-skeleton" class="grid gap-6 items-stretch" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+                    @for ($i = 0; $i < 8; $i++)
+                        <div class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col h-full">
+                            <div class="p-6 flex flex-col flex-1">
+                                <!-- Badges skeleton -->
+                                <div class="flex flex-wrap gap-1 md:gap-2 mb-4 justify-center min-h-[24px]">
+                                    <div class="h-5 w-20 bg-gray-100 rounded"></div>
+                                    <div class="h-5 w-24 bg-gray-100 rounded"></div>
+                                </div>
+
+                                <!-- Avatar skeleton -->
+                                <div class="flex justify-center mb-3">
+                                    <div class="w-32 h-32 bg-gray-100 rounded-full"></div>
+                                </div>
+
+                                <!-- Name skeleton -->
+                                <div class="text-center mb-3">
+                                    <div class="h-6 bg-gray-100 rounded w-3/4 mx-auto mb-2"></div>
+                                    <div class="h-4 bg-gray-100 rounded w-1/2 mx-auto"></div>
+                                </div>
+
+                                <!-- Separator -->
+                                <div class="border-t border-gray-200 my-3"></div>
+
+                                <!-- Techniques skeleton -->
+                                <div class="text-center flex-1 min-h-[48px] flex items-center justify-center">
+                                    <div class="h-5 bg-gray-100 rounded w-2/3"></div>
+                                </div>
+
+                                <!-- Separator -->
+                                <div class="border-t border-gray-200 my-3"></div>
+
+                                <!-- Location & Date skeleton -->
+                                <div class="text-center">
+                                    <div class="h-4 bg-gray-100 rounded w-3/4 mx-auto mb-2"></div>
+                                    <div class="h-5 bg-gray-100 rounded w-1/2 mx-auto"></div>
+                                </div>
+                            </div>
+
+                            <!-- Button skeleton -->
+                            <div class="p-4 border-t border-gray-200">
+                                <div class="h-10 bg-gray-100 rounded-xl"></div>
+                            </div>
+                        </div>
+                    @endfor
+                </div>
+            @endif
             </div>
                 </div>
             </section>
