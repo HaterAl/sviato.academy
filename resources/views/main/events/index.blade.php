@@ -74,13 +74,16 @@
                 <div class="grid gap-6 items-stretch" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));" id="events-grid">
                     @foreach($events as $event)
                         @php
-                            $masterTitle = $event['acf_fields']['master']['title'] ?? 'N/A';
-                            $masterImage = !empty($event['acf_fields']['master']['featured_image_url'])
-                                ? $event['acf_fields']['master']['featured_image_url']
+                            $master = $event['acf_fields']['master'] ?? [];
+                            $masterTitle = $master['title'] ?? 'N/A';
+                            $masterImage = !empty($master['featured_image_url'])
+                                ? $master['featured_image_url']
                                 : 'https://ui-avatars.com/api/?name=' . urlencode($masterTitle) . '&size=400&background=random&color=fff&bold=true&font-size=0.35';
 
                             // Get trainer type for logo
-                            $trainerTypeSlug = $event['acf_fields']['master']['member_types'][0]['slug'] ?? 'trainer';
+                            $memberTypes = $master['member_types'] ?? [];
+                            $trainerTypeSlug = !empty($memberTypes[0]['slug']) ? $memberTypes[0]['slug'] : 'trainer';
+
                             $logoMap = [
                                 'top-trainer' => '/images/top_trainer_logo.png',
                                 'trainer' => '/images/trainer_logo.png',
@@ -292,6 +295,9 @@
                 if (!response.ok) throw new Error('Failed to load events');
 
                 const data = await response.json();
+                console.log('API Response:', data);
+                console.log('First event:', data.events?.[0]);
+                console.log('Master data:', data.events?.[0]?.acf_fields?.master);
                 renderEvents(data.events, data.pagination);
             } catch (error) {
                 console.error('Error loading events:', error);
@@ -329,7 +335,9 @@
                 const imageUrl = masterImage || `https://ui-avatars.com/api/?name=${encodeURIComponent(masterTitle)}&size=400&background=random&color=fff&bold=true&font-size=0.35`;
 
                 // Get trainer type for logo
-                const trainerTypeSlug = event.acf_fields?.master?.member_types?.[0]?.slug || 'trainer';
+                const master = event.acf_fields?.master || {};
+                const memberTypes = master.member_types || [];
+                const trainerTypeSlug = memberTypes[0]?.slug || 'trainer';
                 const logoMap = {
                     'top-trainer': '/images/top_trainer_logo.png',
                     'trainer': '/images/trainer_logo.png',

@@ -209,8 +209,7 @@
                                             <div class="absolute -bottom-10 right-4 z-20 pointer-events-none select-none">
                                                 <img src="{{ $memberLogo }}" alt="{{ $memberTypeDisplay }}" class="w-20 h-20 rounded-full shadow-lg border-2 border-white" draggable="false">
                                             </div>
-                                        </div>
-
+                                        </div>        
                                         {{-- Content section --}}
                                         <div class="p-5 pt-12 flex flex-col flex-1">
                                             {{-- Name - split into two lines only if very long (>18 chars) --}}
