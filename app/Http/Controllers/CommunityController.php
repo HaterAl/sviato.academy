@@ -22,13 +22,16 @@ class CommunityController extends Controller
         $page = $request->query('page', 1);
         $memberType = $request->input('member_type', '');
         $location = $request->input('location', '');
+        $search = $request->input('search', '');
+        $sortBy = in_array($request->input('sort_by'), ['date', 'title']) ? $request->input('sort_by') : 'date';
+        $sortOrder = in_array($request->input('sort_order'), ['ASC', 'DESC']) ? $request->input('sort_order') : 'ASC';
 
         // Create unique cache key based on request parameters
-        $cacheKey = 'community_' . md5($page . '_' . $memberType . '_' . $location);
+        $cacheKey = 'community_' . md5($page . '_' . $memberType . '_' . $location . '_' . $search . '_' . $sortBy . '_' . $sortOrder);
         $cacheTtl = config('cache.ttl', 10);
 
         // Cache for configured TTL (default 10 minutes)
-        $result = Cache::remember($cacheKey, 60 * $cacheTtl, function () use ($request, $page, $memberType, $location) {
+        $result = Cache::remember($cacheKey, 60 * $cacheTtl, function () use ($request, $page, $memberType, $location, $search, $sortBy, $sortOrder) {
             try {
                 $apiKey = config('services.master_event.key');
 
@@ -36,8 +39,8 @@ class CommunityController extends Controller
                     'page' => $page,
                     'per_page' => 16,
                     'post_type' => 'member',
-                    'sort_by' => 'date',
-                    'sort_order' => 'ASC',
+                    'sort_by' => $sortBy,
+                    'sort_order' => $sortOrder,
                 ];
 
                 // Apply member_type filter only if specified
@@ -48,6 +51,11 @@ class CommunityController extends Controller
                 // Apply location filter
                 if (!empty($location)) {
                     $params['location'] = $location;
+                }
+
+                // Apply name search filter
+                if (!empty($search)) {
+                    $params['search'] = $search;
                 }
 
                 $apiUrl = config('services.master_event.api_url');
@@ -88,7 +96,9 @@ class CommunityController extends Controller
         return view('main.community.index', [
             'members' => $result['members'],
             'pagination' => $result['pagination'],
-            'currentMemberType' => $memberType
+            'currentMemberType' => $memberType,
+            'sortBy' => $sortBy,
+            'sortOrder' => $sortOrder,
         ]);
     }
 
@@ -103,13 +113,16 @@ class CommunityController extends Controller
         $page = $request->query('page', 1);
         $memberType = $request->input('member_type', '');
         $location = $request->input('location', '');
+        $search = $request->input('search', '');
+        $sortBy = in_array($request->input('sort_by'), ['date', 'title']) ? $request->input('sort_by') : 'date';
+        $sortOrder = in_array($request->input('sort_order'), ['ASC', 'DESC']) ? $request->input('sort_order') : 'ASC';
 
         // Create unique cache key based on request parameters
-        $cacheKey = 'community_' . md5($page . '_' . $memberType . '_' . $location);
+        $cacheKey = 'community_' . md5($page . '_' . $memberType . '_' . $location . '_' . $search . '_' . $sortBy . '_' . $sortOrder);
         $cacheTtl = config('cache.ttl', 10);
 
         // Cache for configured TTL (default 10 minutes)
-        $result = Cache::remember($cacheKey, 60 * $cacheTtl, function () use ($request, $page, $memberType, $location) {
+        $result = Cache::remember($cacheKey, 60 * $cacheTtl, function () use ($request, $page, $memberType, $location, $search, $sortBy, $sortOrder) {
             try {
                 $apiKey = config('services.master_event.key');
 
@@ -117,8 +130,8 @@ class CommunityController extends Controller
                     'page' => $page,
                     'per_page' => 16,
                     'post_type' => 'member',
-                    'sort_by' => 'date',
-                    'sort_order' => 'ASC',
+                    'sort_by' => $sortBy,
+                    'sort_order' => $sortOrder,
                 ];
 
                 // Apply member_type filter only if specified
@@ -129,6 +142,11 @@ class CommunityController extends Controller
                 // Apply location filter
                 if (!empty($location)) {
                     $params['location'] = $location;
+                }
+
+                // Apply name search filter
+                if (!empty($search)) {
+                    $params['search'] = $search;
                 }
 
                 $apiUrl = config('services.master_event.api_url');

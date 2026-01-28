@@ -14,9 +14,67 @@
                     </div>
 
                     <!-- Search Form -->
-                    <div class="mb-8 bg-white rounded-2xl shadow-md p-6">
+                    @php $hasActiveFilters = request('search') || request('location') || request('member_type'); @endphp
+                    <style>
+                        #filters-content {
+                            max-height: 0;
+                            overflow: hidden;
+                            transition: max-height 0.3s ease;
+                        }
+                        #filters-content.open {
+                            max-height: 500px;
+                        }
+                        @media (min-width: 768px) {
+                            #filters-toggle,
+                            #sort-mobile-wrapper {
+                                display: none !important;
+                            }
+                            #sort-dropdown-wrapper {
+                                display: block !important;
+                            }
+                            #filters-content {
+                                max-height: none !important;
+                                overflow: visible !important;
+                            }
+                        }
+                    </style>
+                    <div class="mb-8 bg-white rounded-2xl shadow-md p-4 md:p-6">
+                        <!-- Mobile Filters Toggle Button -->
+                        <button type="button" id="filters-toggle" onclick="toggleFilters()"
+                            class="md:hidden w-full flex items-center justify-between px-2 py-2 text-gray-700 font-semibold">
+                            <span class="flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+                                </svg>
+                                Filters
+                            </span>
+                            <svg id="filters-chevron" class="w-5 h-5 transition-transform duration-300{{ $hasActiveFilters ? ' rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+
+                        <!-- Filters Content -->
+                        <div id="filters-content" class="{{ $hasActiveFilters ? 'open' : '' }}">
                         <form id="search-form">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="flex flex-col md:flex-row md:items-end gap-3">
+                            <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <!-- Name Search -->
+                                <div>
+                                    <label for="search_name" class="block text-sm font-semibold text-gray-700 mb-2">Name</label>
+                                    <div class="relative">
+                                        <input type="text" id="search_name" name="search" value="{{ request('search') }}"
+                                            placeholder="Search by name..." autocomplete="off"
+                                            class="w-full px-4 py-2.5 pr-10 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                                        <button type="button" id="clear-search" onclick="clearSearch()"
+                                            class="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors {{ request('search') ? '' : 'hidden' }}">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+
                                 <!-- Location -->
                                 <div class="relative">
                                     <label for="location"
@@ -53,10 +111,50 @@
                                     </select>
                                 </div>
                             </div>
+                            <!-- Sort: select on mobile, icon+dropdown on desktop -->
+                            <!-- Mobile sort select -->
+                            <div id="sort-mobile-wrapper" class="md:hidden">
+                                <label for="sort_mobile" class="block text-sm font-semibold text-gray-700 mb-2">Sort by</label>
+                                <select id="sort_mobile" onchange="applySortFromSelect(this.value)"
+                                    class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white">
+                                    <option value="date-ASC" {{ ($sortBy ?? 'date') == 'date' ? 'selected' : '' }}>Default</option>
+                                    <option value="title-ASC" {{ ($sortBy ?? '') == 'title' && ($sortOrder ?? '') == 'ASC' ? 'selected' : '' }}>A - Z</option>
+                                    <option value="title-DESC" {{ ($sortBy ?? '') == 'title' && ($sortOrder ?? '') == 'DESC' ? 'selected' : '' }}>Z - A</option>
+                                </select>
+                            </div>
+                            <!-- Desktop sort button -->
+                            <div class="relative flex-shrink-0 hidden md:block" id="sort-dropdown-wrapper">
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Sort by</label>
+                                <button type="button" id="sort-btn" onclick="toggleSortDropdown()"
+                                    title="Sort by name"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M4 6h7"/><path d="M4 12h5"/><path d="M4 18h3"/><path d="M18 6v14"/><path d="M18 20l-3-3"/><path d="M18 20l3-3"/>
+                                    </svg>
+                                    <span class="text-sm"></span>
+                                </button>
+                                <div id="sort-dropdown" class="absolute right-0 top-full mt-1 w-36 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-hidden hidden">
+                                    <button type="button" onclick="applySort('date','ASC')" data-sort="date-ASC"
+                                        class="sort-option w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+                                        Default
+                                    </button>
+                                    <button type="button" onclick="applySort('title','ASC')" data-sort="title-ASC"
+                                        class="sort-option w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+                                        A - Z
+                                    </button>
+                                    <button type="button" onclick="applySort('title','DESC')" data-sort="title-DESC"
+                                        class="sort-option w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+                                        Z - A
+                                    </button>
+                                </div>
+                            </div>
+                            </div>
                         </form>
+                        </div>
                     </div>
 
                     <div id="members-container">
+                        @if(count($members) > 0)
                         <div class="grid gap-6 items-stretch"
                             style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));" id="members-grid">
                             @foreach($members as $member)
@@ -211,12 +309,12 @@
                                             </div>
                                         </div>        
                                         {{-- Content section --}}
-                                        <div class="p-5 pt-12 flex flex-col flex-1">
+                                        <div class="p-4 pt-8 flex flex-col flex-1">
                                             {{-- Name - split into two lines only if very long (>18 chars) --}}
                                             @php
                                                 $fullName = $member['title'] ?? 'N/A';
                                                 $nameParts = explode(' ', $fullName, 2);
-                                                $isLong = strlen($fullName) > 18;
+                                                $isLong = strlen($fullName) > 36;
                                             @endphp
                                             <h3 class="font-bold text-lg text-gray-900 mb-2 leading-tight">
                                                 @if($isLong && isset($nameParts[1]))
@@ -289,6 +387,11 @@
                                 @endif
                             </div>
                         @endif
+                        @else
+                        <div class="text-center py-12">
+                            <p class="u-text--primary text-xl">No community members available at the moment</p>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </section>
@@ -296,6 +399,12 @@
     </section>
 
     <script>
+        // Mobile filters toggle
+        function toggleFilters() {
+            document.getElementById('filters-content').classList.toggle('open');
+            document.getElementById('filters-chevron').classList.toggle('rotate-180');
+        }
+
         // Gradients for member cards
         const gradients = [
             'linear-gradient(to top right, #facc15, #ef4444, #9333ea)',
@@ -309,8 +418,65 @@
             'linear-gradient(to top right, #fb7185, #c026d3, #9333ea)',
         ];
 
+        // Sort state
+        let currentSortBy = '{{ $sortBy ?? "date" }}';
+        let currentSortOrder = '{{ $sortOrder ?? "ASC" }}';
+
+        function toggleSortDropdown() {
+            const dropdown = document.getElementById('sort-dropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        function applySort(sortBy, sortOrder) {
+            currentSortBy = sortBy;
+            currentSortOrder = sortOrder;
+            document.getElementById('sort-dropdown').classList.add('hidden');
+            // Sync mobile select
+            const mobileSelect = document.getElementById('sort_mobile');
+            if (mobileSelect) mobileSelect.value = `${sortBy}-${sortOrder}`;
+            updateSortButton();
+            loadMembers();
+        }
+
+        function applySortFromSelect(value) {
+            const [sortBy, sortOrder] = value.split('-');
+            currentSortBy = sortBy;
+            currentSortOrder = sortOrder;
+            updateSortButton();
+            loadMembers();
+        }
+
+        function updateSortButton() {
+            const btn = document.getElementById('sort-btn');
+            const isActive = currentSortBy === 'title';
+
+            if (isActive) {
+                btn.classList.add('border-purple-500', 'text-purple-600', 'bg-purple-50');
+                btn.classList.remove('border-gray-300', 'text-gray-500', 'bg-white');
+            } else {
+                btn.classList.remove('border-purple-500', 'text-purple-600', 'bg-purple-50');
+                btn.classList.add('border-gray-300', 'text-gray-500', 'bg-white');
+            }
+
+            // Highlight active option
+            document.querySelectorAll('.sort-option').forEach(opt => {
+                const key = opt.getAttribute('data-sort');
+                if (key === `${currentSortBy}-${currentSortOrder}`) {
+                    opt.classList.add('bg-purple-50', 'text-purple-600', 'font-semibold');
+                    opt.classList.remove('text-gray-700');
+                } else {
+                    opt.classList.remove('bg-purple-50', 'text-purple-600', 'font-semibold');
+                    opt.classList.add('text-gray-700');
+                }
+            });
+        }
+
+        // Initialize sort button state
+        updateSortButton();
+
         // Load members via AJAX
         async function loadMembers(page = 1) {
+            const searchNameInput = document.getElementById('search_name');
             const locationInput = document.getElementById('location');
             const memberTypeSelect = document.getElementById('member_type');
             const clearBtn = document.getElementById('clear-location');
@@ -334,8 +500,13 @@
             // Build query parameters for URL
             const params = new URLSearchParams();
             if (page > 1) params.append('page', page);
+            if (searchNameInput.value.trim()) params.append('search', searchNameInput.value.trim());
             if (locationInput.value.trim()) params.append('location', locationInput.value.trim());
             if (memberTypeSelect.value) params.append('member_type', memberTypeSelect.value);
+            if (currentSortBy !== 'date') {
+                params.append('sort_by', currentSortBy);
+                params.append('sort_order', currentSortOrder);
+            }
 
             // Update URL in browser address bar (clean URL)
             const pageUrl = params.toString() ? `{{ route('community.index') }}?${params.toString()}` : '{{ route('community.index') }}';
@@ -466,10 +637,10 @@
                         </div>
 
                         <!-- Content section -->
-                        <div class="p-5 pt-12 flex flex-col flex-1">
+                        <div class="p-4 pt-8 flex flex-col flex-1">
                             <!-- Name - split into two lines only if very long (>18 chars) -->
                             <h3 class="font-bold text-lg text-gray-900 mb-2 leading-tight">
-                                ${(masterTitle.length > 18 && masterTitle.includes(' ')) ? masterTitle.replace(' ', '<br>') : masterTitle}
+                                ${(masterTitle.length > 28 && masterTitle.includes(' ')) ? masterTitle.replace(' ', '<br>') : masterTitle}
                             </h3>`;
 
                 // Treatments
@@ -540,6 +711,22 @@
             container.innerHTML = html;
         }
 
+        // Name search: trigger on Enter or debounced input
+        let nameSearchTimeout;
+        const searchNameEl = document.getElementById('search_name');
+        searchNameEl.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                clearTimeout(nameSearchTimeout);
+                loadMembers();
+            }
+        });
+        searchNameEl.addEventListener('input', function() {
+            clearTimeout(nameSearchTimeout);
+            document.getElementById('clear-search').classList.toggle('hidden', !this.value.trim());
+            nameSearchTimeout = setTimeout(() => loadMembers(), 500);
+        });
+
         // Location autocomplete functionality
         let locationTimeout;
         const locationInput = document.getElementById('location');
@@ -585,6 +772,12 @@
             loadMembers();
         }
 
+        function clearSearch() {
+            searchNameEl.value = '';
+            document.getElementById('clear-search').classList.add('hidden');
+            loadMembers();
+        }
+
         function clearLocation() {
             locationInput.value = '';
             loadMembers();
@@ -599,10 +792,14 @@
             loadMembers();
         }
 
-        // Hide suggestions when clicking outside
+        // Hide dropdowns when clicking outside
         document.addEventListener('click', function (event) {
             if (!locationInput.contains(event.target) && !suggestionsDiv.contains(event.target)) {
                 suggestionsDiv.classList.add('hidden');
+            }
+            const sortWrapper = document.getElementById('sort-dropdown-wrapper');
+            if (!sortWrapper.contains(event.target)) {
+                document.getElementById('sort-dropdown').classList.add('hidden');
             }
         });
     </script>

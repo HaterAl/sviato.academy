@@ -11,7 +11,43 @@
                     </div>
 
                     <!-- Search Form -->
-                    <div class="mb-8 bg-white rounded-2xl shadow-md p-6">
+                    @php $hasActiveFilters = request('location') || request('technique'); @endphp
+                    <style>
+                        #filters-content {
+                            max-height: 0;
+                            overflow: hidden;
+                            transition: max-height 0.3s ease;
+                        }
+                        #filters-content.open {
+                            max-height: 500px;
+                        }
+                        @media (min-width: 768px) {
+                            #filters-toggle {
+                                display: none !important;
+                            }
+                            #filters-content {
+                                max-height: none !important;
+                                overflow: visible !important;
+                            }
+                        }
+                    </style>
+                    <div class="mb-8 bg-white rounded-2xl shadow-md p-4 md:p-6">
+                        <!-- Mobile Filters Toggle Button -->
+                        <button type="button" id="filters-toggle" onclick="toggleFilters()"
+                            class="md:hidden w-full flex items-center justify-between px-2 py-2 text-gray-700 font-semibold">
+                            <span class="flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+                                </svg>
+                                Filters
+                            </span>
+                            <svg id="filters-chevron" class="w-5 h-5 transition-transform duration-300{{ $hasActiveFilters ? ' rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+
+                        <!-- Filters Content -->
+                        <div id="filters-content" class="{{ $hasActiveFilters ? 'open' : '' }}">
                         <form id="search-form">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <!-- Location -->
@@ -67,6 +103,7 @@
                                 </div>
                             </div>
                         </form>
+                        </div>
                     </div>
 
             <div id="events-container">
@@ -247,6 +284,12 @@
     </section>
 
     <script>
+        // Mobile filters toggle
+        function toggleFilters() {
+            document.getElementById('filters-content').classList.toggle('open');
+            document.getElementById('filters-chevron').classList.toggle('rotate-180');
+        }
+
         // Load events via AJAX
         async function loadEvents(page = 1) {
             const locationInput = document.getElementById('location');
