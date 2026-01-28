@@ -158,7 +158,7 @@
                                     <span class="font-semibold text-gray-800">{{ $event['acf_fields']['date'] ?? 'N/A' }}</span>
                                     @if(!empty($event['acf_fields']['duration']))
                                         <span class="text-gray-400">·</span>
-                                        <span>{{ $event['acf_fields']['duration'] }} days</span>
+                                        <span>{{ $event['acf_fields']['duration'] }} {{ $event['acf_fields']['duration'] == 1 ? 'day' : 'days' }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -403,7 +403,7 @@
                                 <span class="font-semibold text-gray-800">${date}</span>`;
 
                 if (duration) {
-                    html += `<span class="text-gray-400">·</span><span>${duration} days</span>`;
+                    html += `<span class="text-gray-400">·</span><span>${duration} ${duration == 1 ? 'day' : 'days'}</span>`;
                 }
 
                 html += `
