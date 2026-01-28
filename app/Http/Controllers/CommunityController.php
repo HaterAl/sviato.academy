@@ -36,6 +36,8 @@ class CommunityController extends Controller
                     'page' => $page,
                     'per_page' => 16,
                     'post_type' => 'member',
+                    'sort_by' => 'date',
+                    'sort_order' => 'ASC',
                 ];
 
                 // Apply member_type filter only if specified
@@ -115,6 +117,8 @@ class CommunityController extends Controller
                     'page' => $page,
                     'per_page' => 16,
                     'post_type' => 'member',
+                    'sort_by' => 'date',
+                    'sort_order' => 'ASC',
                 ];
 
                 // Apply member_type filter only if specified

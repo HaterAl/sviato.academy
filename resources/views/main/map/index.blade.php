@@ -92,7 +92,6 @@
         }
 
         .popup-social a:hover {
-            background: #facc15 !important;
             transform: scale(1.1);
         }
 
@@ -149,7 +148,7 @@
             display: flex;
             align-items: flex-start;
             gap: 8px;
-            font-size: 12px;
+            font-size: 10px;
             color: #6b7280;
             margin-top: 10px;
             padding-top: 10px;

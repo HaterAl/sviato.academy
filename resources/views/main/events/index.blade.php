@@ -295,9 +295,6 @@
                 if (!response.ok) throw new Error('Failed to load events');
 
                 const data = await response.json();
-                console.log('API Response:', data);
-                console.log('First event:', data.events?.[0]);
-                console.log('Master data:', data.events?.[0]?.acf_fields?.master);
                 renderEvents(data.events, data.pagination);
             } catch (error) {
                 console.error('Error loading events:', error);

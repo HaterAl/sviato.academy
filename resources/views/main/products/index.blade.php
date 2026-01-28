@@ -12,7 +12,7 @@
 
                     {{-- Category filter --}}
                     <div class="mb-8 md:flex md:justify-end">
-                        <div class="md:w-[500px]">
+                        <div class="md:w-[300px]">
                             <select id="category-filter" onchange="handleCategoryChange()" class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-yellow-500 transition-colors duration-300 bg-white text-gray-900 font-semibold cursor-pointer">
                                 <option value="all" {{ ($selectedCategory ?? 'all') === 'all' ? 'selected' : '' }}>All Categories</option>
                                 <option value="aftercare products" {{ ($selectedCategory ?? 'all') === 'aftercare products' ? 'selected' : '' }}>Aftercare Products</option>
