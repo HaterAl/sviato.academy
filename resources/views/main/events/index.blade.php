@@ -73,60 +73,92 @@
                 @if(count($events) > 0)
                 <div class="grid gap-6 items-stretch" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));" id="events-grid">
                     @foreach($events as $event)
-                        <div class="bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl flex flex-col h-full transform hover:scale-[1.03] hover:z-10 relative">
-                            <!-- Master image - full width -->
-                            <div class="relative h-48 overflow-hidden">
-                                <img src="{{ !empty($event['acf_fields']['master']['featured_image_url']) ? $event['acf_fields']['master']['featured_image_url'] : 'https://ui-avatars.com/api/?name=' . urlencode($event['acf_fields']['master']['title'] ?? 'N A') . '&size=400&background=random&color=fff&bold=true&font-size=0.35' }}"
-                                     alt="{{ $event['acf_fields']['master']['title'] ?? 'N/A' }}"
-                                     class="w-full h-full object-cover">
-                                <!-- Gradient overlay -->
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                <!-- Master name on image -->
-                                <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
-                                    <h3 class="font-bold text-lg">{{ $event['acf_fields']['master']['title'] ?? 'N/A' }}</h3>
-                                    <p class="text-sm text-white/80">Trainer</p>
+                        @php
+                            $masterTitle = $event['acf_fields']['master']['title'] ?? 'N/A';
+                            $masterImage = !empty($event['acf_fields']['master']['featured_image_url'])
+                                ? $event['acf_fields']['master']['featured_image_url']
+                                : 'https://ui-avatars.com/api/?name=' . urlencode($masterTitle) . '&size=400&background=random&color=fff&bold=true&font-size=0.35';
+
+                            // Get trainer type for logo
+                            $trainerTypeSlug = $event['acf_fields']['master']['member_types'][0]['slug'] ?? 'trainer';
+                            $logoMap = [
+                                'top-trainer' => '/images/top_trainer_logo.png',
+                                'trainer' => '/images/trainer_logo.png',
+                                'master' => '/images/master_logo.png',
+                            ];
+                            $trainerLogo = $logoMap[$trainerTypeSlug] ?? '/images/trainer_logo.png';
+                        @endphp
+
+                        <div class="bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl flex flex-col h-full transform hover:scale-[1.02] hover:z-10 relative">
+                            <!-- Photo wrapper for badge positioning -->
+                            <div class="relative">
+                                <!-- Full-width square photo at top -->
+                                <div class="relative aspect-square w-full overflow-hidden rounded-t-2xl">
+                                    <img src="{{ $masterImage }}"
+                                         alt="{{ $masterTitle }}"
+                                         class="w-full h-full object-cover">
+                                </div>
+                                <!-- Trainer type logo badge -->
+                                <div class="absolute -bottom-10 right-4 z-20 pointer-events-none select-none">
+                                    <img src="{{ $trainerLogo }}" alt="Trainer" class="w-20 h-20 rounded-full shadow-lg border-2 border-white" draggable="false">
                                 </div>
                             </div>
 
-                            <div class="p-4 flex flex-col flex-1">
+                            <div class="p-4 pt-8 flex flex-col flex-1">
+                                <!-- Master name -->
+                                <h3 class="font-bold text-lg text-gray-900 mb-2">{{ $masterTitle }}</h3>
+
                                 <!-- Course/Treatment badges -->
-                                <div class="flex flex-wrap gap-1 md:gap-2 mb-3 justify-center min-h-[24px]">
+                                <div class="flex flex-wrap gap-1 md:gap-2 mb-3">
                                     @if(!empty($event['acf_fields']['treatments']))
                                         @foreach($event['acf_fields']['treatments'] as $treatment)
-                                            <span class="inline-block relative px-2 py-0.5 rounded text-xs font-semibold border border-purple-500 text-purple-700 bg-purple-50 transition-all duration-300">
-                                                <span class="relative z-10">#{{ str_replace(' ', '_', $treatment['title']) }}</span>
+                                            <span class="inline-block px-2 py-0.5 rounded text-xs font-semibold border border-purple-500 text-purple-700 bg-purple-50">
+                                                #{{ str_replace(' ', '_', $treatment['title']) }}
                                             </span>
                                         @endforeach
                                     @endif
                                     @if(!empty($event['acf_fields']['course']))
                                         @foreach($event['acf_fields']['course'] as $course)
-                                            <span class="inline-block relative px-2 py-0.5 rounded text-xs font-semibold border border-teal-500 text-teal-700 bg-teal-50 transition-all duration-300">
-                                                <span class="relative z-10">#{{ str_replace(' ', '_', $course['title']) }}</span>
+                                            <span class="inline-block px-2 py-0.5 rounded text-xs font-semibold border border-teal-500 text-teal-700 bg-teal-50">
+                                                #{{ str_replace(' ', '_', $course['title']) }}
                                             </span>
                                         @endforeach
                                     @endif
                                 </div>
 
-                                <!-- Event type/Techniques -->
-                                <div class="text-center flex-1 min-h-[32px] flex items-center justify-center flex-wrap">
-                                    <div>
-                                        @if(!empty($event['acf_fields']['technique']))
-                                            @foreach($event['acf_fields']['technique'] as $technique)
-                                                <span onclick="filterByTechnique('{{ $technique }}')" class="text-sm font-semibold text-gray-700 cursor-pointer hover:text-purple-600 transition-colors">{{ $technique }}</span>{{ !$loop->last ? ', ' : '' }}
-                                            @endforeach
-                                        @endif
+                                <!-- Techniques -->
+                                @if(!empty($event['acf_fields']['technique']))
+                                    <div class="flex flex-wrap gap-1.5 mb-3">
+                                        @foreach($event['acf_fields']['technique'] as $technique)
+                                            <span onclick="filterByTechnique('{{ $technique }}')" class="px-2 py-0.5 text-xs font-medium text-gray-600 bg-gray-100 rounded-md cursor-pointer hover:bg-purple-100 hover:text-purple-700 transition-colors">{{ $technique }}</span>
+                                        @endforeach
                                     </div>
+                                @endif
+
+                                <!-- Spacer -->
+                                <div class="flex-1"></div>
+
+                                <!-- Location -->
+                                <div class="flex items-center gap-2 text-sm text-gray-500 mt-3 pt-3 border-t border-gray-100">
+                                    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    </svg>
+                                    <span onclick="filterByLocation('{{ $event['acf_fields']['location']['address'] ?? '' }}')"
+                                          class="cursor-pointer hover:text-purple-600 transition-colors truncate">
+                                        {{ $event['acf_fields']['location']['address'] ?? 'N/A' }}
+                                    </span>
                                 </div>
 
-                                <!-- Separator -->
-                                <div class="border-t border-gray-200 my-3"></div>
-
-                                <!-- Location, Date and Duration -->
-                                <div class="text-center">
-                                    <p onclick="filterByLocation('{{ $event['acf_fields']['location']['address'] ?? '' }}')" class="text-sm text-gray-600 mb-1 cursor-pointer hover:text-purple-600 transition-colors">{{ $event['acf_fields']['location']['address'] ?? 'N/A' }}</p>
-                                    <p class="text-sm font-semibold text-gray-800">{{ $event['acf_fields']['date'] ?? 'N/A' }}</p>
+                                <!-- Date -->
+                                <div class="flex items-center gap-2 text-sm text-gray-500 mt-2">
+                                    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                    </svg>
+                                    <span class="font-semibold text-gray-800">{{ $event['acf_fields']['date'] ?? 'N/A' }}</span>
                                     @if(!empty($event['acf_fields']['duration']))
-                                        <p class="text-sm text-gray-500 mt-1">Duration: {{ $event['acf_fields']['duration'] }} days</p>
+                                        <span class="text-gray-400">·</span>
+                                        <span>{{ $event['acf_fields']['duration'] }} days</span>
                                     @endif
                                 </div>
                             </div>
@@ -168,47 +200,39 @@
                 <!-- Skeleton Loader -->
                 <div id="events-skeleton" class="grid gap-6 items-stretch" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
                     @for ($i = 0; $i < 8; $i++)
-                        <div class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col h-full">
-                            <div class="p-6 flex flex-col flex-1">
+                        <div class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col h-full animate-pulse">
+                            <!-- Image skeleton with logo placeholder -->
+                            <div class="relative">
+                                <div class="aspect-square bg-gray-200"></div>
+                                <div class="absolute -bottom-10 right-4 w-20 h-20 bg-gray-300 rounded-full"></div>
+                            </div>
+
+                            <div class="p-4 pt-8 flex flex-col flex-1">
+                                <!-- Name skeleton -->
+                                <div class="h-6 bg-gray-200 rounded w-3/4 mb-3"></div>
+
                                 <!-- Badges skeleton -->
-                                <div class="flex flex-wrap gap-1 md:gap-2 mb-4 justify-center min-h-[24px]">
+                                <div class="flex flex-wrap gap-1 mb-3">
                                     <div class="h-5 w-20 bg-gray-100 rounded"></div>
                                     <div class="h-5 w-24 bg-gray-100 rounded"></div>
                                 </div>
 
-                                <!-- Avatar skeleton -->
-                                <div class="flex justify-center mb-3">
-                                    <div class="w-32 h-32 bg-gray-100 rounded-full"></div>
-                                </div>
-
-                                <!-- Name skeleton -->
-                                <div class="text-center mb-3">
-                                    <div class="h-6 bg-gray-100 rounded w-3/4 mx-auto mb-2"></div>
-                                    <div class="h-4 bg-gray-100 rounded w-1/2 mx-auto"></div>
-                                </div>
-
-                                <!-- Separator -->
-                                <div class="border-t border-gray-200 my-3"></div>
-
                                 <!-- Techniques skeleton -->
-                                <div class="text-center flex-1 min-h-[48px] flex items-center justify-center">
-                                    <div class="h-5 bg-gray-100 rounded w-2/3"></div>
+                                <div class="flex flex-wrap gap-1.5 mb-3">
+                                    <div class="h-5 w-28 bg-gray-100 rounded"></div>
                                 </div>
 
-                                <!-- Separator -->
-                                <div class="border-t border-gray-200 my-3"></div>
+                                <div class="flex-1"></div>
 
-                                <!-- Location & Date skeleton -->
-                                <div class="text-center">
-                                    <div class="h-4 bg-gray-100 rounded w-3/4 mx-auto mb-2"></div>
-                                    <div class="h-5 bg-gray-100 rounded w-1/2 mx-auto"></div>
+                                <!-- Location skeleton -->
+                                <div class="pt-3 border-t border-gray-100">
+                                    <div class="h-4 bg-gray-100 rounded w-3/4 mb-2"></div>
+                                    <div class="h-4 bg-gray-100 rounded w-1/2"></div>
                                 </div>
                             </div>
 
                             <!-- Button skeleton -->
-                            <div class="p-4 border-t border-gray-200">
-                                <div class="h-10 bg-gray-100 rounded-xl"></div>
-                            </div>
+                            <div class="h-12 bg-gray-200"></div>
                         </div>
                     @endfor
                 </div>
@@ -220,19 +244,6 @@
     </section>
 
     <script>
-        // Gradients for event cards
-        const gradients = [
-            'linear-gradient(to top right, #facc15, #ef4444, #9333ea)',
-            'linear-gradient(to top right, #ec4899, #f43f5e, #f97316)',
-            'linear-gradient(to top right, #3b82f6, #a855f7, #ec4899)',
-            'linear-gradient(to top right, #4ade80, #06b6d4, #3b82f6)',
-            'linear-gradient(to top right, #a855f7, #ec4899, #ef4444)',
-            'linear-gradient(to top right, #6366f1, #a855f7, #ec4899)',
-            'linear-gradient(to top right, #fb923c, #ef4444, #db2777)',
-            'linear-gradient(to top right, #2dd4bf, #10b981, #22c55e)',
-            'linear-gradient(to top right, #fb7185, #c026d3, #9333ea)',
-        ];
-
         // Load events via AJAX
         async function loadEvents(page = 1) {
             const locationInput = document.getElementById('location');
@@ -304,7 +315,6 @@
             let html = '<div class="grid gap-6 items-stretch" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));" id="events-grid">';
 
             events.forEach(event => {
-                const gradient = gradients[Math.floor(Math.random() * gradients.length)];
                 const masterImage = event.acf_fields?.master?.featured_image_url || '';
                 const masterTitle = event.acf_fields?.master?.title || 'N/A';
                 const location = event.acf_fields?.location?.address || 'N/A';
@@ -315,65 +325,85 @@
                 const treatments = event.acf_fields?.treatments || [];
                 const courses = event.acf_fields?.course || [];
 
+                // Always show image, use placeholder if no image
+                const imageUrl = masterImage || `https://ui-avatars.com/api/?name=${encodeURIComponent(masterTitle)}&size=400&background=random&color=fff&bold=true&font-size=0.35`;
+
+                // Get trainer type for logo
+                const trainerTypeSlug = event.acf_fields?.master?.member_types?.[0]?.slug || 'trainer';
+                const logoMap = {
+                    'top-trainer': '/images/top_trainer_logo.png',
+                    'trainer': '/images/trainer_logo.png',
+                    'master': '/images/master_logo.png'
+                };
+                const trainerLogo = logoMap[trainerTypeSlug] || '/images/trainer_logo.png';
+
                 html += `
-                    <div class="bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl flex flex-col h-full transform hover:scale-[1.03] hover:z-10 relative">
-                        <div class="p-6 flex flex-col flex-1">
-                            <div class="flex flex-wrap gap-1 md:gap-2 mb-4 justify-center min-h-[24px]">`;
+                    <div class="bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl flex flex-col h-full transform hover:scale-[1.02] hover:z-10 relative">
+                        <!-- Photo wrapper for badge positioning -->
+                        <div class="relative">
+                            <!-- Full-width square photo at top -->
+                            <div class="relative aspect-square w-full overflow-hidden rounded-t-2xl">
+                                <img src="${imageUrl}" alt="${masterTitle}" class="w-full h-full object-cover">
+                            </div>
+                            <!-- Trainer type logo badge -->
+                            <div class="absolute -bottom-10 right-4 z-20 pointer-events-none select-none">
+                                <img src="${trainerLogo}" alt="Trainer" class="w-20 h-20 rounded-full shadow-lg border-2 border-white" draggable="false">
+                            </div>
+                        </div>
+
+                        <div class="p-4 pt-8 flex flex-col flex-1">
+                            <!-- Master name -->
+                            <h3 class="font-bold text-lg text-gray-900 mb-2">${masterTitle}</h3>
+
+                            <!-- Course/Treatment badges -->
+                            <div class="flex flex-wrap gap-1 md:gap-2 mb-3">`;
 
                 treatments.forEach(treatment => {
                     const hashtag = '#' + treatment.title.replace(/ /g, '_');
-                    html += `<span class="inline-block relative px-2 py-0.5 rounded text-xs font-semibold border border-purple-500 text-purple-700 bg-purple-50 transition-all duration-300">
-                        <span class="relative z-10">${hashtag}</span>
-                    </span>`;
+                    html += `<span class="inline-block px-2 py-0.5 rounded text-xs font-semibold border border-purple-500 text-purple-700 bg-purple-50">${hashtag}</span>`;
                 });
 
                 courses.forEach(course => {
                     const hashtag = '#' + course.title.replace(/ /g, '_');
-                    html += `<span class="inline-block relative px-2 py-0.5 rounded text-xs font-semibold border border-teal-500 text-teal-700 bg-teal-50 transition-all duration-300">
-                        <span class="relative z-10">${hashtag}</span>
-                    </span>`;
+                    html += `<span class="inline-block px-2 py-0.5 rounded text-xs font-semibold border border-teal-500 text-teal-700 bg-teal-50">${hashtag}</span>`;
                 });
 
                 html += `</div>`;
 
-                // Always show avatar, use placeholder if no image
-                const avatarUrl = masterImage || `https://ui-avatars.com/api/?name=${encodeURIComponent(masterTitle)}&size=300&background=random&color=fff&bold=true&font-size=0.35`;
-                html += `
-                    <div class="flex justify-center mb-3">
-                        <div class="relative">
-                            <div class="w-32 h-32 rounded-full p-1" style="background: ${gradient}">
-                                <div class="w-full h-full rounded-full overflow-hidden border-4 border-white">
-                                    <img src="${avatarUrl}" alt="${masterTitle}" class="w-full h-full object-cover">
-                                </div>
-                            </div>
-                        </div>
-                    </div>`;
-
-                html += `
-                            <div class="text-center mb-3">
-                                <h3 class="font-bold text-lg text-gray-900">${masterTitle}</h3>
-                                <p class="text-sm text-gray-600">Trainer</p>
-                            </div>
-                            <div class="border-t border-gray-200 my-3"></div>
-                            <div class="text-center flex-1 min-h-[48px] flex items-center justify-center flex-wrap">
-                                <div>`;
-
+                // Techniques
                 if (techniques.length > 0) {
-                    html += techniques.map((tech, index) => {
-                        return `<span onclick="filterByTechnique('${tech.replace(/'/g, "\\'")}')" class="text-sm font-semibold text-gray-700 cursor-pointer hover:text-purple-600 transition-colors">${tech}</span>${index < techniques.length - 1 ? ', ' : ''}`;
-                    }).join('');
+                    html += `<div class="flex flex-wrap gap-1.5 mb-3">`;
+                    techniques.forEach(tech => {
+                        html += `<span onclick="filterByTechnique('${tech.replace(/'/g, "\\'")}')" class="px-2 py-0.5 text-xs font-medium text-gray-600 bg-gray-100 rounded-md cursor-pointer hover:bg-purple-100 hover:text-purple-700 transition-colors">${tech}</span>`;
+                    });
+                    html += `</div>`;
                 }
 
                 html += `
-                                </div>
+                            <!-- Spacer -->
+                            <div class="flex-1"></div>
+
+                            <!-- Location -->
+                            <div class="flex items-center gap-2 text-sm text-gray-500 mt-3 pt-3 border-t border-gray-100">
+                                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                                <span onclick="filterByLocation('${location.replace(/'/g, "\\'")}')"
+                                      class="cursor-pointer hover:text-purple-600 transition-colors truncate">
+                                    ${location}
+                                </span>
                             </div>
-                            <div class="border-t border-gray-200 my-3"></div>
-                            <div class="text-center">
-                                <p onclick="filterByLocation('${location.replace(/'/g, "\\'")}')" class="text-sm text-gray-600 mb-1 cursor-pointer hover:text-purple-600 transition-colors">${location}</p>
-                                <p class="text-sm font-semibold text-gray-800">${date}</p>`;
+
+                            <!-- Date -->
+                            <div class="flex items-center gap-2 text-sm text-gray-500 mt-2">
+                                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                                <span class="font-semibold text-gray-800">${date}</span>`;
 
                 if (duration) {
-                    html += `<p class="text-sm text-gray-500 mt-1">Duration: ${duration} days</p>`;
+                    html += `<span class="text-gray-400">·</span><span>${duration} days</span>`;
                 }
 
                 html += `
