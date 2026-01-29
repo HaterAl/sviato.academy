@@ -11,6 +11,22 @@ use Carbon\Carbon;
 
 class EventController extends Controller
 {
+    private const TREATMENT_IDS = [
+        'Cosmetic Microneedling' => 41914,
+        'Permanent make-up' => 48,
+        'Hairstrokes' => 18473,
+        'Photo and video editing' => 41109,
+        'Scalp Micropigmentation' => 36985,
+        'Workshop' => 35332,
+        'Marketing' => 34189,
+        'Mini Tattoo' => 30570,
+        'Social Media Marketing' => 31731,
+        'Areola' => 16092,
+        'Aftercare' => 15688,
+        'Removal' => 10064,
+        'Microblading' => 10060,
+    ];
+
     /**
      * Display a listing of events.
      *
@@ -27,14 +43,16 @@ class EventController extends Controller
         $location = $request->input('location', '');
         $month = $request->input('month', '');
         $technique = $request->input('technique', '');
+        $treatment = $request->input('treatment', '');
+        $treatmentId = self::TREATMENT_IDS[$treatment] ?? null;
         $today = Carbon::today()->format('Y-m-d');
 
         // Create unique cache key based on request parameters
-        $cacheKey = 'events_' . md5($page . '_' . $location . '_' . $month . '_' . $technique . '_' . $today);
+        $cacheKey = 'events_' . md5($page . '_' . $location . '_' . $month . '_' . $technique . '_' . $treatment . '_' . $today);
         $cacheTtl = config('cache.ttl', 10);
 
         // Cache for configured TTL (default 10 minutes)
-        $result = Cache::remember($cacheKey, 60 * $cacheTtl, function () use ($page, $location, $month, $technique, $today) {
+        $result = Cache::remember($cacheKey, 60 * $cacheTtl, function () use ($page, $location, $month, $technique, $treatmentId, $today) {
             try {
                 $apiKey = config('services.master_event.key');
 
@@ -68,6 +86,11 @@ class EventController extends Controller
                 // Apply technique filter
                 if (!empty($technique)) {
                     $params['technique'] = $technique;
+                }
+
+                // Apply treatment filter
+                if (!empty($treatmentId)) {
+                    $params['treatment'] = $treatmentId;
                 }
 
                 $apiUrl = config('services.master_event.api_url');
@@ -123,14 +146,16 @@ class EventController extends Controller
         $location = $request->input('location', '');
         $month = $request->input('month', '');
         $technique = $request->input('technique', '');
+        $treatment = $request->input('treatment', '');
+        $treatmentId = self::TREATMENT_IDS[$treatment] ?? null;
         $today = Carbon::today()->format('Y-m-d');
 
         // Create unique cache key based on request parameters
-        $cacheKey = 'events_' . md5($page . '_' . $location . '_' . $month . '_' . $technique . '_' . $today);
+        $cacheKey = 'events_' . md5($page . '_' . $location . '_' . $month . '_' . $technique . '_' . $treatment . '_' . $today);
         $cacheTtl = config('cache.ttl', 10);
 
         // Cache for configured TTL (default 10 minutes)
-        $result = Cache::remember($cacheKey, 60 * $cacheTtl, function () use ($page, $location, $month, $technique, $today) {
+        $result = Cache::remember($cacheKey, 60 * $cacheTtl, function () use ($page, $location, $month, $technique, $treatmentId, $today) {
             try {
                 $apiKey = config('services.master_event.key');
 
@@ -164,6 +189,11 @@ class EventController extends Controller
                 // Apply technique filter
                 if (!empty($technique)) {
                     $params['technique'] = $technique;
+                }
+
+                // Apply treatment filter
+                if (!empty($treatmentId)) {
+                    $params['treatment'] = $treatmentId;
                 }
 
                 $apiUrl = config('services.master_event.api_url');

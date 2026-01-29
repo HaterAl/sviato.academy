@@ -11,7 +11,7 @@
                     </div>
 
                     <!-- Search Form -->
-                    @php $hasActiveFilters = request('location') || request('technique'); @endphp
+                    @php $hasActiveFilters = request('location') || request('technique') || request('treatment'); @endphp
                     <style>
                         #filters-content {
                             max-height: 0;
@@ -49,7 +49,7 @@
                         <!-- Filters Content -->
                         <div id="filters-content" class="{{ $hasActiveFilters ? 'open' : '' }}">
                         <form id="search-form">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <!-- Location -->
                                 <div class="relative">
                                     <label for="location" class="block text-sm font-semibold text-gray-700 mb-2">Location</label>
@@ -101,6 +101,31 @@
                                         </optgroup>
                                     </select>
                                 </div>
+
+                                <!-- Treatment -->
+                                <div>
+                                    <label for="treatment" class="block text-sm font-semibold text-gray-700 mb-2">Treatment</label>
+                                    <select id="treatment"
+                                            name="treatment"
+                                            onchange="loadEvents()"
+                                            class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent bg-white">
+                                        <option value="">All Treatments</option>
+                                        <option value="Permanent make-up" {{ request('treatment') == 'Permanent make-up' ? 'selected' : '' }}>Permanent make-up</option>
+                                        <option value="Microblading" {{ request('treatment') == 'Microblading' ? 'selected' : '' }}>Microblading</option>
+                                        <option value="Hairstrokes" {{ request('treatment') == 'Hairstrokes' ? 'selected' : '' }}>Hairstrokes</option>
+                                        <option value="Scalp Micropigmentation" {{ request('treatment') == 'Scalp Micropigmentation' ? 'selected' : '' }}>Scalp Micropigmentation</option>
+                                        <option value="Cosmetic Microneedling" {{ request('treatment') == 'Cosmetic Microneedling' ? 'selected' : '' }}>Cosmetic Microneedling</option>
+                                        <option value="Mini Tattoo" {{ request('treatment') == 'Mini Tattoo' ? 'selected' : '' }}>Mini Tattoo</option>
+                                        <option value="Areola" {{ request('treatment') == 'Areola' ? 'selected' : '' }}>Areola</option>
+                                        <option value="Removal" {{ request('treatment') == 'Removal' ? 'selected' : '' }}>Removal</option>
+                                        <option value="Aftercare" {{ request('treatment') == 'Aftercare' ? 'selected' : '' }}>Aftercare</option>
+                                        <option value="Workshop" {{ request('treatment') == 'Workshop' ? 'selected' : '' }}>Workshop</option>
+                                        <option value="Marketing" {{ request('treatment') == 'Marketing' ? 'selected' : '' }}>Marketing</option>
+                                        <option value="Social Media Marketing" {{ request('treatment') == 'Social Media Marketing' ? 'selected' : '' }}>Social Media Marketing</option>
+                                        <option value="Photo and video editing" {{ request('treatment') == 'Photo and video editing' ? 'selected' : '' }}>Photo and video editing</option>
+                                    </select>
+                                </div>
+
                             </div>
                         </form>
                         </div>
@@ -237,44 +262,8 @@
                     </div>
                 @endif
             @else
-                <!-- Skeleton Loader -->
-                <div id="events-skeleton" class="grid gap-6 items-stretch" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
-                    @for ($i = 0; $i < 8; $i++)
-                        <div class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col h-full animate-pulse">
-                            <!-- Image skeleton with logo placeholder -->
-                            <div class="relative">
-                                <div class="aspect-square bg-gray-200"></div>
-                                <div class="absolute -bottom-10 right-4 w-20 h-20 bg-gray-300 rounded-full"></div>
-                            </div>
-
-                            <div class="p-4 pt-8 flex flex-col flex-1">
-                                <!-- Name skeleton -->
-                                <div class="h-6 bg-gray-200 rounded w-3/4 mb-3"></div>
-
-                                <!-- Badges skeleton -->
-                                <div class="flex flex-wrap gap-1 mb-3">
-                                    <div class="h-5 w-20 bg-gray-100 rounded"></div>
-                                    <div class="h-5 w-24 bg-gray-100 rounded"></div>
-                                </div>
-
-                                <!-- Techniques skeleton -->
-                                <div class="flex flex-wrap gap-1.5 mb-3">
-                                    <div class="h-5 w-28 bg-gray-100 rounded"></div>
-                                </div>
-
-                                <div class="flex-1"></div>
-
-                                <!-- Location skeleton -->
-                                <div class="pt-3 border-t border-gray-100">
-                                    <div class="h-4 bg-gray-100 rounded w-3/4 mb-2"></div>
-                                    <div class="h-4 bg-gray-100 rounded w-1/2"></div>
-                                </div>
-                            </div>
-
-                            <!-- Button skeleton -->
-                            <div class="h-12 bg-gray-200"></div>
-                        </div>
-                    @endfor
+                <div class="text-center py-12">
+                    <p class="u-text--primary text-xl">No events available at the moment</p>
                 </div>
             @endif
             </div>
@@ -294,6 +283,7 @@
         async function loadEvents(page = 1) {
             const locationInput = document.getElementById('location');
             const techniqueSelect = document.getElementById('technique');
+            const treatmentSelect = document.getElementById('treatment');
             const clearBtn = document.getElementById('clear-location');
             const container = document.getElementById('events-container');
 
@@ -317,6 +307,7 @@
             if (page > 1) params.append('page', page);
             if (locationInput.value.trim()) params.append('location', locationInput.value.trim());
             if (techniqueSelect.value) params.append('technique', techniqueSelect.value);
+            if (treatmentSelect.value) params.append('treatment', treatmentSelect.value);
 
             // Update URL without reload
             const pageUrl = params.toString() ? `{{ route('events.index') }}?${params.toString()}` : '{{ route('events.index') }}';
